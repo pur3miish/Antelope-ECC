@@ -1,3 +1,4 @@
+![eos ecc logo](static/eos-ecc.svg)
 # eos-ecc
 
 ## Work in progress 🚧 🏗️ 👷
