@@ -1,6 +1,14 @@
 'use strict'
 
-const sha256 = async data => {
+/**
+ * Isomorphic sha256 message digest function.
+ * @kind function
+ * @name sha256
+ * @param {Uint8Array} data Binary data to hash.
+ * @returns {Uint8Array} Message digest.
+ * @ignore
+ */
+async function sha256(data) {
   if (!(data instanceof Uint8Array))
     throw new TypeError('Expected Uint8Array input data.')
 

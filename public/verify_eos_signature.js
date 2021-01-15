@@ -6,7 +6,18 @@ const verify_signature = require('isomorphic-secp256k1/public/verify_signature')
 const sha256 = require('../private/sha256')
 const wif_to_public_key = require('../private/wif_to_public_key')
 
-const verify_eos_signature = async ({ wif_public_key, signature, hash }) => {
+/**
+ * Validates and EOS signature from the message digest and public key.
+ * @kind function
+ * @name verify_eos_signature
+ * @param {object} arg Argument.
+ * @param {string} arg.wif_public_key EOS public key.
+ * @param {string} arg.signature EOS encoded signature.
+ * @param {string} arg.hash The `sha256` message digest.
+ * @returns {boolena} Will be `true` & `false` for valid & invalid signatures respectively.
+ * @example
+ */
+async function verify_eos_signature({ wif_public_key, signature, hash }) {
   if (!signature.startsWith('SIG_K1_'))
     throw new Error('Signature should start with “SIG_K1”')
   const raw_sig = base58_to_binary(signature.replace('SIG_K1_', ''))

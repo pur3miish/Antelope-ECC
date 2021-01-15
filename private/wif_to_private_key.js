@@ -3,7 +3,15 @@
 const base58_to_binary = require('base58-js/public/base58_to_binary')
 const sha256 = require('./sha256')
 
-const wif_to_private_key = async wif_private_key => {
+/**
+ * Converts an EOS wallet import format (WIF) private key to private key.
+ * @kind function
+ * @name wif_to_private_key
+ * @param {string} wif_private_key WIF is a base 58 string.
+ * @returns {Uint8Array} Secp256k1 private key.
+ * @ignore
+ */
+async function wif_to_private_key(wif_private_key) {
   const priv_key = base58_to_binary(wif_private_key)
   const raw_priv_key = priv_key.slice(0, 33)
   const checksum = priv_key.slice(-4)

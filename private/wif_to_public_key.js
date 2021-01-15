@@ -3,7 +3,15 @@
 const ripemd160 = require('@relocke/ripemd160')
 const base58_to_binary = require('base58-js/public/base58_to_binary')
 
-const wif_to_public_key = async wif_public_key => {
+/**
+ * Converts an EOS wallet import format (WIF) public key to public key.
+ * @kind function
+ * @name wif_to_public_key
+ * @param {string} wif_public_key Base58 WIF public key.
+ * @returns {Uint8Array} Compressed secp256k1 public key.
+ * @ignore
+ */
+async function wif_to_public_key(wif_public_key) {
   if (!wif_public_key.startsWith('EOS'))
     throw new Error('Public key should start with EOS')
 

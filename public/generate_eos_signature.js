@@ -6,11 +6,36 @@ const sign_hash = require('isomorphic-secp256k1/public/sign_hash')
 const wif_to_private_key = require('../private/wif_to_private_key')
 
 /**
- * Create an EOS signature.
- * @param {object} arg Arg object.
- * @param {string} arg.hex The hex string of a serialised EOS transaciton.
+ * Generate an EOS encoded signature.
+ * @kind function
+ * @name generate_eos_signature
+ * @param {object} arg Argument.
+ * @param {string} arg.hex Message digest sha256 to sign.
  * @param {string} arg.wif_private_key An EOS wallet import format private key.
- * @returns {string} EOS signature.
+ * @returns {string} EOS encoded signature.
+ * @example <caption>Ways to `import`.</caption>
+ * ```js
+ * import generate_eos_signature from 'eos-secp256k1/public/generate_eos_signature'
+ * ```
+ * ```js
+ * import { generate_eos_signature } from 'eos-secp256k1'
+ * ```
+ * @example <caption>Ways to `require`.</caption>
+ * ```js
+ * const generate_eos_signature = require("eos-secp256k1/public/generate_eos_signature")
+ * ```
+ * ```js
+ * const { generate_eos_signature } = require("eos-secp256k1")
+ * ```
+ * @example <caption>Usage of `generate_eos_signature`</caption>
+ * ```js
+ * import crypto from 'crypto'
+ *
+ * const message = 'hello'
+ * const hex = new Uint8Array(crypto.createHash('sha256').update(message).digest())
+ * generate_eos_signature({ hex, wif_private_key: "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3" }).then(console.log)
+ * ```
+ * The logged output will be SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ.
  */
 const generate_eos_signature = async ({ hex, wif_private_key }) => {
   const { der_signature } = await sign_hash({
