@@ -1,4 +1,4 @@
-![eos ecc logo](static/eos-ecc.svg)
+![eos ecc logo](https://raw.githubusercontent.com/pur3miish/eos-ecc/main/static/eos-ecc.svg)
 # eos-ecc
 
 ## Work in progress 🚧 🏗️ 👷
