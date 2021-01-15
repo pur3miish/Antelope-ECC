@@ -1,3 +1,5 @@
+'use strict'
+
 const ripemd160 = require('@relocke/ripemd160')
 const binary_to_base58 = require('base58-js/public/binary_to_base58')
 

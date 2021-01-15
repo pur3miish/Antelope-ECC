@@ -1,5 +1,5 @@
 import { ok, rejects } from 'assert'
-import verify_eos_signature from '../src/verify_eos_signature.js'
+import verify_eos_signature from '../public/verify_eos_signature.js'
 
 export default tests => {
   tests.add('verify eos signature', async () => {

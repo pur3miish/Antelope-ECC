@@ -1,3 +1,5 @@
+'use strict'
+
 const sha256 = async data => {
   if (!(data instanceof Uint8Array))
     throw new TypeError('Expected Uint8Array input data.')

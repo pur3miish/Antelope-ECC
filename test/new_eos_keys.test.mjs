@@ -1,6 +1,6 @@
 import { deepStrictEqual } from 'assert'
-import new_eos_keys from '../src/new_eos_keys.js'
-import public_key_from_private from '../src/public_key_from_private.js'
+import new_eos_keys from '../public/new_eos_keys.js'
+import public_key_from_private from '../public/public_key_from_private.js'
 
 export default tests => {
   tests.add('new eos keys', async () => {

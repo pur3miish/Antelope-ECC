@@ -1,4 +1,8 @@
 # eos-secp256k1 changelog
 
-## Initial Release
+##  1.0.0
+
+Initial Release
+
+
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const base58_to_binary = require('base58-js/public/base58_to_binary')
 const sha256 = require('./sha256')
 

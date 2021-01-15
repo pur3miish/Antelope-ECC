@@ -4,14 +4,30 @@
   "description": "",
   "main": "src/index.js",
   "engines": {
-    "node": ">=12"
+    "node": "^12.20.1 || >= 13.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./public/index.mjs",
+      "require": "./public/index.js"
+    },
+    "./public/": "./public/",
+    "./package": "./package.json",
+    "./package.json": "./package.json"
   },
   "browserslist": [
     "defaults",
     "not IE 11"
   ],
   "scripts": {
-    "test:api": "coverage-node -r hard-rejection/register tests/index.test.mjs"
+    "prepare": "npm run prepare:jsdoc && npm run prepare:prettier",
+    "prepare:jsdoc": "jsdoc-md",
+    "prepare:prettier": "prettier --write readme.md",
+    "test": "npm run test:eslint && npm run test:prettier && npm run test:api",
+    "test:api": "coverage-node -r hard-rejection/register test/index.test.mjs",
+    "test:eslint": "eslint .",
+    "test:prettier": "prettier -c .",
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
@@ -27,7 +43,7 @@
     "blockchain",
     "digital",
     "signature",
-    "ECC",
+    "ecc",
     "elliptic",
     "curve",
     "cryptography",
@@ -37,31 +53,23 @@
     "libsec256k1",
     "WASM",
     "Javascript",
-    "EOS",
+    "eos",
     "eosjs",
     "alternative"
   ],
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@size-limit/preset-small-lib": "^4.9.1",
-    "babel-eslint": "^10.1.0",
     "coverage-node": "^4.0.0",
     "eslint": "^7.16.0",
-    "eslint-config-env": "^15.0.1",
+    "eslint-config-env": "^16.0.0",
     "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-compat": "^3.9.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-import-order-alphabetical": "^1.0.1",
-    "eslint-plugin-jsdoc": "^30.7.9",
+    "eslint-plugin-jsdoc": "^31.0.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.0",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "hard-rejection": "^2.1.0",
     "jsdoc-md": "^8.0.0",
-    "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
-    "size-limit": "^4.9.1",
     "test-director": "^5.0.0"
   },
   "dependencies": {

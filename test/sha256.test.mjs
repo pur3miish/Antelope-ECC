@@ -1,6 +1,6 @@
 import { deepStrictEqual, rejects } from 'assert'
 import crypto from 'crypto'
-import sha256 from '../src/sha256.js'
+import sha256 from '../private/sha256.js'
 
 export default tests => {
   tests.add('sha256', async () => {

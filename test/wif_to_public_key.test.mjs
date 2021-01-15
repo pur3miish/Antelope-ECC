@@ -1,5 +1,5 @@
 import { deepStrictEqual, rejects } from 'assert'
-import wif_to_public_key from '../src/wif_to_public_key.js'
+import wif_to_public_key from '../private/wif_to_public_key.js'
 
 export default tests => {
   tests.add('wif to public key', async () => {

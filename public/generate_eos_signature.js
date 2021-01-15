@@ -1,7 +1,9 @@
+'use strict'
+
 const ripemd160 = require('@relocke/ripemd160')
 const binary_to_base58 = require('base58-js/public/binary_to_base58.js')
 const sign_hash = require('isomorphic-secp256k1/public/sign_hash')
-const wif_to_private_key = require('./wif_to_private_key')
+const wif_to_private_key = require('../private/wif_to_private_key')
 
 /**
  * Create an EOS signature.

@@ -1,5 +1,5 @@
 import { deepStrictEqual } from 'assert'
-import generate_eos_signature from '../src/generate_eos_signature.js'
+import generate_eos_signature from '../public/generate_eos_signature.js'
 
 export default tests => {
   tests.add('generate eos signature', async () => {

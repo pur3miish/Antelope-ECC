@@ -1,5 +1,5 @@
 import { deepStrictEqual } from 'assert'
-import public_key_from_private from '../src/public_key_from_private.js'
+import public_key_from_private from '../public/public_key_from_private.js'
 
 export default tests => {
   tests.add('public_key_from_private', async () => {

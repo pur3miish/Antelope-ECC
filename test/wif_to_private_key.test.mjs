@@ -1,5 +1,5 @@
 import { deepStrictEqual, rejects } from 'assert'
-import wif_to_private_key from '../src/wif_to_private_key.js'
+import wif_to_private_key from '../private/wif_to_private_key.js'
 
 export default tests => {
   tests.add('wif to private key', async () => {
