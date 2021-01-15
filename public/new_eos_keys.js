@@ -19,17 +19,17 @@ const public_key_to_wif = require('../private/public_key_to_wif')
  * @returns {KeyPair} Key pair.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import { new_eos_keys } from 'eos-secp256k1'
+ * import { new_eos_keys } from 'eos-ecc'
  * ```
  * ```js
- * import new_eos_keys from 'eos-secp256k1/public/secp256k1'
+ * import new_eos_keys from 'eos-ecc/public/new_eos_keys.js'
  * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
- * const { new_eos_keys } = require('eos-secp256k1')
+ * const { new_eos_keys } = require('eos-ecc')
  * ```
  * ```js
- * const { new_eos_keys } = require('eos-secp256k1/public/secp256k1')
+ * const { new_eos_keys } = require('eos-ecc/public/new_eos_keys.js')
  * ```
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js

@@ -1,4 +1,4 @@
-# eos-secp256k1
+# eos-ecc
 
 ## Work in progress 🚧 🏗️ 👷
 
@@ -9,6 +9,7 @@
 - [function generate_eos_signature](#function-generate_eos_signature)
 - [function new_eos_keys](#function-new_eos_keys)
 - [function public_key_from_private](#function-public_key_from_private)
+- [function verify_eos_signature](#function-verify_eos_signature)
 - [type KeyPair](#type-keypair)
 
 ## function generate_eos_signature
@@ -28,21 +29,21 @@ Generate an EOS encoded signature.
 _Ways to `import`._
 
 > ```js
-> import generate_eos_signature from 'eos-secp256k1/public/generate_eos_signature'
+> import generate_eos_signature from 'eos-ecc/public/generate_eos_signature.js'
 > ```
 >
 > ```js
-> import { generate_eos_signature } from 'eos-secp256k1'
+> import { generate_eos_signature } from 'eos-ecc'
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const generate_eos_signature = require('eos-secp256k1/public/generate_eos_signature')
+> const generate_eos_signature = require('eos-ecc/public/generate_eos_signature.js')
 > ```
 >
 > ```js
-> const { generate_eos_signature } = require('eos-secp256k1')
+> const { generate_eos_signature } = require('eos-ecc')
 > ```
 
 _Usage of `generate_eos_signature`_
@@ -75,21 +76,21 @@ Generate a new cryptographically random EOS key pair.
 _Ways to `import`._
 
 > ```js
-> import { new_eos_keys } from 'eos-secp256k1'
+> import { new_eos_keys } from 'eos-ecc'
 > ```
 >
 > ```js
-> import new_eos_keys from 'eos-secp256k1/public/secp256k1'
+> import new_eos_keys from 'eos-ecc/public/new_eos_keys.js'
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { new_eos_keys } = require('eos-secp256k1')
+> const { new_eos_keys } = require('eos-ecc')
 > ```
 >
 > ```js
-> const { new_eos_keys } = require('eos-secp256k1/public/secp256k1')
+> const { new_eos_keys } = require('eos-ecc/public/new_eos_keys.js')
 > ```
 
 _Usage `new_eos_keys`._
@@ -117,21 +118,21 @@ Convert an EOS WIF private key to a WIF public key.
 _Ways to `import`._
 
 > ```js
-> import public_key_from_private from 'eos-secp256k1/public/public_key_from_private'
+> import public_key_from_private from 'eos-ecc/public/public_key_from_private.js'
 > ```
 >
 > ```js
-> import { public_key_from_private } from 'eos-secp256k1'
+> import { public_key_from_private } from 'eos-ecc'
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { public_key_from_private } = require('eos-secp256k1')
+> const { public_key_from_private } = require('eos-ecc')
 > ```
 >
 > ```js
-> const public_key_from_private = require('eos-secp256k1/public/public_key_from_private')
+> const public_key_from_private = require('eos-ecc/public/public_key_from_private.js')
 > ```
 
 _Usage `public_key_from_private`._
@@ -143,6 +144,58 @@ _Usage `public_key_from_private`._
 > ```
 >
 > The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
+
+---
+
+## function verify_eos_signature
+
+Validates and EOS signature from the message digest and public key.
+
+| Parameter            | Type   | Description                  |
+| :------------------- | :----- | :--------------------------- |
+| `arg`                | object | Argument.                    |
+| `arg.wif_public_key` | string | EOS public key.              |
+| `arg.signature`      | string | EOS encoded signature.       |
+| `arg.hash`           | string | The `sha256` message digest. |
+
+**Returns:** boolena — Will be `true` & `false` for valid & invalid signatures respectively.
+
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { verify_eos_signature } from 'eos-ecc'
+> ```
+>
+> ```js
+> import verify_eos_signature from 'eos-ecc/public/verify_eos_signature.js'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { verify_eos_signature } = require('eos-ecc')
+> ```
+>
+> ```js
+> const verify_eos_signature = require('eos-ecc/public/verify_eos_signature.js')
+> ```
+
+_Usage `verify_eos_signature`._
+
+> ```js
+> const signature =
+>   'SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ'
+> const wif_public_key = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV'
+> const hash = new Uint8Array(
+>   crypto.createHash('sha256').update('hello').digest()
+> )
+>
+> verify_eos_signature({ wif_public_key, signature, hash })
+> ```
+>
+> The logged output will return `true`.
 
 ---
 

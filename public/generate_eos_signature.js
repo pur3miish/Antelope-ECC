@@ -15,17 +15,17 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  * @returns {string} EOS encoded signature.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import generate_eos_signature from 'eos-secp256k1/public/generate_eos_signature'
+ * import generate_eos_signature from 'eos-ecc/public/generate_eos_signature.js'
  * ```
  * ```js
- * import { generate_eos_signature } from 'eos-secp256k1'
+ * import { generate_eos_signature } from 'eos-ecc'
  * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
- * const generate_eos_signature = require("eos-secp256k1/public/generate_eos_signature")
+ * const generate_eos_signature = require("eos-ecc/public/generate_eos_signature.js")
  * ```
  * ```js
- * const { generate_eos_signature } = require("eos-secp256k1")
+ * const { generate_eos_signature } = require("eos-ecc")
  * ```
  * @example <caption>Usage of `generate_eos_signature`</caption>
  * ```js

@@ -15,7 +15,29 @@ const wif_to_public_key = require('../private/wif_to_public_key')
  * @param {string} arg.signature EOS encoded signature.
  * @param {string} arg.hash The `sha256` message digest.
  * @returns {boolena} Will be `true` & `false` for valid & invalid signatures respectively.
- * @example
+ * @example <caption>Ways to `import`.</caption>
+ * ```js
+ * import { verify_eos_signature } from 'eos-ecc'
+ * ```
+ * ```js
+ * import verify_eos_signature from 'eos-ecc/public/verify_eos_signature.js'
+ * ```
+ * @example <caption>Ways to `require`.</caption>
+ * ```js
+ * const { verify_eos_signature } = require('eos-ecc')
+ * ```
+ * ```js
+ * const verify_eos_signature = require('eos-ecc/public/verify_eos_signature.js')
+ * ```
+ * @example <caption>Usage `verify_eos_signature`.</caption>
+ * ```js
+ * const signature = 'SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ'
+ * const wif_public_key = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV'
+ * const hash = new Uint8Array(crypto.createHash("sha256").update("hello").digest())
+ *
+ * verify_eos_signature({ wif_public_key, signature, hash })
+ * ```
+ * The logged output will return `true`.
  */
 async function verify_eos_signature({ wif_public_key, signature, hash }) {
   if (!signature.startsWith('SIG_K1_'))

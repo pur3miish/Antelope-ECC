@@ -1,8 +1,8 @@
 {
-  "name": "eos-secp256k1",
+  "name": "eos-ecc",
   "version": "1.0.0-alpha",
   "description": "",
-  "main": "src/index.js",
+  "main": "public/index.js",
   "engines": {
     "node": "^12.20.1 || >= 13.2"
   },
@@ -15,6 +15,10 @@
     "./package": "./package.json",
     "./package.json": "./package.json"
   },
+  "files": [
+    "public",
+    "private"
+  ],
   "browserslist": [
     "defaults",
     "not IE 11"
@@ -31,14 +35,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pur3miish/eos-secp256k1.git"
+    "url": "git+https://github.com/pur3miish/eos-ecc.git"
   },
   "author": "pur3miish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pur3miish/eos-secp256k1/issues"
+    "url": "https://github.com/pur3miish/eos-ecc/issues"
   },
-  "homepage": "https://github.com/pur3miish/eos-secp256k1#readme",
+  "homepage": "https://github.com/pur3miish/eos-ecc#readme",
   "keywords": [
     "blockchain",
     "digital",

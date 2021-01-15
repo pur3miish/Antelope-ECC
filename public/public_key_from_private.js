@@ -12,17 +12,17 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  * @returns {string} EOS wallet import format public key.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import public_key_from_private from 'eos-secp256k1/public/public_key_from_private'
+ * import public_key_from_private from 'eos-ecc/public/public_key_from_private.js'
  * ```
  * ```js
- * import { public_key_from_private } from 'eos-secp256k1'
+ * import { public_key_from_private } from 'eos-ecc'
  * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
- * const { public_key_from_private } = require('eos-secp256k1')
+ * const { public_key_from_private } = require('eos-ecc')
  * ```
  * ```js
- * const public_key_from_private = require('eos-secp256k1/public/public_key_from_private')
+ * const public_key_from_private = require('eos-ecc/public/public_key_from_private.js')
  * ```
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
