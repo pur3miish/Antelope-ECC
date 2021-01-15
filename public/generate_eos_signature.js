@@ -27,7 +27,7 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  * ```js
  * const generate_eos_signature = require('eos-ecc/public/generate_eos_signature.js')
  * ```
- * @example <caption>Usage of `generate_eos_signature`</caption>
+ * @example <caption>Usage of `generate_eos_signature`.</caption>
  * ```js
  * import crypto from 'crypto'
  *
