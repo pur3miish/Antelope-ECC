@@ -29,7 +29,7 @@ const public_key_to_wif = require('../private/public_key_to_wif')
  * const { new_eos_keys } = require('eos-ecc')
  * ```
  * ```js
- * const { new_eos_keys } = require('eos-ecc/public/new_eos_keys.js')
+ * const new_eos_keys = require('eos-ecc/public/new_eos_keys.js')
  * ```
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js

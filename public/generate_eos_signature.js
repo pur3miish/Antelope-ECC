@@ -15,17 +15,17 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  * @returns {string} EOS encoded signature.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import generate_eos_signature from 'eos-ecc/public/generate_eos_signature.js'
+ * import { generate_eos_signature } from 'eos-ecc'
  * ```
  * ```js
- * import { generate_eos_signature } from 'eos-ecc'
+ * import generate_eos_signature from 'eos-ecc/public/generate_eos_signature.js'
  * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
- * const generate_eos_signature = require("eos-ecc/public/generate_eos_signature.js")
+ * const { generate_eos_signature } = require('eos-ecc')
  * ```
  * ```js
- * const { generate_eos_signature } = require("eos-ecc")
+ * const generate_eos_signature = require('eos-ecc/public/generate_eos_signature.js')
  * ```
  * @example <caption>Usage of `generate_eos_signature`</caption>
  * ```js
@@ -33,7 +33,7 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  *
  * const message = 'hello'
  * const hex = new Uint8Array(crypto.createHash('sha256').update(message).digest())
- * generate_eos_signature({ hex, wif_private_key: "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3" }).then(console.log)
+ * generate_eos_signature({ hex, wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3' }).then(console.log)
  * ```
  * The logged output will be SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ.
  */

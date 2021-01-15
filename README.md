@@ -29,21 +29,21 @@ Generate an EOS encoded signature.
 _Ways to `import`._
 
 > ```js
-> import generate_eos_signature from 'eos-ecc/public/generate_eos_signature.js'
+> import { generate_eos_signature } from 'eos-ecc'
 > ```
 >
 > ```js
-> import { generate_eos_signature } from 'eos-ecc'
+> import generate_eos_signature from 'eos-ecc/public/generate_eos_signature.js'
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const generate_eos_signature = require('eos-ecc/public/generate_eos_signature.js')
+> const { generate_eos_signature } = require('eos-ecc')
 > ```
 >
 > ```js
-> const { generate_eos_signature } = require('eos-ecc')
+> const generate_eos_signature = require('eos-ecc/public/generate_eos_signature.js')
 > ```
 
 _Usage of `generate_eos_signature`_
@@ -90,7 +90,7 @@ _Ways to `require`._
 > ```
 >
 > ```js
-> const { new_eos_keys } = require('eos-ecc/public/new_eos_keys.js')
+> const new_eos_keys = require('eos-ecc/public/new_eos_keys.js')
 > ```
 
 _Usage `new_eos_keys`._
@@ -118,11 +118,11 @@ Convert an EOS WIF private key to a WIF public key.
 _Ways to `import`._
 
 > ```js
-> import public_key_from_private from 'eos-ecc/public/public_key_from_private.js'
+> import { public_key_from_private } from 'eos-ecc'
 > ```
 >
 > ```js
-> import { public_key_from_private } from 'eos-ecc'
+> import public_key_from_private from 'eos-ecc/public/public_key_from_private.js'
 > ```
 
 _Ways to `require`._
