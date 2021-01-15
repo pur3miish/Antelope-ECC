@@ -1,4 +1,4 @@
-const generate_key_pair = require('secp256k1-js/src/generate_key_pair')
+const generate_key_pair = require('isomorphic-secp256k1/public/generate_key_pair')
 const private_key_to_wif = require('./private_key_to_wif')
 const public_key_to_wif = require('./public_key_to_wif')
 

@@ -1,4 +1,4 @@
-const get_public_key = require('secp256k1-js/src/get_public_key')
+const get_public_key = require('isomorphic-secp256k1/public/get_public_key')
 const public_key_to_wif = require('./public_key_to_wif')
 const wif_to_private_key = require('./wif_to_private_key')
 

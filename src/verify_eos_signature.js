@@ -1,6 +1,6 @@
-const base58_to_binary = require('@relocke/base58/src/base58_to_binary')
 const ripemd160 = require('@relocke/ripemd160')
-const verify_signature = require('secp256k1-js/src/verify_signature')
+const base58_to_binary = require('base58-js/public/base58_to_binary')
+const verify_signature = require('isomorphic-secp256k1/public/verify_signature')
 const sha256 = require('./sha256')
 const wif_to_public_key = require('./wif_to_public_key')
 

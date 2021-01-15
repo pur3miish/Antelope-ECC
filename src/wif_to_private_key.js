@@ -1,4 +1,4 @@
-const base58_to_binary = require('@relocke/base58/src/base58_to_binary')
+const base58_to_binary = require('base58-js/public/base58_to_binary')
 const sha256 = require('./sha256')
 
 const wif_to_private_key = async wif_private_key => {
