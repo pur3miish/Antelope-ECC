@@ -2,6 +2,8 @@
 
 # EOS-ECC
 
+[![NPM Package](https://img.shields.io/npm/v/eos-ecc.svg)](https://www.npmjs.org/package/eos-ecc) [![CI status](https://github.com/pur3miish/eos-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eos-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eos-ecc/blob/main/LICENSE)
+
 A [universal JavaScript](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) package for [elliptic curve cryptography](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography), operations for the EOSIO blockchain.
 
 **Features**
