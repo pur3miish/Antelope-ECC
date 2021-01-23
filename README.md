@@ -62,7 +62,7 @@ _Usage of `generate_eos_signature`_
 > }).then(console.log)
 > ```
 >
-> The logged output will be SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ.
+> The logged output will be SIG_K1_JxMN(…)NJ.
 
 ---
 
@@ -186,8 +186,7 @@ _Ways to `require`._
 _Usage `verify_eos_signature`._
 
 > ```js
-> const signature =
->   'SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ'
+> const signature = 'SIG_K1_JxMNpqjt…yNJ'
 > const wif_public_key = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV'
 > const hash = new Uint8Array(
 >   crypto.createHash('sha256').update('hello').digest()

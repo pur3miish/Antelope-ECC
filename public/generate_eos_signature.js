@@ -35,7 +35,7 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  * const hex = new Uint8Array(crypto.createHash('sha256').update(message).digest())
  * generate_eos_signature({ hex, wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3' }).then(console.log)
  * ```
- * The logged output will be SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ.
+ * The logged output will be SIG_K1_JxMN(…)NJ.
  */
 const generate_eos_signature = async ({ hex, wif_private_key }) => {
   const { der_signature } = await sign_hash({
