@@ -1,7 +1,9 @@
 ![eos ecc logo](https://raw.githubusercontent.com/pur3miish/eos-ecc/main/static/eos-ecc.svg)
-# eos-ecc
 
-## Work in progress 🚧 🏗️ 👷
+# EOS-ECC
+
+A [universal JavaScript](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) package for [elliptic curve cryptography](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography), operations for the EOSIO blockchain.
+
 
 # API
 

@@ -1,7 +1,7 @@
 {
   "name": "eos-ecc",
-  "version": "1.0.0-rc",
-  "description": "A universal JavaScript package for various elliptic curve cryptography, ecc, operations on the EOSIO blockchain.",
+  "version": "0.0.0-rc",
+  "description": "A universal JavaScript package for elliptic curve cryptography on the EOSIO blockchain.",
   "main": "public/index.js",
   "engines": {
     "node": "^12.20.1 || >= 13.2"
