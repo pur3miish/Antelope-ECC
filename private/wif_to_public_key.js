@@ -1,7 +1,7 @@
 'use strict'
 
-const ripemd160 = require('@relocke/ripemd160')
 const base58_to_binary = require('base58-js/public/base58_to_binary')
+const ripemd160 = require('ripemd160-js')
 
 /**
  * Converts an EOS wallet import format (WIF) public key to public key.
@@ -19,11 +19,10 @@ async function wif_to_public_key(wif_public_key) {
   const raw_public_key = whole.slice(0, -4)
   const checksum = whole.slice(-4)
 
-  ripemd160(raw_public_key)
-    .slice(0, 4)
-    .forEach((i, x) => {
-      if (i != checksum[x]) throw new Error('Invalid public key checksum.')
-    })
+  const hash = await ripemd160(raw_public_key)
+  hash.slice(0, 4).forEach((i, x) => {
+    if (i != checksum[x]) throw new Error('Invalid public key checksum.')
+  })
 
   return raw_public_key
 }

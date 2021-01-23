@@ -77,8 +77,8 @@
     "test-director": "^5.0.0"
   },
   "dependencies": {
-    "@relocke/ripemd160": "^1.0.1",
     "base58-js": "^1.0.0-rc",
     "isomorphic-secp256k1": "^1.0.0-rc"
+    "ripemd160-js": "^1.1.1"
   }
 }

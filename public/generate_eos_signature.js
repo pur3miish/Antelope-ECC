@@ -1,8 +1,8 @@
 'use strict'
 
-const ripemd160 = require('@relocke/ripemd160')
 const binary_to_base58 = require('base58-js/public/binary_to_base58.js')
 const sign_hash = require('isomorphic-secp256k1/public/sign_hash')
+const ripemd160 = require('ripemd160-js')
 const wif_to_private_key = require('../private/wif_to_private_key')
 
 /**
@@ -49,7 +49,9 @@ const generate_eos_signature = async ({ hex, wif_private_key }) => {
   const i = 31 // signifies compressed & compact key.
   const K1 = [75, 49] // K1 as ascii
   const raw_sig = new Uint8Array([i, ...r, ...s])
-  const checksum = ripemd160([...raw_sig, ...K1]).slice(0, 4)
+  const hash = await ripemd160(new Uint8Array([...raw_sig, ...K1]))
+  const checksum = hash.slice(0, 4)
+
   const base58_sig = binary_to_base58(new Uint8Array([...raw_sig, ...checksum]))
   return 'SIG_K1_' + base58_sig
 }

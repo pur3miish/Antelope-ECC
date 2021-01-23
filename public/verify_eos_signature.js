@@ -1,8 +1,8 @@
 'use strict'
 
-const ripemd160 = require('@relocke/ripemd160')
 const base58_to_binary = require('base58-js/public/base58_to_binary')
 const verify_signature = require('isomorphic-secp256k1/public/verify_signature')
+const ripemd160 = require('ripemd160-js')
 const sha256 = require('../private/sha256')
 const wif_to_public_key = require('../private/wif_to_public_key')
 
@@ -45,11 +45,13 @@ async function verify_eos_signature({ wif_public_key, signature, hash }) {
   const raw_sig = base58_to_binary(signature.replace('SIG_K1_', ''))
   const checksum = raw_sig.slice(-4)
   const sig = raw_sig.slice(0, -4)
-  ripemd160([...sig, 75, 49])
-    .slice(0, 4)
-    .forEach((i, x) => {
-      if (i != checksum[x]) throw new Error('Invalid checksum for signature')
-    })
+
+  const _hash = await ripemd160(new Uint8Array([...sig, 75, 49]))
+
+  _hash.slice(0, 4).forEach((i, x) => {
+    if (i != checksum[x]) throw new Error('Invalid checksum for signature')
+  })
+
   const s1 = sig.slice(1, 33)
   const s2 = sig.slice(33)
   const der_signature = new Uint8Array([48, 68, 2, 32, ...s1, 2, 32, ...s2])
