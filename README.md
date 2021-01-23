@@ -49,7 +49,7 @@ _Ways to `require`._
 > const generate_eos_signature = require('eos-ecc/public/generate_eos_signature.js')
 > ```
 
-_Usage of `generate_eos_signature`_
+_Usage of `generate_eos_signature`._
 
 > ```js
 > import crypto from 'crypto'
