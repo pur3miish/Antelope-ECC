@@ -21,6 +21,9 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 - Node.js `^12.20.1 || >= 13.2`
 - Browser `defaults, no IE 11`
 
+**NB**
+For testing purposes you will need [webcrypto](https://nodejs.org/api/webcrypto.html#webcrypto_class_subtlecrypto) a Node.js v15 feature.
+
 # API
 
 ## Table of contents
