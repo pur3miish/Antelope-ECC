@@ -4,6 +4,20 @@
 
 A [universal JavaScript](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) package for [elliptic curve cryptography](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography), operations for the EOSIO blockchain.
 
+**Features**
+
+- Signature generation & validation
+- Public key from private key
+- Generate cryptographic random key pair
+
+Built from [isomorphic-secp256k1](https://github.com/pur3miish/isomorphic-secp256k1) which has developed strategies to mitigate various [side channel attacks](https://en.wikipedia.org/wiki/Side-channel_attack).
+
+# Support
+
+We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
+
+- Node.js `^12.20.1 || >= 13.2`
+- Browser `defaults, no IE 11`
 
 # API
 
