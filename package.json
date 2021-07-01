@@ -28,7 +28,7 @@
     "prepare:jsdoc": "jsdoc-md",
     "prepare:prettier": "prettier --write readme.md",
     "test": "npm run test:eslint && npm run test:prettier && npm run test:api",
-    "test:api": "coverage-node -r hard-rejection/register test/index.test.mjs",
+    "test:api": "coverage-node test/index.test.mjs",
     "test:eslint": "eslint .",
     "test:prettier": "prettier -c .",
     "prepublishOnly": "npm test"
