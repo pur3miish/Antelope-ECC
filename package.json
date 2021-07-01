@@ -53,8 +53,6 @@
     "cryptography",
     "bitcoin",
     "secp256k1",
-    "verify",
-    "libsec256k1",
     "WASM",
     "Javascript",
     "eos",
