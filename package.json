@@ -1,7 +1,6 @@
 {
   "name": "eos-ecc",
-  "version": "0.0.0-rc",
-  "version": "0.0.1-rc",
+  "version": "1.0.0-rc",
   "description": "A universal JavaScript package for elliptic curve cryptography on the EOSIO blockchain.",
   "main": "public/index.js",
   "engines": {
