@@ -4,15 +4,7 @@
 
 [![NPM Package](https://img.shields.io/npm/v/eos-ecc.svg)](https://www.npmjs.org/package/eos-ecc) [![CI status](https://github.com/pur3miish/eos-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eos-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eos-ecc/blob/main/LICENSE)
 
-A [universal JavaScript](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) package for [elliptic curve cryptography](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography), operations for the EOSIO blockchain.
-
-**Features**
-
-- Signature generation & validation
-- Public key from private key
-- Generate cryptographic random key pair
-
-Built from [isomorphic-secp256k1](https://github.com/pur3miish/isomorphic-secp256k1) which has developed strategies to mitigate various [side channel attacks](https://en.wikipedia.org/wiki/Side-channel_attack).
+A [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) package for the EOSIO blockchain.
 
 # Support
 

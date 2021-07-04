@@ -2,21 +2,27 @@
 
 ## Next
 
+### Patch
+
+- Updated dependency `universal-ecdsa`.
+
+- Added extra tests to private key to public key fn.
+
 ### Major
 
-- Added `universal-ecdsa` package
+- Added `universal-ecdsa` package.
 
-- Removed signature validation
+- Removed signature validation.
 
-- Fix for invalid signature
+- Fix for invalid signature.
 
 ### Minor
 
 - `new eos keys` function now contains a seed argument.
 
-- Removed `hard-coverage`
+- Removed `hard-coverage`.
 
-- Removed `isomorphic-secp256k1`
+- Removed `isomorphic-secp256k1`.
 
 ### Patch
 
