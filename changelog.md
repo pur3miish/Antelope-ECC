@@ -10,7 +10,7 @@
 
 - Fix for invalid signature.
 
-- Renamed `generate_signature` to `sign_txn`
+- Renamed `generate_signature` to `sign_txn`.
 
 ### Minor
 
@@ -21,7 +21,6 @@
 - Removed `isomorphic-secp256k1`.
 
 - added seed to `new_eos_keys`.
-
 
 ### Patch
 
