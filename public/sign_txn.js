@@ -8,29 +8,29 @@ const wif_to_private_key = require('../private/wif_to_private_key')
 /**
  * Generate an EOS encoded signature.
  * @kind function
- * @name generate_eos_signature
+ * @name sign_txn
  * @param {object} arg Argument.
  * @param {string | Uint8Array} arg.hex Data to sign.
  * @param {string} arg.wif_private_key An EOS wallet import format private key.
  * @returns {string} EOS encoded signature.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import { generate_eos_signature } from 'eos-ecc'
+ * import { sign_txn } from 'eos-ecc'
  * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
- * const { generate_eos_signature } = require('eos-ecc')
+ * const { sign_txn } = require('eos-ecc')
  * ```
- * @example <caption>Usage of `generate_eos_signature`.</caption>
+ * @example <caption>Usage of `sign_hash`.</caption>
  * ```js
  * import crypto from 'crypto'
  *
- * generate_eos_signature({
- *   data: hello,
+ * sign_txn({
+ *   hex: FDFDFDFD,
  *   wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
  * }).then(console.log)
  * ```
- * The logged output will be SIG_K1_JxMN(…)NJ.
+ * The logged output will be SIG_K1_….
  */
 async function sign_txn({ hex, wif_private_key }) {
   const private_key = await wif_to_private_key(wif_private_key)

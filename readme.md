@@ -23,51 +23,10 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 
 # API
 
-- [function generate_eos_signature](#function-generate_eos_signature)
 - [function new_eos_keys](#function-new_eos_keys)
 - [function public_key_from_private](#function-public_key_from_private)
+- [function sign_txn](#function-sign_txn)
 - [type KeyPair](#type-keypair)
-
-## function generate_eos_signature
-
-Generate an EOS encoded signature.
-
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| `arg` | object | Argument. |
-| `arg.hex` | string \| Uint8Array | Data to sign. |
-| `arg.wif_private_key` | string | An EOS wallet import format private key. |
-
-**Returns:** string — EOS encoded signature.
-
-### Examples
-
-_Ways to `import`._
-
-> ```js
-> import { generate_eos_signature } from 'eos-ecc'
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { generate_eos_signature } = require('eos-ecc')
-> ```
-
-_Usage of `generate_eos_signature`._
-
-> ```js
-> import crypto from 'crypto'
->
-> generate_eos_signature({
->   data: hello,
->   wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
-> }).then(console.log)
-> ```
->
-> The logged output will be SIG_K1_JxMN(…)NJ.
-
----
 
 ## function new_eos_keys
 
@@ -152,6 +111,47 @@ _Usage `public_key_from_private`._
 > ```
 >
 > The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
+
+---
+
+## function sign_txn
+
+Generate an EOS encoded signature.
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| `arg` | object | Argument. |
+| `arg.hex` | string \| Uint8Array | Data to sign. |
+| `arg.wif_private_key` | string | An EOS wallet import format private key. |
+
+**Returns:** string — EOS encoded signature.
+
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { sign_txn } from 'eos-ecc'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { sign_txn } = require('eos-ecc')
+> ```
+
+_Usage of `sign_hash`._
+
+> ```js
+> import crypto from 'crypto'
+>
+> sign_txn({
+>   hex: FDFDFDFD,
+>   wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
+> }).then(console.log)
+> ```
+>
+> The logged output will be SIG_K1\_….
 
 ---
 
