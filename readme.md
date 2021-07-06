@@ -6,6 +6,12 @@
 
 A [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) package for the EOSIO blockchain.
 
+# Setup
+
+```shell
+npm i eos-ecc
+```
+
 # Support
 
 We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
