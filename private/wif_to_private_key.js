@@ -1,7 +1,7 @@
 'use strict'
 
 const base58_to_binary = require('base58-js/public/base58_to_binary')
-const sha256 = require('./sha256')
+const { sha256 } = require('universal-ecdsa')
 
 /**
  * Converts an EOS wallet import format (WIF) private key to private key.
@@ -16,8 +16,10 @@ async function wif_to_private_key(wif_private_key) {
   const raw_priv_key = priv_key.slice(0, 33)
   const checksum = priv_key.slice(-4)
   const checksum_hash = await sha256(await sha256(raw_priv_key))
+
   if (checksum_hash.slice(0, 4).filter((x, i) => x != checksum[i]).length)
     throw new Error('Invalid wif private key - checksum mismatch')
+
   return raw_priv_key.slice(1, 33)
 }
 
