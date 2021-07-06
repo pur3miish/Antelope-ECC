@@ -1,12 +1,6 @@
 # eos-ecc changelog
 
-## Next
-
-### Patch
-
-- Updated dependency `universal-ecdsa`.
-
-- Added extra tests to private key to public key fn.
+## V 2.0.0
 
 ### Major
 
@@ -16,6 +10,8 @@
 
 - Fix for invalid signature.
 
+- Renamed `generate_signature` to `sign_txn`
+
 ### Minor
 
 - `new eos keys` function now contains a seed argument.
@@ -23,6 +19,9 @@
 - Removed `hard-coverage`.
 
 - Removed `isomorphic-secp256k1`.
+
+- added seed to `new_eos_keys`.
+
 
 ### Patch
 
