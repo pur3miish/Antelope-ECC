@@ -50,5 +50,15 @@ export default tests => {
       'SIG_K1_K9mUb6kLZN8a9BELwbkdPvwb7W68vfEYUTjVDSSTXsfqVtRh2EfT9rUQKHDwCh2c5ee3rrbS4KVkRsLQyqGYhMJqXY4d81',
       'Expected signature 3.'
     )
+
+    deepStrictEqual(
+      await sign_txn({
+        hex:
+          '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840' +
+          'b30b5d6100cb12b0dbd5000000000100a6823403ea3055000000572d3ccdcd01505455355d1aa18200000000a8ed323221505455355d1aa182304dc60e2a38c820010000000000000004454f530000000000000000000000000000000000000000000000000000000000000000000000000000',
+        wif_private_key: '5K7xR2C8mBzMo4aMPJyBPp7Njc3XvszeJSfTApa51rc2d54rrd3'
+      }),
+      'SIG_K1_K8ggFknsLKE2vuqL5R7gDoRxgYi1yPDZJ6h7wA4cg4waGk7diA3bWudDezCXCZq8h6RZKF1CpjDhGhbvaM4hQxYR52exWg'
+    )
   })
 }

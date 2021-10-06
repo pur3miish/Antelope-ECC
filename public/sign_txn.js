@@ -42,7 +42,6 @@ async function sign_txn({ hex, wif_private_key }) {
   else hex_array = hex
 
   const { r, s, racid } = await sign({ data: hex_array, private_key })
-
   const i = 31 + racid // compressed (4) + compact key(27).
   const K1 = [75, 49] // K1 as ascii
   const raw_sig = new Uint8Array([i, ...r, ...s])

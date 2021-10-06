@@ -1,5 +1,17 @@
 # eos-ecc changelog
 
+# v 2.0.2
+
+## Patch
+
+- Bug fix for invalid `racid` by updating `universal-ecdsa`.
+
+# v 2.0.1
+
+## Minor
+
+- Updated ripemd160-js depen.
+
 ## V 2.0.0
 
 ### Major
