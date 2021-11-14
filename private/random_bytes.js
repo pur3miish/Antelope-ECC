@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Universally generate a strong psudorandom byte array.
+ * Universally generate a psudorandom byte array.
  * @kind function
  * @name random_bytes
  * @param {number} bytes Length of random byte array.

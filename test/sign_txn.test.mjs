@@ -10,18 +10,15 @@ export default tests => {
       0x1b,0x16,0x1e,0x5c,0x1f,0xa7,0x42,0x5e,
       0x73,0x04,0x33,0x62,0x93,0x8b,0x98,0x24
     ])
-
     const sig0 = await sign_txn({
       hex: 'FF',
       wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
     })
-
     deepStrictEqual(
       sig0,
       'SIG_K1_KkdPezk36k4k6jaPHUuvux7ZFvnp5gXSazvUHWRBpJ15Wyys5gEXm56QrzwtyWfd4Abe13DHS7Z1b7kfKxJScT5q9C237S',
       'hex string signature example'
     )
-
     deepStrictEqual(
       await sign_txn({
         hex,
@@ -30,7 +27,6 @@ export default tests => {
       'SIG_K1_JxMNpqjtD1bdwUASSncg3DNE3Vy9GWMjFUhFQ6QqwN8Dypfhsk7EN47cJ8BD43iXeNBSQ5u8A1Z4TYzeNeDnyvCoNWyyNJ',
       'Expected signature 1.'
     )
-
     deepStrictEqual(
       await sign_txn({
         hex: Uint8Array.from([23, 23, 123, 244]),
@@ -39,7 +35,6 @@ export default tests => {
       'SIG_K1_Kdy8vw8s887hzEQjGaoFWnMSC3wsWZpTTz7jvGTQqBAjenJExwpYZ4XgjtnUT56aoxoijSW5K8LJaq86wpTZyH5Az2pbH5',
       'Expected signature 2.'
     )
-
     deepStrictEqual(
       await sign_txn({
         hex: Uint8Array.from([
@@ -53,12 +48,10 @@ export default tests => {
 
     deepStrictEqual(
       await sign_txn({
-        hex:
-          '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840' +
-          'b30b5d6100cb12b0dbd5000000000100a6823403ea3055000000572d3ccdcd01505455355d1aa18200000000a8ed323221505455355d1aa182304dc60e2a38c820010000000000000004454f530000000000000000000000000000000000000000000000000000000000000000000000000000',
+        hex: '8a34ec7df1b8cd06ff4a8abbaa7cc50300823350cadc59ab296cb00d104d2b8ffb6f9061f41a6466f09b000000000110e77d792a77b39e000050d0e4e952320110e77d792a77b39e00000000a8ed32322100000000a868a45a2c000000000000000103706f6f03706f6f0101320001013200000000000000000000000000000000000000000000000000000000000000000000',
         wif_private_key: '5K7xR2C8mBzMo4aMPJyBPp7Njc3XvszeJSfTApa51rc2d54rrd3'
       }),
-      'SIG_K1_K8ggFknsLKE2vuqL5R7gDoRxgYi1yPDZJ6h7wA4cg4waGk7diA3bWudDezCXCZq8h6RZKF1CpjDhGhbvaM4hQxYR52exWg'
+      'SIG_K1_KmBMyLdQ2DUwkCvwvTmEUG9bG6KooaqBWYoBUBbhkYyzYSaxpA2HkmwKrouRdunPmQNFie8U4JWDqxNohxmSiUFrtbTKkK'
     )
   })
 }
