@@ -1,6 +1,12 @@
 # eos-ecc changelog
 
+# v 2.0.4
+
+- Updated dependencies.
+
 # v 2.0.3
+
+## Patch
 
 - Updated dependencies.
 - Added sign hash test.
