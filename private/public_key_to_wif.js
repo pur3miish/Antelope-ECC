@@ -1,6 +1,6 @@
 'use strict'
 
-const binary_to_base58 = require('base58-js/public/binary_to_base58')
+const { binary_to_base58 } = require('base58-js')
 const ripemd160 = require('ripemd160-js')
 
 /**

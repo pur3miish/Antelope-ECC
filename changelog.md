@@ -1,5 +1,11 @@
 # eos-ecc changelog
 
+# v 2.1.0
+
+- Minor
+
+- Added public and private key check.
+
 # v 2.0.4
 
 - Updated dependencies.
