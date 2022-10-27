@@ -1,7 +1,7 @@
 {
   "name": "eos-ecc",
-  "version": "2.1.0",
-  "description": "A universal JavaScript ECDSA packaged for EOS blockchain.",
+  "version": "3.0.0",
+  "description": "An universal JavaScript (Node.js and browsers) EOSIO based digital signature package with public & private key utilities.",
   "main": "public/index.js",
   "engines": {
     "node": ">15"
