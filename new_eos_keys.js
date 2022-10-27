@@ -1,8 +1,9 @@
 'use strict'
-const { get_public_key } = require('universal-ecdsa')
-const private_key_to_wif = require('../private/private_key_to_wif')
-const public_key_to_wif = require('../private/public_key_to_wif')
-const random_bytes = require('../private/random_bytes')
+
+const { get_public_key } = require('isomorphic-secp256k1-js')
+const private_key_to_wif = require('./private/private_key_to_wif.js')
+const public_key_to_wif = require('./private/public_key_to_wif.js')
+const random_bytes = require('./private/random_bytes.js')
 
 /**
  * An EOS wallet import formatted (WIF) public & private key pair.
@@ -22,15 +23,9 @@ const random_bytes = require('../private/random_bytes')
  * ```js
  * import { new_eos_keys } from 'eos-ecc'
  * ```
- * ```js
- * import new_eos_keys from 'eos-ecc/public/new_eos_keys.js'
- * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
  * const { new_eos_keys } = require('eos-ecc')
- * ```
- * ```js
- * const new_eos_keys = require('eos-ecc/public/new_eos_keys.js')
  * ```
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js

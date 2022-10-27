@@ -1,5 +1,27 @@
 # eos-ecc changelog
 
+# 3.0.0
+
+## Major
+
+- Change import/require structure
+
+- Now supporting Node >=15
+
+## Minor
+
+- Added public key recovery from signature
+
+## Patch
+
+- dependency updates.
+
+- now using `isomorphic-secp256k1-js` instead of `universal-ecdsa`.
+
+## Patch
+
+- Dependency updates.
+
 # v 2.1.0
 
 - Minor
@@ -15,6 +37,7 @@
 ## Patch
 
 - Updated dependencies.
+
 - Added sign hash test.
 
 # v 2.0.2
@@ -53,7 +76,7 @@
 
 ### Patch
 
-Updated dependencies.
+- Updated dependencies.
 
 ## 0.0.0-rc
 

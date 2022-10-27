@@ -1,7 +1,7 @@
 'use strict'
 
 const { base58_to_binary } = require('base58-js')
-const { sha256 } = require('universal-ecdsa')
+const sha256 = require('universal-sha256-js')
 
 /**
  * Validates an EOS private key.

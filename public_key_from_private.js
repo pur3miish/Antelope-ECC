@@ -1,8 +1,8 @@
 'use strict'
 
-const { get_public_key } = require('universal-ecdsa')
-const public_key_to_wif = require('../private/public_key_to_wif')
-const wif_to_private_key = require('../private/wif_to_private_key')
+const { get_public_key } = require('isomorphic-secp256k1-js')
+const public_key_to_wif = require('./private/public_key_to_wif.js')
+const wif_to_private_key = require('./private/wif_to_private_key.js')
 
 /**
  * Convert an EOS WIF private key to a WIF public key.
@@ -14,15 +14,9 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  * ```js
  * import { public_key_from_private } from 'eos-ecc'
  * ```
- * ```js
- * import public_key_from_private from 'eos-ecc/public/public_key_from_private.js'
- * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
  * const { public_key_from_private } = require('eos-ecc')
- * ```
- * ```js
- * const public_key_from_private = require('eos-ecc/public/public_key_from_private.js')
  * ```
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js

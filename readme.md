@@ -25,8 +25,12 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 
 - [function new_eos_keys](#function-new_eos_keys)
 - [function public_key_from_private](#function-public_key_from_private)
+- [function recover_public_key](#function-recover_public_key)
 - [function sign_txn](#function-sign_txn)
+- [function validate_private_key](#function-validate_private_key)
+- [function validate_public_key](#function-validate_public_key)
 - [type KeyPair](#type-keypair)
+- [type validation_obj](#type-validation_obj)
 
 ## function new_eos_keys
 
@@ -45,19 +49,11 @@ _Ways to `import`._
 > ```js
 > import { new_eos_keys } from 'eos-ecc'
 > ```
->
-> ```js
-> import new_eos_keys from 'eos-ecc/public/new_eos_keys.js'
-> ```
 
 _Ways to `require`._
 
 > ```js
 > const { new_eos_keys } = require('eos-ecc')
-> ```
->
-> ```js
-> const new_eos_keys = require('eos-ecc/public/new_eos_keys.js')
 > ```
 
 _Usage `new_eos_keys`._
@@ -87,19 +83,11 @@ _Ways to `import`._
 > ```js
 > import { public_key_from_private } from 'eos-ecc'
 > ```
->
-> ```js
-> import public_key_from_private from 'eos-ecc/public/public_key_from_private.js'
-> ```
 
 _Ways to `require`._
 
 > ```js
 > const { public_key_from_private } = require('eos-ecc')
-> ```
->
-> ```js
-> const public_key_from_private = require('eos-ecc/public/public_key_from_private.js')
 > ```
 
 _Usage `public_key_from_private`._
@@ -108,6 +96,45 @@ _Usage `public_key_from_private`._
 > public_key_from_private(
 >   '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
 > ).then(console.log)
+> ```
+>
+> The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
+
+---
+
+## function recover_public_key
+
+Recovers EOS Wallet import format (WIF) public key from signature.
+
+| Parameter       | Type    | Description                                 |
+| :-------------- | :------ | :------------------------------------------ |
+| `Arg`           | obeject | Argument                                    |
+| `Arg.signature` | string  | EOS signature.                              |
+| `Arg.hex`       | string  | Hex data that was used to create signature. |
+
+**Returns:** string — WIF Public key.
+
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { recover_public_key } from 'eos-ecc'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { recover_public_key } = require('eos-ecc')
+> ```
+
+_Usage `public_key_from_private`._
+
+> ```js
+> recover_public_key({
+>   signature: 'SIG_K1_…',
+>   data: 'ff'
+> }).then(console.log)
 > ```
 >
 > The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
@@ -155,6 +182,30 @@ _Usage of `sign_hash`._
 
 ---
 
+## function validate_private_key
+
+Validate an EOS private key.
+
+| Parameter         | Type   | Description        |
+| :---------------- | :----- | :----------------- |
+| `wif_private_key` | string | base58 private key |
+
+**Returns:** [validation_obj](#type-validation_obj) — validation message.
+
+---
+
+## function validate_public_key
+
+Validate EOS public key.
+
+| Parameter        | Type   | Description                          |
+| :--------------- | :----- | :----------------------------------- |
+| `wif_public_key` | string | wallet import format EOS public key. |
+
+**Returns:** [validation_obj](#type-validation_obj) — validation object
+
+---
+
 ## type KeyPair
 
 An EOS wallet import formatted (WIF) public & private key pair.
@@ -163,3 +214,14 @@ An EOS wallet import formatted (WIF) public & private key pair.
 | :------------ | :----- | :------------------- |
 | `public_key`  | string | EOS WIF public key.  |
 | `private_key` | string | EOS WIF private key. |
+
+---
+
+## type validation_obj
+
+Validates an EOS private key.
+
+| Property  | Type    | Description                  |
+| :-------- | :------ | :--------------------------- |
+| `valid`   | bool    | Determins if the private key |
+| `message` | string? | Description of invalidation. |

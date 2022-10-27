@@ -1,9 +1,9 @@
 'use strict'
 
 const binary_to_base58 = require('base58-js/public/binary_to_base58.js')
+const { sign } = require('isomorphic-secp256k1-js')
 const ripemd160 = require('ripemd160-js')
-const { sign } = require('universal-ecdsa')
-const wif_to_private_key = require('../private/wif_to_private_key')
+const wif_to_private_key = require('./private/wif_to_private_key')
 
 /**
  * Generate an EOS encoded signature.
@@ -34,6 +34,7 @@ const wif_to_private_key = require('../private/wif_to_private_key')
  */
 async function sign_txn({ hex, wif_private_key }) {
   const private_key = await wif_to_private_key(wif_private_key)
+
   let hex_array
   if (typeof hex == 'string')
     hex_array = new Uint8Array(
@@ -41,9 +42,9 @@ async function sign_txn({ hex, wif_private_key }) {
     )
   else hex_array = hex
 
-  const { r, s, racid } = await sign({ data: hex_array, private_key })
+  const { r, s, v } = await sign({ data: hex_array, private_key })
 
-  const i = 31 + racid // compressed (4) + compact key(27).
+  const i = 31 + Number(v) // compressed (4) + compact key(27).
   const K1 = [75, 49] // K1 as ascii
   const raw_sig = new Uint8Array([i, ...r, ...s])
 

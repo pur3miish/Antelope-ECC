@@ -1,6 +1,6 @@
 import { ok } from 'assert'
-import validate_private_key from '../public/validate_private_key.js'
-import validate_public_key from '../public/validate_public_key.js'
+import validate_private_key from '../validate_private_key.js'
+import validate_public_key from '../validate_public_key.js'
 
 export default async tests => {
   tests.add('validate EOS private key', async () => {

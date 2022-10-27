@@ -1,7 +1,7 @@
 'use strict'
 
-const base58_to_binary = require('base58-js/public/base58_to_binary')
-const { sha256 } = require('universal-ecdsa')
+const { base58_to_binary } = require('base58-js')
+const sha256 = require('universal-sha256-js')
 
 /**
  * Converts an EOS wallet import format (WIF) private key to private key.
