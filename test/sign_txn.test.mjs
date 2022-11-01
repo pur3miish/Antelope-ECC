@@ -1,4 +1,5 @@
 import { deepStrictEqual } from 'assert'
+import sign_packed_txn from '../sign_packed_txn.js'
 import sign_txn from '../sign_txn.js'
 
 export default tests => {
@@ -12,6 +13,20 @@ export default tests => {
       hex: 'FF',
       wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
     })
+
+    deepStrictEqual(
+      await sign_txn({
+        hex: 'ffbbaa',
+        wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
+      }),
+      await sign_packed_txn({
+        chain_id: 'ff',
+        transaction_body: 'aa',
+        transaction_header: 'bb',
+        wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
+      })
+    )
+
     deepStrictEqual(
       sig0,
       'SIG_K1_KkdPezk36k4k6jaPHUuvux7ZFvnp5gXSazvUHWRBpJ15Wyys5gEXm56QrzwtyWfd4Abe13DHS7Z1b7kfKxJScT5q9C237S',

@@ -1,5 +1,11 @@
 # eos-ecc changelog
 
+# 3.1.0
+
+## Minor
+
+- Added `sign_packed_txn` function for intuative `EOSIO` signature generation.
+
 # 3.0.0
 
 ## Major

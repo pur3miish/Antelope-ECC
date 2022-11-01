@@ -4,7 +4,7 @@
 
 [![NPM Package](https://img.shields.io/npm/v/eos-ecc.svg)](https://www.npmjs.org/package/eos-ecc) [![CI status](https://github.com/pur3miish/eos-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eos-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eos-ecc/blob/main/LICENSE)
 
-A [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) package for the EOSIO blockchain.
+A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript EOSIO digital signature and crypto key utilty package.
 
 # Setup
 
@@ -16,16 +16,15 @@ npm i eos-ecc
 
 We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 
-- Node.js `^12.20.1 || >= 13.2`
+- Node.js `>= 15`
 - Browser `defaults, no IE 11`
-
-**NB** For testing purposes you will need [webcrypto](https://nodejs.org/api/webcrypto.html#webcrypto_class_subtlecrypto) a Node.js v15 feature.
 
 # API
 
 - [function new_eos_keys](#function-new_eos_keys)
 - [function public_key_from_private](#function-public_key_from_private)
 - [function recover_public_key](#function-recover_public_key)
+- [function sign_packed_txn](#function-sign_packed_txn)
 - [function sign_txn](#function-sign_txn)
 - [function validate_private_key](#function-validate_private_key)
 - [function validate_public_key](#function-validate_public_key)
@@ -138,6 +137,49 @@ _Usage `public_key_from_private`._
 > ```
 >
 > The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
+
+---
+
+## function sign_packed_txn
+
+Generate an EOSIO signature for a packed transaction object.
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| `PackedTxn` | object | Packed EOSIO transaction object. |
+| `PackedTxn.chain_id` | string | ID specifiying what chain we are operating on. |
+| `PackedTxn.transaction_header` | string | Serialised transaction header. |
+| `PackedTxn.transaction_body` | string | Serialised transaction body. |
+| `PackedTxn.wif_private_key` | string | EOSIO private key (wallet import format). |
+
+**Returns:** string — Signature
+
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { sign_packed_txn } from 'eos-ecc'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { sign_packed_txn } = require('eos-ecc')
+> ```
+
+_Usage `sign_packed_txn`._
+
+> ```js
+> sign_packed_txn({
+>   chain_id: '2a02a0053…',
+>   transaction_header: 'fa123232…',
+>   transaction_body: 'fa45ffa2…',
+>   wif_private_key: '5f…'
+> })
+> ```
+>
+> The logged output was SIG_K1\_….
 
 ---
 

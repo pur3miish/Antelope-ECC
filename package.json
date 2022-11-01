@@ -1,10 +1,10 @@
 {
   "name": "eos-ecc",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "An universal JavaScript (Node.js and browsers) EOSIO based digital signature package with public & private key utilities.",
   "main": "public/index.js",
   "engines": {
-    "node": ">15"
+    "node": ">=15"
   },
   "exports": {
     ".": "./index.js",
@@ -14,7 +14,8 @@
     "./public_key_from_private.js": "./public_key_from_private.js",
     "./sign_txn.js": "./sign_txn.js",
     "./validate_private_key.js": "./validate_private_key.js",
-    "./validate_public_key.js": "./validate_public_key.js"
+    "./validate_public_key.js": "./validate_public_key.js",
+    "./sign_packed_txn.js": "./sign_packed_txn.js"
   },
   "files": [
     "private",
@@ -24,7 +25,8 @@
     "recover_public_key_from_signature.js",
     "sign_txn.js",
     "validate_private_key.js",
-    "validate_public_key.js"
+    "validate_public_key.js",
+    "sign_packed_txn.js"
   ],
   "browserslist": [
     "defaults",
