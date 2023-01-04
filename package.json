@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "base58-js": "^1.0.5",
-    "isomorphic-secp256k1-js": "^1.0.1",
+    "isomorphic-secp256k1-js": "^1.0.2",
     "ripemd160-js": "^1.2.0",
     "universal-sha256-js": "^1.0.3"
   }
