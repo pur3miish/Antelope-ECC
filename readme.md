@@ -4,7 +4,15 @@
 
 [![NPM Package](https://img.shields.io/npm/v/eos-ecc.svg)](https://www.npmjs.org/package/eos-ecc) [![CI status](https://github.com/pur3miish/eos-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eos-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eos-ecc/blob/main/LICENSE)
 
-A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript EOSIO digital signature and crypto key utilty package.
+A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript Antelope and EOSIO digital signature and cryptokey utilty package.
+
+## Antelope/EOSIO Features
+
+- Public & private key creation
+- Digital signatures
+- Signature verification
+- Legacy support
+
 
 # Setup
 
