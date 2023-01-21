@@ -57,14 +57,12 @@
     "digital",
     "signature",
     "ecc",
+    "eosio",
+    "Antelope",
     "elliptic",
-    "curve",
-    "cryptography",
-    "bitcoin",
+    "crypto",
+    "keys",
     "secp256k1",
-    "JavaScript",
-    "eos",
-    "eosjs",
     "alternative"
   ],
   "devDependencies": {
