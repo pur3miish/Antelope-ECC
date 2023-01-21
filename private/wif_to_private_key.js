@@ -1,6 +1,7 @@
 'use strict'
 
 const { base58_to_binary } = require('base58-js')
+const ripemd160 = require('ripemd160-js')
 const sha256 = require('universal-sha256-js')
 
 /**
@@ -12,15 +13,18 @@ const sha256 = require('universal-sha256-js')
  * @ignore
  */
 async function wif_to_private_key(wif_private_key) {
-  const priv_key = base58_to_binary(wif_private_key)
-  const raw_priv_key = priv_key.slice(0, 33)
+  const non_legacy = wif_private_key.startsWith('PVT_K1_')
+  const priv_key = base58_to_binary(wif_private_key.replace('PVT_K1_', ''))
+  const raw_priv_key = priv_key.slice(0, non_legacy ? 32 : 33)
   const checksum = priv_key.slice(-4)
-  const checksum_hash = await sha256(await sha256(raw_priv_key))
+
+  const checksum_hash = non_legacy
+    ? await ripemd160(Uint8Array.from([...raw_priv_key, 75, 49]))
+    : await sha256(await sha256(raw_priv_key))
 
   if (checksum_hash.slice(0, 4).filter((x, i) => x != checksum[i]).length)
     throw new Error('Invalid wif private key - checksum mismatch')
-
-  return raw_priv_key.slice(1, 33)
+  return non_legacy ? raw_priv_key.slice(0, 32) : raw_priv_key.slice(1, 33)
 }
 
 module.exports = wif_to_private_key

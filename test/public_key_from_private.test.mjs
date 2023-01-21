@@ -27,6 +27,18 @@ export default tests => {
       [
         'EOS87U41tTLiEjWX1S8GPAzaX48inKnJ4bnsSk6hGs1Cb3w72dHnQ',
         '5KjykvxKRaFj6CNzWHxecevXsdiFDPXka1aGVGHAFHtT6A1mfBz'
+      ],
+      [
+        'PUB_K1_6jytfkQoZHYpzCvMZwcw8yL42KfbJ8ayncM459zii44utEy8zn',
+        'PVT_K1_CWCRfKc8atzthZbFMfRdFzqFqGf9d3WNAaZd99gwaosw9kfhS'
+      ],
+      [
+        'PUB_K1_6Xdz1dScSbjEWm3urrwrx2BtfivTN7PpDeEsRcwM3abDuVuHox',
+        'PVT_K1_rpcKPJ4DbcppgK1aBVcWkgxk2VcxeVqChYK7SgQSVccBG4Do'
+      ],
+      [
+        'PUB_K1_6VjQqy3sKmzyFCkmE8rKrKLtt3988zyo1FZnsDtjxNf4gcoeEQ',
+        'PVT_K1_2oSnUdngPUHVw3zAvNLkBeRtMZiyYRy7e4mgmgpNUgBUrvgAjA'
       ]
     ]
 
@@ -37,5 +49,8 @@ export default tests => {
     ok((await public_keys[3]) == keys[3][0], 'Invalid public key 3')
     ok((await public_keys[4]) == keys[4][0], 'Invalid public key 4')
     ok((await public_keys[5]) == keys[5][0], 'Invalid public key 5')
+    ok((await public_keys[6]) == keys[6][0], 'Invalid public key 6')
+    ok((await public_keys[7]) == keys[7][0], 'Invalid public key 7')
+    ok((await public_keys[8]) == keys[8][0], 'Invalid public key 8')
   })
 }

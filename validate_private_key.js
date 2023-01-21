@@ -7,7 +7,7 @@ const sha256 = require('universal-sha256-js')
  * Validates an EOS private key.
  * @kind typedef
  * @name validation_obj
- * @prop {bool} valid Determins if the private key
+ * @prop {boolean} valid Determins if the private key
  * @prop {string} [message] Description of invalidation.
  */
 

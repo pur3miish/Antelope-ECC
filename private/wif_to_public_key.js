@@ -12,14 +12,20 @@ const ripemd160 = require('ripemd160-js')
  * @ignore
  */
 async function wif_to_public_key(wif_public_key) {
-  if (!wif_public_key.startsWith('EOS'))
-    throw new Error('Public key should start with EOS')
+  let suffix = [],
+    whole
+  if (wif_public_key.startsWith('PUB_K1_')) {
+    suffix = [75, 49]
+    whole = base58_to_binary(wif_public_key.replace('PUB_K1_', ''))
+  } else if (wif_public_key.startsWith('EOS'))
+    whole = base58_to_binary(wif_public_key.replace('EOS', ''))
+  else throw new Error('Invalid public key format')
 
-  const whole = base58_to_binary(wif_public_key.replace('EOS', ''))
   const raw_public_key = whole.slice(0, -4)
   const checksum = whole.slice(-4)
 
-  const hash = await ripemd160(raw_public_key)
+  const hash = await ripemd160(Uint8Array.from([...raw_public_key, ...suffix]))
+
   hash.slice(0, 4).forEach((i, x) => {
     if (i != checksum[x]) throw new Error('Invalid public key checksum.')
   })
@@ -28,3 +34,6 @@ async function wif_to_public_key(wif_public_key) {
 }
 
 module.exports = wif_to_public_key
+
+// PUB_K1_ 56e2SD9cNHezjW4mMNTRzK69ievupUvX5d4w82hccyFf NMu8uF
+// EOS56e2SD9cNHezjW4mMNTRzK69ievupUvX5d4w82hccyFfT1jCZ7

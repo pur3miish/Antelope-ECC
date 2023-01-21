@@ -1,4 +1,5 @@
 import { deepStrictEqual, rejects } from 'assert'
+import private_key_to_wif from '../private/private_key_to_wif.js'
 import wif_to_private_key from '../private/wif_to_private_key.js'
 
 export default tests => {
@@ -14,8 +15,26 @@ export default tests => {
 
     deepStrictEqual(
       private_key,
+      await wif_to_private_key(await private_key_to_wif(private_key, true)),
+      'expected non-legacy private keys'
+    )
+
+    deepStrictEqual(
+      private_key,
       await wif_to_private_key(
         '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3',
+        'Expected result'
+      )
+    )
+
+    deepStrictEqual(
+      Uint8Array.from([
+        26, 30, 175, 180, 209, 165, 0, 245, 18, 81, 242, 80, 110, 213, 131, 230,
+        203, 195, 169, 218, 178, 16, 77, 238, 211, 129, 171, 215, 41, 48, 243,
+        188
+      ]),
+      await wif_to_private_key(
+        'PVT_K1_CWCRfKc8atzthZbFMfRdFzqFqGf9d3WNAaZd99gwaosw9kfhS',
         'Expected result'
       )
     )

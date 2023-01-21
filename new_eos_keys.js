@@ -18,6 +18,7 @@ const random_bytes = require('./private/random_bytes.js')
  * @kind function
  * @name new_eos_keys
  * @param {Uint8Array} [seed] A 32 byte array to seed a private key (seed < curve order n).
+ * @param {boolean} [legacy] Indicates if you want legacy keys.
  * @returns {KeyPair} Key pair.
  * @example <caption>Ways to `import`.</caption>
  * ```js
@@ -33,13 +34,13 @@ const random_bytes = require('./private/random_bytes.js')
  * ```
  * The logged output will be an object containing EOS wif public & private keys.
  */
-async function new_eos_keys(seed) {
+async function new_eos_keys(seed, legacy) {
   const private_key = seed ? seed : await random_bytes()
   const public_key = await get_public_key(private_key)
 
   return {
-    public_key: await public_key_to_wif(public_key),
-    private_key: await private_key_to_wif(private_key)
+    public_key: await public_key_to_wif(public_key, legacy),
+    private_key: await private_key_to_wif(private_key, legacy)
   }
 }
 

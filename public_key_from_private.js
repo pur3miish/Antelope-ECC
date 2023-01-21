@@ -28,7 +28,10 @@ const wif_to_private_key = require('./private/wif_to_private_key.js')
  */
 async function public_key_from_private(wif_private_key) {
   const private_key = await wif_to_private_key(wif_private_key)
-  return public_key_to_wif(await get_public_key(private_key))
+  return public_key_to_wif(
+    await get_public_key(private_key),
+    !wif_private_key.startsWith('PVT_K1_')
+  )
 }
 
 module.exports = public_key_from_private

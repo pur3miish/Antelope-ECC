@@ -1,5 +1,11 @@
 # eos-ecc changelog
 
+# 3.2.0
+
+## Major
+
+- Added support for `PUB_K1` and `PVT_K1` Antelope & EOSIO keys.
+
 # 3.1.0
 
 ## Minor
