@@ -1,7 +1,7 @@
 {
   "name": "eos-ecc",
-  "version": "3.2.0",
-  "description": "An universal JavaScript (Node.js and browsers) EOSIO based digital signature package with public & private key utilities.",
+  "version": "4.0.0",
+  "description": "An universal JavaScript (Node.js and browsers) EOSIO and Antelope based digital signature package with public & private key utilities.",
   "main": "public/index.js",
   "engines": {
     "node": ">=16"
