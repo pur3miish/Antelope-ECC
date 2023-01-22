@@ -3,8 +3,29 @@ import validate_private_key from '../validate_private_key.js'
 import validate_public_key from '../validate_public_key.js'
 
 export default async tests => {
-  tests.add('validate EOS private key', async () => {
+  tests.add('validate private key', async () => {
     let valid
+
+    valid = (
+      await validate_private_key(
+        'PVT_K1_zKsh3V5k6W7UvpKLPMViQizDWhMpKj2K2wNgf5STzaL3rYwL9'
+      )
+    ).valid
+    ok(valid, 'valid private key')
+
+    valid = (
+      await validate_private_key(
+        'PVT_K1_NfCHnJ8QKQJqjSxERawfiErvbpy9sx4BKFiKnJaPJ4ndBDeg'
+      )
+    ).valid
+    ok(!valid, 'invalid private key')
+
+    valid = (
+      await validate_private_key(
+        'PVT_K1_NfCHnJ8QKQJqjSxERawfiErvbpy9sx4BKFiKnJaPJ4ndBDehg'
+      )
+    ).valid
+    ok(valid, 'Valid private key')
 
     valid = (
       await validate_private_key(
@@ -41,6 +62,23 @@ export default async tests => {
   })
 
   tests.add('validate EOS public key', async () => {
+    ok(
+      (
+        await validate_public_key(
+          'PUB_K1_82GQM4rE4uwQke8d49WfdMgH7zfR1MY2VULwC7BXkRGH5kgcvH'
+        )
+      ).valid,
+      'valid public key'
+    )
+    ok(
+      !(
+        await validate_public_key(
+          'PUB_K1_82GQM4rE4uwQke8d49WfdMgH7zfR1MY2VULwC7BXkRGH5kgc'
+        )
+      ).valid,
+      'expected invalid public key'
+    )
+
     ok(
       (
         await validate_public_key(

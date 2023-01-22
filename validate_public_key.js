@@ -11,29 +11,44 @@ const ripemd160 = require('ripemd160-js')
  * @returns {validation_obj} validation object
  */
 async function validate_public_key(wif_public_key) {
-  if (!wif_public_key.startsWith('EOS'))
+  const legacy = wif_public_key.startsWith('EOS')
+
+  if (
+    !wif_public_key.startsWith('EOS') &&
+    !wif_public_key.startsWith('PUB_K1_')
+  )
     return {
       valid: false,
-      message: 'Public key need to start with EOS.'
+      message: 'Public keys need to start with PUB_K1 or for legacy keys EOS'
     }
 
-  let public_key = wif_public_key.slice(3)
+  if (legacy && wif_public_key.length != 53)
+    return {
+      valid: false,
+      message: 'Legacy public keys need to be 53 characters long.'
+    }
 
-  if (public_key.slice(3).match(/[0IOl]+/gmu))
+  if (!legacy && wif_public_key.startsWith('PUB_K1_'))
+    if (wif_public_key.length != 57)
+      return {
+        valid: false,
+        message: 'Public key needs to be 57 characters long.'
+      }
+
+  let public_key = wif_public_key?.replace('EOS', '').replace('PUB_K1_', '')
+
+  if (public_key.match(/[0IOl]+/gmu))
     return {
       valid: false,
       message: 'Invalid base58 character.'
     }
 
-  if (public_key.length != 50)
-    return {
-      valid: false,
-      message: 'Public key should be 53 characters long.'
-    }
-
   const base58_str = base58_to_binary(public_key)
   const checksum_check = base58_str.slice(-4)
-  const checksum = await ripemd160(base58_str.slice(0, -4))
+
+  const checksum = legacy
+    ? await ripemd160(base58_str.slice(0, -4))
+    : await ripemd160(Uint8Array.from([...base58_str.slice(0, -4), 75, 49]))
 
   let invalid_checksum
 

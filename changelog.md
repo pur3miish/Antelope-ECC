@@ -1,5 +1,11 @@
 # eos-ecc changelog
 
+# 4.1.0
+
+## Major
+
+- Support for (PUB_K1 & PVT_K1) key validation.
+
 # 4.0.0
 
 ## Major
