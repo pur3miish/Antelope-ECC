@@ -4,6 +4,7 @@
 
 ## Major
 
+- Minium support node 16
 - Updates to the recover public key, now recovers PUB_K1 by default inplace of legacy key.
 
 ## Patch

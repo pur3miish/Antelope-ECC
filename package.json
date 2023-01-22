@@ -4,7 +4,7 @@
   "description": "An universal JavaScript (Node.js and browsers) EOSIO based digital signature package with public & private key utilities.",
   "main": "public/index.js",
   "engines": {
-    "node": ">=15"
+    "node": ">=16"
   },
   "exports": {
     ".": "./index.js",
