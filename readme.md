@@ -13,7 +13,6 @@ A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_Java
 - Signature verification
 - Legacy support
 
-
 # Setup
 
 ```shell
@@ -46,6 +45,7 @@ Generate a new cryptographically random EOS key pair.
 | Parameter | Type | Description |
 | :-- | :-- | :-- |
 | `seed` | Uint8Array? | A 32 byte array to seed a private key (seed < curve order n). |
+| `legacy` | boolean? | Indicates if you want legacy keys. |
 
 **Returns:** [KeyPair](#type-keypair) — Key pair.
 
@@ -273,5 +273,5 @@ Validates an EOS private key.
 
 | Property  | Type    | Description                  |
 | :-------- | :------ | :--------------------------- |
-| `valid`   | bool    | Determins if the private key |
+| `valid`   | boolean | Determins if the private key |
 | `message` | string? | Description of invalidation. |
