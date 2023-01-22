@@ -23,7 +23,7 @@ npm i eos-ecc
 
 We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 
-- Node.js `>= 15`
+- Node.js `>= 16`
 - Browser `defaults, no IE 11`
 
 # API
