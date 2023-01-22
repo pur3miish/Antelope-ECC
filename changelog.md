@@ -1,8 +1,18 @@
 # eos-ecc changelog
 
-# 3.2.0
+# 4.0.0
 
 ## Major
+
+- Updates to the recover public key, now recovers PUB_K1 by default inplace of legacy key.
+
+## Patch
+
+- Fixed generate public key bug, diff between legacy key and new PUB_K1
+
+# 3.2.0
+
+## Minor
 
 - Added support for `PUB_K1` and `PVT_K1` Antelope & EOSIO keys.
 

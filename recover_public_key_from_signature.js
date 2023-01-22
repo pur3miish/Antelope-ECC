@@ -11,6 +11,7 @@ const public_key_to_wif = require('./private/public_key_to_wif.js')
  * @name recover_public_key
  * @param {string} Arg.signature EOS signature.
  * @param {string} Arg.hex Hex data that was used to create signature.
+ * @param {bool} [Arg.legacy] Returns the key in the legacy format.
  * @returns {string} WIF Public key.
  * @example <caption>Ways to `import`.</caption>
  * ```js
@@ -29,7 +30,7 @@ const public_key_to_wif = require('./private/public_key_to_wif.js')
  * ```
  * The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
  */
-async function recover_EOS_public_key({ signature, hex }) {
+async function recover_public_key({ signature, hex, legacy = false }) {
   let hex_array
   if (typeof hex == 'string')
     hex_array = new Uint8Array(
@@ -37,7 +38,7 @@ async function recover_EOS_public_key({ signature, hex }) {
     )
   else hex_array = hex
 
-  if (!signature.startsWith('SIG_K1_'))
+  if (!signature?.startsWith('SIG_K1_'))
     throw new TypeError('Invalid EOS signature, must start with “SIG_K1_”')
 
   const raw_sig = base58_to_binary(signature.replace('SIG_K1_', '')).slice(
@@ -57,8 +58,9 @@ async function recover_EOS_public_key({ signature, hex }) {
         s,
         v
       }
-    })
+    }),
+    legacy
   )
 }
 
-module.exports = recover_EOS_public_key
+module.exports = recover_public_key

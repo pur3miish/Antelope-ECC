@@ -6,7 +6,8 @@ export default tests => {
     const pub_key = await recover_EOS_public_key({
       signature:
         'SIG_K1_KkdPezk36k4k6jaPHUuvux7ZFvnp5gXSazvUHWRBpJ15Wyys5gEXm56QrzwtyWfd4Abe13DHS7Z1b7kfKxJScT5q9C237S',
-      hex: 'FF'
+      hex: 'FF',
+      legacy: true
     })
 
     const public_key = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV'

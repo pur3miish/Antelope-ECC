@@ -13,8 +13,8 @@ const sha256 = require('universal-sha256-js')
  * @returns {string} WIF private key.
  * @ignore
  */
-async function private_key_to_wif(private_key, legacy) {
-  if (legacy) {
+async function private_key_to_wif(private_key, legacy = true) {
+  if (!legacy) {
     const checksum = await ripemd160(Uint8Array.from([...private_key, 75, 49]))
     return (
       'PVT_K1_' +

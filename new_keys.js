@@ -6,41 +6,33 @@ const public_key_to_wif = require('./private/public_key_to_wif.js')
 const random_bytes = require('./private/random_bytes.js')
 
 /**
- * An Antelope/EOSIO wallet import formatted (WIF) public & private key pair.
- * @kind typedef
- * @name KeyPair
- * @prop {string} public_key WIF public key.
- * @prop {string} private_key WIF private key.
- */
-
-/**
- * Generate a new cryptographically random EOS key pair.
+ * Generate a new pair of crypto keys for an antelope or EOSIO based blockchain.
  * @kind function
- * @name new_eos_keys
+ * @name new_keys
  * @param {Uint8Array} [seed] A 32 byte array to seed a private key (seed < curve order n).
  * @returns {KeyPair} Key pair.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import { new_eos_keys } from 'eos-ecc'
+ * import { new_keys } from 'eos-ecc'
  * ```
  * @example <caption>Ways to `require`.</caption>
  * ```js
- * const { new_eos_keys } = require('eos-ecc')
+ * const { new_keys } = require('eos-ecc')
  * ```
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js
- * new_eos_keys().then(console.log)
+ * new_keys().then(console.log)
  * ```
- * The logged output will be an object containing EOS wif public & private keys.
+ * The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
  */
-async function new_eos_keys(seed) {
+async function new_keys(seed) {
   const private_key = seed ? seed : await random_bytes()
   const public_key = await get_public_key(private_key)
 
   return {
-    public_key: await public_key_to_wif(public_key),
-    private_key: await private_key_to_wif(private_key)
+    public_key: await public_key_to_wif(public_key, false),
+    private_key: await private_key_to_wif(private_key, false)
   }
 }
 
-module.exports = new_eos_keys
+module.exports = new_keys

@@ -13,8 +13,8 @@ const sha256 = require('universal-sha256-js')
  * @ignore
  */
 async function wif_to_private_key(wif_private_key) {
-  const non_legacy = wif_private_key.startsWith('PVT_K1_')
-  const priv_key = base58_to_binary(wif_private_key.replace('PVT_K1_', ''))
+  const non_legacy = wif_private_key?.startsWith('PVT_K1_')
+  const priv_key = base58_to_binary(wif_private_key?.replace('PVT_K1_', ''))
   const raw_priv_key = priv_key.slice(0, non_legacy ? 32 : 33)
   const checksum = priv_key.slice(-4)
 

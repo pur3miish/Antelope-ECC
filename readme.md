@@ -29,6 +29,7 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 # API
 
 - [function new_eos_keys](#function-new_eos_keys)
+- [function new_keys](#function-new_keys)
 - [function public_key_from_private](#function-public_key_from_private)
 - [function recover_public_key](#function-recover_public_key)
 - [function sign_packed_txn](#function-sign_packed_txn)
@@ -45,7 +46,6 @@ Generate a new cryptographically random EOS key pair.
 | Parameter | Type | Description |
 | :-- | :-- | :-- |
 | `seed` | Uint8Array? | A 32 byte array to seed a private key (seed < curve order n). |
-| `legacy` | boolean? | Indicates if you want legacy keys. |
 
 **Returns:** [KeyPair](#type-keypair) — Key pair.
 
@@ -70,6 +70,40 @@ _Usage `new_eos_keys`._
 > ```
 >
 > The logged output will be an object containing EOS wif public & private keys.
+
+---
+
+## function new_keys
+
+Generate a new pair of crypto keys for an antelope or EOSIO based blockchain.
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| `seed` | Uint8Array? | A 32 byte array to seed a private key (seed < curve order n). |
+
+**Returns:** [KeyPair](#type-keypair) — Key pair.
+
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { new_keys } from 'eos-ecc'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { new_keys } = require('eos-ecc')
+> ```
+
+_Usage `new_eos_keys`._
+
+> ```js
+> new_keys().then(console.log)
+> ```
+>
+> The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
 
 ---
 
@@ -118,6 +152,7 @@ Recovers EOS Wallet import format (WIF) public key from signature.
 | `Arg`           | obeject | Argument                                    |
 | `Arg.signature` | string  | EOS signature.                              |
 | `Arg.hex`       | string  | Hex data that was used to create signature. |
+| `Arg.legacy`    | bool?   | Returns the key in the legacy format.       |
 
 **Returns:** string — WIF Public key.
 
@@ -258,12 +293,12 @@ Validate EOS public key.
 
 ## type KeyPair
 
-An EOS wallet import formatted (WIF) public & private key pair.
+An Antelope/EOSIO wallet import formatted (WIF) public & private key pair.
 
-| Property      | Type   | Description          |
-| :------------ | :----- | :------------------- |
-| `public_key`  | string | EOS WIF public key.  |
-| `private_key` | string | EOS WIF private key. |
+| Property      | Type   | Description      |
+| :------------ | :----- | :--------------- |
+| `public_key`  | string | WIF public key.  |
+| `private_key` | string | WIF private key. |
 
 ---
 
