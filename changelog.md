@@ -1,8 +1,14 @@
 # eos-ecc changelog
 
+# 4.2.0
+
+## Minor
+
+- Added legacy public key conversion to PUB_K1 format.
+
 # 4.1.0
 
-## Major
+## Minor
 
 - Support for (PUB_K1 & PVT_K1) key validation.
 

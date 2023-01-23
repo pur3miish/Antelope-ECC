@@ -11,6 +11,7 @@
     "./package": "./package.json",
     "./package.json": "./package.json",
     "./new_eos_keys.js": "./new_eos_keys.js",
+    "./legacy_to_public_key.js": "./legacy_to_public_key.js",
     "./new_keys.js": "./new_keys.js",
     "./public_key_from_private.js": "./public_key_from_private.js",
     "./sign_txn.js": "./sign_txn.js",
@@ -28,7 +29,8 @@
     "sign_txn.js",
     "validate_private_key.js",
     "validate_public_key.js",
-    "sign_packed_txn.js"
+    "sign_packed_txn.js",
+    "legacy_to_public_key.js"
   ],
   "browserslist": [
     "defaults",

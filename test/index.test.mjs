@@ -1,5 +1,6 @@
 // eslint-disable-next-line node/no-missing-import
 import TestDirector from 'test-director'
+import legacy_to_public_keyTetMjs from './legacy_to_public.test.mjs'
 import new_eos_keysTestMjs from './new_eos_keys.test.mjs'
 import public_key_from_privateTestMjs from './public_key_from_private.test.mjs'
 import random_bytesTestMjs from './random_bytes.test.js'
@@ -11,6 +12,7 @@ import wif_to_public_keyTestMjs from './wif_to_public_key.test.mjs'
 
 const tests = new TestDirector()
 
+legacy_to_public_keyTetMjs(tests)
 recover_publickey(tests)
 public_key_from_privateTestMjs(tests)
 new_eos_keysTestMjs(tests)
