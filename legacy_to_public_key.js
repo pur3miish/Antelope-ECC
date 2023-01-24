@@ -4,6 +4,8 @@ const ripemd160 = require('ripemd160-js')
 
 /**
  * Converts an EOSIO legacy key to PUB_K1 format
+ * @name legacy_to_public_key
+ * @kind function
  * @param {string} legacy legacy public key
  * @returns {string} public key PUB_K1 format
  */

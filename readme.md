@@ -28,6 +28,7 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 
 # API
 
+- [function legacy_to_public_key](#function-legacy_to_public_key)
 - [function new_eos_keys](#function-new_eos_keys)
 - [function new_keys](#function-new_keys)
 - [function public_key_from_private](#function-public_key_from_private)
@@ -38,6 +39,18 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 - [function validate_public_key](#function-validate_public_key)
 - [type KeyPair](#type-keypair)
 - [type validation_obj](#type-validation_obj)
+
+## function legacy_to_public_key
+
+Converts an EOSIO legacy key to PUB_K1 format
+
+| Parameter | Type   | Description       |
+| :-------- | :----- | :---------------- |
+| `legacy`  | string | legacy public key |
+
+**Returns:** string — public key PUB_K1 format
+
+---
 
 ## function new_eos_keys
 
