@@ -1,5 +1,11 @@
 # eos-ecc changelog
 
+# 4.2.1
+
+## Patch
+
+- Added legacy example to readme.md.
+
 # 4.2.0
 
 ## Minor
