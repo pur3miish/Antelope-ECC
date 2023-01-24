@@ -50,6 +50,30 @@ Converts an EOSIO legacy key to PUB_K1 format
 
 **Returns:** string — public key PUB_K1 format
 
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { legacy_to_public_key } from 'eos-ecc'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { legacy_to_public_key } = require('eos-ecc')
+> ```
+
+_Usage `legacy_to_public_key`._
+
+> ```js
+> legacy_to_public_key(
+>   'EOS53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDChput7'
+> ).then(console.log)
+> ```
+>
+> The logged output was PUB_K1_53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDCqCCVR.
+
 ---
 
 ## function new_eos_keys
