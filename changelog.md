@@ -1,5 +1,12 @@
 # eos-ecc changelog
 
+# 4.3.0
+
+## Minor
+
+- Added Legacy private key to private key (PVT_K1)
+- Added support for validating signatures for 57 characters long.
+
 # 4.2.1
 
 ## Patch
@@ -22,7 +29,7 @@
 
 ## Major
 
-- Minium support node 16
+- Minimum support node 16
 - Updates to the recover public key, now recovers PUB_K1 by default inplace of legacy key.
 - Added new keys function to return `K1` keys.
 
