@@ -21,6 +21,7 @@ const sha256 = require('universal-sha256-js')
  */
 async function validate_private_key(wif_private_key) {
   const legacy = !wif_private_key.startsWith('PVT_K1_')
+
   if (legacy) {
     if (wif_private_key[0] != '5')
       return {
@@ -32,7 +33,7 @@ async function validate_private_key(wif_private_key) {
         valid: false,
         message: 'Legacy private keys need to be 51 characters long.'
       }
-  } else if (wif_private_key.length != 56)
+  } else if (wif_private_key.length != 56 && wif_private_key.length != 57)
     return {
       valid: false,
       message: 'Private keys need to be 56 characters long.'

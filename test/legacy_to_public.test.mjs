@@ -1,4 +1,5 @@
 import { deepStrictEqual } from 'assert'
+import legacy_to_private_key from '../legacy_to_private_key.js'
 import legacy_to_public_key from '../legacy_to_public_key.js'
 
 export default tests => {
@@ -9,6 +10,14 @@ export default tests => {
       ),
       'PUB_K1_53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDCqCCVR',
       'Expected converted key to be PUB_K1_53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDCqCCVR'
+    )
+
+    deepStrictEqual(
+      await legacy_to_private_key(
+        '5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak'
+      ),
+      'PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23',
+      'Expected converted private key.'
     )
 
     deepStrictEqual(

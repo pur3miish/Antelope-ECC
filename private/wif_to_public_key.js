@@ -34,6 +34,3 @@ async function wif_to_public_key(wif_public_key) {
 }
 
 module.exports = wif_to_public_key
-
-// PUB_K1_ 56e2SD9cNHezjW4mMNTRzK69ievupUvX5d4w82hccyFf NMu8uF
-// EOS56e2SD9cNHezjW4mMNTRzK69ievupUvX5d4w82hccyFfT1jCZ7

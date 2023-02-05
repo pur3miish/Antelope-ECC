@@ -38,6 +38,15 @@ export default tests => {
         'Expected result'
       )
     )
+    // 5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak
+    deepStrictEqual(
+      await wif_to_private_key(
+        '5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak'
+      ),
+      await wif_to_private_key(
+        'PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23'
+      )
+    )
 
     rejects(async () => {
       await wif_to_private_key(

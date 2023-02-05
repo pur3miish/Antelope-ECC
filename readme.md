@@ -29,6 +29,7 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 # API
 
 - [function legacy_to_public_key](#function-legacy_to_public_key)
+- [function legacy_to_public_key](#function-legacy_to_public_key-1)
 - [function new_eos_keys](#function-new_eos_keys)
 - [function new_keys](#function-new_keys)
 - [function public_key_from_private](#function-public_key_from_private)
@@ -39,6 +40,42 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 - [function validate_public_key](#function-validate_public_key)
 - [type KeyPair](#type-keypair)
 - [type validation_obj](#type-validation_obj)
+
+## function legacy_to_public_key
+
+Converts an Antelope/EOSIO legacy priate key to PVT_K1 format
+
+| Parameter | Type   | Description        |
+| :-------- | :----- | :----------------- |
+| `legacy`  | string | legacy private key |
+
+**Returns:** string — public key PVT_K1 format
+
+### Examples
+
+_Ways to `import`._
+
+> ```js
+> import { legacy_to_private_key } from 'eos-ecc'
+> ```
+
+_Ways to `require`._
+
+> ```js
+> const { legacy_to_public_key } = require('eos-ecc')
+> ```
+
+_Usage `legacy_to_public_key`._
+
+> ```js
+> legacy_to_public_key(
+>   '5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak'
+> ).then(console.log)
+> ```
+>
+> The logged output was PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23.
+
+---
 
 ## function legacy_to_public_key
 

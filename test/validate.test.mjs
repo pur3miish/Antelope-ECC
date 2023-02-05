@@ -61,7 +61,16 @@ export default async tests => {
     ok(!valid, 'Invalid base58 char')
   })
 
-  tests.add('validate EOS public key', async () => {
+  tests.add('validate EOSIO public key', async () => {
+    ok(
+      (
+        await validate_private_key(
+          'PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23'
+        )
+      ).valid,
+      'validate 57 character length PVT key'
+    )
+
     ok(
       (
         await validate_public_key(
