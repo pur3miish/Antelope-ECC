@@ -1,24 +1,24 @@
-// eslint-disable-next-line node/no-missing-import
-import TestDirector from 'test-director'
-import legacy_to_public_keyTetMjs from './legacy_to_public.test.mjs'
-import new_eos_keysTestMjs from './new_eos_keys.test.mjs'
-import public_key_from_privateTestMjs from './public_key_from_private.test.mjs'
-import random_bytesTestMjs from './random_bytes.test.js'
-import recover_publickey from './recover_public_key.test.mjs'
-import sign_txn from './sign_txn.test.mjs'
-import validate_keys from './validate.test.mjs'
-import wif_to_private_keyTestMjs from './wif_to_private_key.test.mjs'
-import wif_to_public_keyTestMjs from './wif_to_public_key.test.mjs'
+import TestDirector from "test-director";
 
-const tests = new TestDirector()
+import legacy_to_public_keyTetMjs from "./legacy_to_public.test.mjs";
+import new_eos_keysTestMjs from "./new_eos_keys.test.mjs";
+import public_key_from_privateTestMjs from "./public_key_from_private.test.mjs";
+import random_bytesTestMjs from "./random_bytes.test.mjs";
+import recover_publickey from "./recover_public_key.test.mjs";
+import sign_txn from "./sign_txn.test.mjs";
+import validate_keys from "./validate.test.mjs";
+import wif_to_private_keyTestMjs from "./wif_to_private_key.test.mjs";
+import wif_to_public_keyTestMjs from "./wif_to_public_key.test.mjs";
 
-legacy_to_public_keyTetMjs(tests)
-recover_publickey(tests)
-public_key_from_privateTestMjs(tests)
-new_eos_keysTestMjs(tests)
-random_bytesTestMjs(tests)
-wif_to_private_keyTestMjs(tests)
-wif_to_public_keyTestMjs(tests)
-sign_txn(tests)
-validate_keys(tests)
-tests.run()
+const tests = new TestDirector();
+
+legacy_to_public_keyTetMjs(tests);
+recover_publickey(tests);
+public_key_from_privateTestMjs(tests);
+new_eos_keysTestMjs(tests);
+random_bytesTestMjs(tests);
+wif_to_private_keyTestMjs(tests);
+wif_to_public_keyTestMjs(tests);
+sign_txn(tests);
+validate_keys(tests);
+tests.run();

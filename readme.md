@@ -43,42 +43,6 @@ We support all browsers that can handle [WebAssembly](https://caniuse.com/wasm).
 
 ## function legacy_to_public_key
 
-Converts an Antelope/EOSIO legacy priate key to PVT_K1 format
-
-| Parameter | Type   | Description        |
-| :-------- | :----- | :----------------- |
-| `legacy`  | string | legacy private key |
-
-**Returns:** string — public key PVT_K1 format
-
-### Examples
-
-_Ways to `import`._
-
-> ```js
-> import { legacy_to_private_key } from 'eos-ecc'
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { legacy_to_public_key } = require('eos-ecc')
-> ```
-
-_Usage `legacy_to_public_key`._
-
-> ```js
-> legacy_to_public_key(
->   '5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak'
-> ).then(console.log)
-> ```
->
-> The logged output was PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23.
-
----
-
-## function legacy_to_public_key
-
 Converts an EOSIO legacy key to PUB_K1 format
 
 | Parameter | Type   | Description       |
@@ -92,24 +56,49 @@ Converts an EOSIO legacy key to PUB_K1 format
 _Ways to `import`._
 
 > ```js
-> import { legacy_to_public_key } from 'eos-ecc'
+> import { legacy_to_public_key } from "eos-ecc";
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { legacy_to_public_key } = require('eos-ecc')
+> const { legacy_to_public_key } = require("eos-ecc");
 > ```
 
 _Usage `legacy_to_public_key`._
 
 > ```js
 > legacy_to_public_key(
->   'EOS53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDChput7'
-> ).then(console.log)
+>   "EOS53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDChput7"
+> ).then(console.log);
 > ```
 >
 > The logged output was PUB_K1_53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDCqCCVR.
+
+---
+
+## function legacy_to_public_key
+
+Converts an Antelope/EOSIO legacy priate key to PVT_K1 format
+
+| Parameter | Type   | Description        |
+| :-------- | :----- | :----------------- |
+| `legacy`  | string | legacy private key |
+
+**Returns:** string — public key PVT_K1 format
+
+### Examples
+
+_Usage `legacy_to_public_key`._
+
+> ```js
+> import { legacy_to_private_key } from "eos-ecc/legacy_to_private_key.mjs";
+> legacy_to_public_key(
+>   "5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak"
+> ).then(console.log);
+> ```
+>
+> The logged output was PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23.
 
 ---
 
@@ -128,19 +117,19 @@ Generate a new cryptographically random EOS key pair.
 _Ways to `import`._
 
 > ```js
-> import { new_eos_keys } from 'eos-ecc'
+> import { new_eos_keys } from "eos-ecc";
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { new_eos_keys } = require('eos-ecc')
+> const { new_eos_keys } = require("eos-ecc");
 > ```
 
 _Usage `new_eos_keys`._
 
 > ```js
-> new_eos_keys().then(console.log)
+> new_eos_keys().then(console.log);
 > ```
 >
 > The logged output will be an object containing EOS wif public & private keys.
@@ -162,19 +151,19 @@ Generate a new pair of crypto keys for an antelope or EOSIO based blockchain.
 _Ways to `import`._
 
 > ```js
-> import { new_keys } from 'eos-ecc'
+> import { new_keys } from "eos-ecc";
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { new_keys } = require('eos-ecc')
+> const { new_keys } = require("eos-ecc");
 > ```
 
 _Usage `new_eos_keys`._
 
 > ```js
-> new_keys().then(console.log)
+> new_keys().then(console.log);
 > ```
 >
 > The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
@@ -196,21 +185,21 @@ Convert an EOS WIF private key to a WIF public key.
 _Ways to `import`._
 
 > ```js
-> import { public_key_from_private } from 'eos-ecc'
+> import { public_key_from_private } from "eos-ecc";
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { public_key_from_private } = require('eos-ecc')
+> const { public_key_from_private } = require("eos-ecc");
 > ```
 
 _Usage `public_key_from_private`._
 
 > ```js
 > public_key_from_private(
->   '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
-> ).then(console.log)
+>   "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"
+> ).then(console.log);
 > ```
 >
 > The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
@@ -235,22 +224,22 @@ Recovers EOS Wallet import format (WIF) public key from signature.
 _Ways to `import`._
 
 > ```js
-> import { recover_public_key } from 'eos-ecc'
+> import { recover_public_key } from "eos-ecc";
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { recover_public_key } = require('eos-ecc')
+> const { recover_public_key } = require("eos-ecc");
 > ```
 
 _Usage `public_key_from_private`._
 
 > ```js
 > recover_public_key({
->   signature: 'SIG_K1_…',
->   data: 'ff'
-> }).then(console.log)
+>   signature: "SIG_K1_…",
+>   data: "ff",
+> }).then(console.log);
 > ```
 >
 > The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV.
@@ -276,24 +265,24 @@ Generate an EOSIO signature for a packed transaction object.
 _Ways to `import`._
 
 > ```js
-> import { sign_packed_txn } from 'eos-ecc'
+> import { sign_packed_txn } from "eos-ecc";
 > ```
 
 _Ways to `require`._
 
 > ```js
-> const { sign_packed_txn } = require('eos-ecc')
+> const { sign_packed_txn } = require("eos-ecc");
 > ```
 
 _Usage `sign_packed_txn`._
 
 > ```js
 > sign_packed_txn({
->   chain_id: '2a02a0053…',
->   transaction_header: 'fa123232…',
->   transaction_body: 'fa45ffa2…',
->   wif_private_key: '5f…'
-> })
+>   chain_id: "2a02a0053…",
+>   transaction_header: "fa123232…",
+>   transaction_body: "fa45ffa2…",
+>   wif_private_key: "5f…",
+> });
 > ```
 >
 > The logged output was SIG_K1\_….
@@ -308,36 +297,24 @@ Generate an EOS encoded signature.
 | :-- | :-- | :-- |
 | `arg` | object | Argument. |
 | `arg.hex` | string \| Uint8Array | Data to sign. |
-| `arg.wif_private_key` | string | An EOS wallet import format private key. |
+| `arg.wif_private_key` | string | An Antelope or EOSIO private key. |
 
-**Returns:** string — EOS encoded signature.
+**Returns:** string — Signature.
 
 ### Examples
 
-_Ways to `import`._
+_Usage of `sign_txn`._
 
 > ```js
-> import { sign_txn } from 'eos-ecc'
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { sign_txn } = require('eos-ecc')
-> ```
-
-_Usage of `sign_hash`._
-
-> ```js
-> import crypto from 'crypto'
+> import sign_txn from "eos-ecc/sign_txn.mjs";
 >
 > sign_txn({
 >   hex: FDFDFDFD,
->   wif_private_key: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
-> }).then(console.log)
+>   wif_private_key: "PUB_K1_43…",
+> }).then(console.log);
 > ```
 >
-> The logged output will be SIG_K1\_….
+> The logged output will be SIG_K1\_…
 
 ---
 

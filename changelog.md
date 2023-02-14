@@ -1,6 +1,10 @@
 # eos-ecc changelog
 
-# 4.3.0
+# 5.0.0
+
+## Major
+
+- [Library module anti-pattern](https://jaydenseric.com/blog/optimal-javascript-module-design)
 
 ## Minor
 

@@ -1,63 +1,12 @@
 {
   "name": "eos-ecc",
-  "version": "4.3.0",
+  "version": "5.0.0-beta.0",
   "description": "An universal JavaScript (Node.js and browsers) EOSIO and Antelope based digital signature package with public & private key utilities.",
-  "main": "public/index.js",
-  "engines": {
-    "node": ">=16"
-  },
-  "exports": {
-    ".": "./index.js",
-    "./package": "./package.json",
-    "./package.json": "./package.json",
-    "./new_eos_keys.js": "./new_eos_keys.js",
-    "./legacy_to_public_key.js": "./legacy_to_public_key.js",
-    "./legacy_to_private_key.js": "./legacy_to_private_key.js",
-    "./new_keys.js": "./new_keys.js",
-    "./public_key_from_private.js": "./public_key_from_private.js",
-    "./sign_txn.js": "./sign_txn.js",
-    "./validate_private_key.js": "./validate_private_key.js",
-    "./validate_public_key.js": "./validate_public_key.js",
-    "./sign_packed_txn.js": "./sign_packed_txn.js"
-  },
-  "files": [
-    "private",
-    "index.js",
-    "new_eos_keys.js",
-    "new_keys.js",
-    "public_key_from_private.js",
-    "recover_public_key_from_signature.js",
-    "sign_txn.js",
-    "validate_private_key.js",
-    "validate_public_key.js",
-    "sign_packed_txn.js",
-    "legacy_to_public_key.js",
-    "legacy_to_private_key.js"
-  ],
-  "browserslist": [
-    "defaults",
-    "not IE 11"
-  ],
-  "scripts": {
-    "prepare": "npm run prepare:jsdoc && npm run prepare:prettier",
-    "prepare:jsdoc": "jsdoc-md",
-    "prepare:prettier": "prettier --write readme.md",
-    "test": "npm run test:eslint && npm run test:prettier && npm run test:api",
-    "test:api": "coverage-node test/index.test.mjs",
-    "test:eslint": "eslint .",
-    "test:prettier": "prettier -c .",
-    "prepublishOnly": "npm test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pur3miish/eos-ecc.git"
-  },
   "author": "pur3miish",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pur3miish/eos-ecc/issues"
-  },
+  "repository": "github:pur3miish/eos-ecc",
   "homepage": "https://github.com/pur3miish/eos-ecc#readme",
+  "bugs": "https://github.com/pur3miish/eos-ecc/issues",
   "keywords": [
     "blockchain",
     "digital",
@@ -71,24 +20,60 @@
     "secp256k1",
     "alternative"
   ],
+  "files": [
+    "private",
+    "index.mjs",
+    "new_eos_keys.mjs",
+    "new_keys.mjs",
+    "public_key_from_private.mjs",
+    "recover_public_key_from_signature.mjs",
+    "sign_txn.mjs",
+    "validate_private_key.mjs",
+    "validate_public_key.mjs",
+    "sign_packed_txn.mjs",
+    "legacy_to_public_key.mjs",
+    "legacy_to_private_key.mjs"
+  ],
+  "sideEffects": false,
+  "exports": {
+    "./package.json": "./package.json",
+    "./new_eos_keys.mjs": "./new_eos_keys.mjs",
+    "./legacy_to_public_key.mjs": "./legacy_to_public_key.mjs",
+    "./legacy_to_private_key.mjs": "./legacy_to_private_key.mjs",
+    "./new_keys.mjs": "./new_keys.mjs",
+    "./public_key_from_private.mjs": "./public_key_from_private.mjs",
+    "./sign_txn.mjs": "./sign_txn.mjs",
+    "./validate_private_key.mjs": "./validate_private_key.mjs",
+    "./validate_public_key.mjs": "./validate_public_key.mjs",
+    "./sign_packed_txn.mjs": "./sign_packed_txn.mjs"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "browserslist": "Node 16 - 17 and Node < 17, Node >= 18, > 0.5%, not OperaMini all, not dead",
+  "scripts": {
+    "eslint": "eslint .",
+    "prettier": "prettier -c .",
+    "prettier:readme": "prettier --write readme.md",
+    "types": "tsc -p jsconfig.json",
+    "tests": "coverage-node test/index.test.mjs",
+    "test": "npm run eslint && npm run prettier && npm run types && npm run tests",
+    "prepublishOnly": "npm test"
+  },
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "coverage-node": "^8.0.0",
-    "eslint": "^8.2.0",
-    "eslint-config-env": "^23.0.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-compat": "^4.0.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jsdoc": "37",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "esbuild": "^0.17.8",
+    "eslint": "^8.34.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "jsdoc-md": "^11.0.2",
-    "prettier": "^2.4.1",
-    "test-director": "^10.0.0"
+    "prettier": "^2.8.4",
+    "test-director": "^10.0.0",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "base58-js": "^1.0.5",
     "isomorphic-secp256k1-js": "^1.0.2",
-    "proton-tsc": "^0.3.58",
     "ripemd160-js": "^1.2.0",
     "universal-sha256-js": "^1.0.3"
   }

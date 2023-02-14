@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "maxNodeModuleJsDepth": 10,
+    "module": "ESNext",
+    "noEmit": true,
+    "strict": true
+  },
+  "typeAcquisition": {
+    "enable": false
+  }
+}
