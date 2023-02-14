@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "maxNodeModuleJsDepth": 10,
-    "module": "ESNext",
+    "module": "nodenext",
     "noEmit": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": false
   },
   "typeAcquisition": {
     "enable": false

@@ -48,7 +48,7 @@
     "./sign_packed_txn.mjs": "./sign_packed_txn.mjs"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=16 || >=18.0.0"
   },
   "browserslist": "Node 16 - 17 and Node < 17, Node >= 18, > 0.5%, not OperaMini all, not dead",
   "scripts": {
@@ -63,10 +63,8 @@
   "devDependencies": {
     "@types/node": "^18.13.0",
     "coverage-node": "^8.0.0",
-    "esbuild": "^0.17.8",
     "eslint": "^8.34.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "jsdoc-md": "^11.0.2",
     "prettier": "^2.8.4",
     "test-director": "^10.0.0",
     "typescript": "^4.9.5"

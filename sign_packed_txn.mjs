@@ -1,3 +1,5 @@
+// @ts-check
+
 import sign_tnx from "./sign_txn.mjs";
 
 /**
@@ -9,7 +11,7 @@ import sign_tnx from "./sign_txn.mjs";
  * @param {string} PackedTxn.transaction_header Serialised transaction header.
  * @param {string} PackedTxn.transaction_body Serialised transaction body.
  * @param {string} PackedTxn.wif_private_key Private key (wallet import format).
- * @returns {string} Signature
+ * @returns {Promise<string>} Signature
  * @example <caption>Usage `sign_packed_txn`.</caption>
  * ```js
  * import sign_packed_txn from 'eos-ecc/sign_packed_txn.mjs'

@@ -6,7 +6,7 @@ import ripemd160 from "ripemd160-js";
  * @kind function
  * @name wif_to_public_key
  * @param {string} wif_public_key Base58 WIF public key.
- * @returns {Uint8Array} Compressed secp256k1 public key.
+ * @returns {Promise<Uint8Array>} Compressed secp256k1 public key.
  * @ignore
  */
 export default async function wif_to_public_key(wif_public_key) {

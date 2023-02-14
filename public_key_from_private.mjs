@@ -1,3 +1,5 @@
+// @ts-check
+
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.js";
 
 import public_key_to_wif from "./private/public_key_to_wif.mjs";
@@ -8,7 +10,7 @@ import wif_to_private_key from "./private/wif_to_private_key.mjs";
  * @kind function
  * @name public_key_from_private
  * @param {string} wif_private_key Wallet import format key.
- * @returns {string} Wallet import format public key.
+ * @returns {Promise<string>} Wallet import format public key.
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
  * import public_key_from_private from 'eos-ecc/public_key_from_private.mjs'

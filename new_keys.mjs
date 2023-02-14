@@ -1,3 +1,5 @@
+// @ts-check
+
 import { get_public_key } from "isomorphic-secp256k1-js";
 
 import private_key_to_wif from "./private/private_key_to_wif.mjs";
@@ -5,11 +7,17 @@ import public_key_to_wif from "./private/public_key_to_wif.mjs";
 import random_bytes from "./private/random_bytes.mjs";
 
 /**
+ * @typedef KeyPair
+ * @prop {string} public_key Antelope/EOSIO public key (PUB_K1).
+ * @prop {string} private_key Antelope/EOSIO private key (PVT_K1).
+ */
+
+/**
  * Generate a new pair of crypto keys for an Antelope/EOSIO based blockchain.
  * @kind function
  * @name new_keys
  * @param {Uint8Array} [seed] A 32 byte array to seed a private key (seed < curve order n).
- * @returns {KeyPair} Key pair.
+ * @returns {Promise<KeyPair>} Key pair.
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js
  * import new_keys from 'eos-ecc/new_keys.mjs'

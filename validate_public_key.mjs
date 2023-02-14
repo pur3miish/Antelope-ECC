@@ -1,12 +1,21 @@
+// @ts-check
+
 import { base58_to_binary } from "base58-js";
 import ripemd160 from "ripemd160-js";
+
+/**
+ * Validates an EOS private key.
+ * @typedef validation_obj
+ * @prop {boolean} valid Determins if the private key
+ * @prop {string} [message] Description of invalidation.
+ */
 
 /**
  * Validate EOS public key.
  * @name validate_public_key
  * @kind function
  * @param {string} wif_public_key wallet import format EOS public key.
- * @returns {validation_obj} validation object
+ * @returns {Promise<validation_obj>} validation object
  */
 export default async function validate_public_key(wif_public_key) {
   const legacy = wif_public_key.startsWith("EOS");

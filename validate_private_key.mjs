@@ -1,11 +1,12 @@
+// @ts-check
+
 import { base58_to_binary } from "base58-js";
 import ripemd160 from "ripemd160-js";
 import sha256 from "universal-sha256-js";
 
 /**
  * Validates an EOS private key.
- * @kind typedef
- * @name validation_obj
+ * @typedef validation_obj
  * @prop {boolean} valid Determins if the private key
  * @prop {string} [message] Description of invalidation.
  */
@@ -15,7 +16,7 @@ import sha256 from "universal-sha256-js";
  * @name validate_private_key
  * @kind function
  * @param {string} wif_private_key base58 private key
- * @returns {validation_obj} validation message.
+ * @returns {Promise<validation_obj>} validation message.
  */
 export default async function validate_private_key(wif_private_key) {
   const legacy = !wif_private_key.startsWith("PVT_K1_");

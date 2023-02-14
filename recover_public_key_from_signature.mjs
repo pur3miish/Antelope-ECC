@@ -1,3 +1,5 @@
+// @ts-check
+
 import { base58_to_binary } from "base58-js";
 import { recover_public_key as get_pub } from "isomorphic-secp256k1-js";
 
@@ -5,13 +7,13 @@ import public_key_to_wif from "./private/public_key_to_wif.mjs";
 
 /**
  * Recovers an Antelope/EOSIO public key from a signature.
- * @param {obeject} Arg Argument
  * @kind function
  * @name recover_public_key
+ * @param {object} Arg Argument
  * @param {string} Arg.signature Signature (SIG_K1…).
  * @param {string} Arg.hex Hex data that was used to create signature.
- * @param {bool} [Arg.legacy] Returns the key in the legacy format.
- * @returns {string} WIF Public key.
+ * @param {Boolean} [Arg.legacy] Returns the key in the legacy format.
+ * @returns {Promise<string>} WIF Public key.
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
  * import recover_public_key from 'eos-ecc/recover_public_key.mjs'
@@ -30,8 +32,8 @@ export default async function recover_public_key({
 }) {
   let hex_array;
   if (typeof hex == "string")
-    hex_array = new Uint8Array(
-      hex.match(/[a-fA-F0-9]{2}/gmu).map((i) => `0x${i}`)
+    hex_array = Uint8Array.from(
+      hex.match(/[a-fA-F0-9]{2}/gmu).map((i) => Number(`0x${i}`))
     );
   else hex_array = hex;
 

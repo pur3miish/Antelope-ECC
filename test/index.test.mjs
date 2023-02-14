@@ -1,3 +1,5 @@
+// @ts-check
+
 import TestDirector from "test-director";
 
 import legacy_to_public_keyTetMjs from "./legacy_to_public.test.mjs";
