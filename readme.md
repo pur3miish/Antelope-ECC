@@ -1,4 +1,4 @@
-![eos ecc logo](https://raw.githubusercontent.com/pur3miish/eos-ecc/main/static/eos-ecc.svg)
+![eos ecc logo](static/eos-ecc.svg)
 
 # EOS-ECC
 
@@ -16,7 +16,7 @@ npm install eos-ecc
 
 ## Examples
 
-An example of signing a packed transaction.
+Signing a packed transaction.
 
 ```js
 import sign_packed_txn from "eos-ecc/sign_packed_txn.mjs";
@@ -41,14 +41,14 @@ new_keys().then(console.log);
 
 > The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
 
-An example of recovering public key from signature.
+Recover public key from signature.
 
 ```js
 import recover_public_key from "eos-ecc/recover_public_key.mjs";
 
 recover_public_key({
-  signature: "SIG_K1_…",
-  data: "ff",
+  signature: "SIG_K1_…", // Signature
+  data: "ff", // Data that was used to create signature.
 }).then(console.log);
 ```
 
