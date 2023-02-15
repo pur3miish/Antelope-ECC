@@ -2,7 +2,7 @@ import assert from "assert";
 
 const { deepStrictEqual, rejects } = assert;
 
-import wif_to_public_key from "../private/wif_to_public_key.mjs";
+import wif_to_public_key from "../wif_to_public_key.mjs";
 
 export default (tests) => {
   tests.add("wif to public key", async () => {

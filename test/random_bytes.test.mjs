@@ -1,7 +1,7 @@
 import assert from "assert";
 import crypto from "crypto";
 
-import random_bytes from "../private/random_bytes.mjs";
+import random_bytes from "../random_bytes.mjs";
 
 const { ok } = assert;
 

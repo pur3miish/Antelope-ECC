@@ -6,7 +6,7 @@
 
 A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript Antelope and EOSIO digital signature and cryptokey utilty package.
 
-## Antelope/EOSIO Features
+## Features
 
 - Public & private key creation
 - Digital signatures

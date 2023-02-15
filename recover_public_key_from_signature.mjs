@@ -3,7 +3,7 @@
 import { base58_to_binary } from "base58-js";
 import { recover_public_key as get_pub } from "isomorphic-secp256k1-js";
 
-import public_key_to_wif from "./private/public_key_to_wif.mjs";
+import public_key_to_wif from "./public_key_to_wif.mjs";
 
 /**
  * Recovers an Antelope/EOSIO public key from a signature.

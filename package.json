@@ -1,6 +1,6 @@
 {
   "name": "eos-ecc",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.2",
   "description": "An universal JavaScript (Node.js and browsers) EOSIO and Antelope based digital signature package with public & private key utilities.",
   "author": "pur3miish",
   "license": "MIT",
@@ -21,31 +21,38 @@
     "alternative"
   ],
   "files": [
-    "private",
-    "index.mjs",
+    "legacy_to_private_key.mjs",
+    "legacy_to_public_key.mjs",
     "new_eos_keys.mjs",
     "new_keys.mjs",
+    "public_key_to_wif.mjs",
     "public_key_from_private.mjs",
+    "random_bytes.mjs",
     "recover_public_key_from_signature.mjs",
+    "sign_packed_txn.mjs",
     "sign_txn.mjs",
     "validate_private_key.mjs",
     "validate_public_key.mjs",
-    "sign_packed_txn.mjs",
-    "legacy_to_public_key.mjs",
-    "legacy_to_private_key.mjs"
+    "wif_to_private_key.mjs",
+    "wif_to_public_key.mjs"
   ],
   "sideEffects": false,
   "exports": {
     "./package.json": "./package.json",
-    "./new_eos_keys.mjs": "./new_eos_keys.mjs",
-    "./legacy_to_public_key.mjs": "./legacy_to_public_key.mjs",
     "./legacy_to_private_key.mjs": "./legacy_to_private_key.mjs",
+    "./legacy_to_public_key.mjs": "./legacy_to_public_key.mjs",
+    "./new_eos_keys.mjs": "./new_eos_keys.mjs",
     "./new_keys.mjs": "./new_keys.mjs",
+    "./public_key_to_wif.mjs": "./public_key_to_wif.mjs",
     "./public_key_from_private.mjs": "./public_key_from_private.mjs",
+    "./random_bytes.mjs":"./random_bytes.mjs",
+    "./recover_public_key_from_signature.mjs": "./recover_public_key_from_signature.mjs",
+    "./sign_packed_txn.mjs": "./sign_packed_txn.mjs",
     "./sign_txn.mjs": "./sign_txn.mjs",
     "./validate_private_key.mjs": "./validate_private_key.mjs",
     "./validate_public_key.mjs": "./validate_public_key.mjs",
-    "./sign_packed_txn.mjs": "./sign_packed_txn.mjs"
+    "./wif_to_private_key.mjs": "./wif_to_private_key.mjs",
+    "./wif_to_public_key.mjs": "./wif_to_public_key.mjs"
   },
   "engines": {
     "node": ">=16 || >=18.0.0"

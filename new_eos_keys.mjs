@@ -1,8 +1,8 @@
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.js";
 
-import private_key_to_wif from "./private/private_key_to_wif.mjs";
-import public_key_to_wif from "./private/public_key_to_wif.mjs";
-import random_bytes from "./private/random_bytes.mjs";
+import private_key_to_wif from "./private_key_to_wif.mjs";
+import public_key_to_wif from "./public_key_to_wif.mjs";
+import random_bytes from "./random_bytes.mjs";
 
 /**
  * An Antelope/EOSIO wallet import formatted (WIF) public & private key pair.

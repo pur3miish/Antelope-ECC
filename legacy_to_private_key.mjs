@@ -1,7 +1,7 @@
 // @ts-check
 
-import private_key_to_wif from "./private/private_key_to_wif.mjs";
-import wif_to_private_key from "./private/wif_to_private_key.mjs";
+import private_key_to_wif from "./private_key_to_wif.mjs";
+import wif_to_private_key from "./wif_to_private_key.mjs";
 
 /**
  * Converts an Antelope/EOSIO legacy private key to PVT_K1 format.
@@ -11,8 +11,6 @@ import wif_to_private_key from "./private/wif_to_private_key.mjs";
  * @returns {Promise<string>} public key PVT_K1 format
  * @example <caption>Usage `legacy_to_public_key`.</caption>
  * ```js
- * import legacy_to_private_key from 'eos-ecc/legacy_to_private_key.mjs'
- *
  * legacy_to_public_key("5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak").then(console.log)
  * ```
  * The logged output was PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23.
