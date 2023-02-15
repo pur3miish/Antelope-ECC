@@ -1,9 +1,16 @@
 # eos-ecc changelog
 
+# 5.0.1
+
+## Patch
+
+- Missing export for [private_key_to_wif](/private_key_to_wif.mjs) added.
+
 # 5.0.0
 
 ## Major
 
+- ESM support
 - [Library module anti-pattern](https://jaydenseric.com/blog/optimal-javascript-module-design)
 
 ## Minor
