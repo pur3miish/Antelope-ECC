@@ -10,10 +10,10 @@ import public_key_to_wif from "./public_key_to_wif.mjs";
  * @kind function
  * @name recover_public_key
  * @param {object} Arg Argument
- * @param {string} Arg.signature Signature (SIG_K1…).
- * @param {string} Arg.hex Hex data that was used to create signature.
+ * @param {String} Arg.signature Signature (SIG_K1…).
+ * @param {String} Arg.hex Hex data that was used to create signature.
  * @param {Boolean} [Arg.legacy] Returns the key in the legacy format.
- * @returns {Promise<string>} WIF Public key.
+ * @returns {Promise<String>} WIF Public key.
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
  * import recover_public_key from 'eos-ecc/recover_public_key.mjs'

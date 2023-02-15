@@ -8,8 +8,8 @@ import random_bytes from "./random_bytes.mjs";
 
 /**
  * @typedef KeyPair
- * @prop {string} public_key Antelope/EOSIO public key (PUB_K1).
- * @prop {string} private_key Antelope/EOSIO private key (PVT_K1).
+ * @prop {String} public_key Antelope/EOSIO public key (PUB_K1).
+ * @prop {String} private_key Antelope/EOSIO private key (PVT_K1).
  */
 
 /**

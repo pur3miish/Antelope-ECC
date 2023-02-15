@@ -5,7 +5,7 @@ import ripemd160 from "ripemd160-js";
  * Converts an EOS wallet import format (WIF) public key to public key.
  * @kind function
  * @name wif_to_public_key
- * @param {string} wif_public_key Base58 WIF public key.
+ * @param {String} wif_public_key Base58 WIF public key.
  * @returns {Promise<Uint8Array>} Compressed secp256k1 public key.
  * @ignore
  */

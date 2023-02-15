@@ -1,5 +1,3 @@
-// @ts-check
-
 import { binary_to_base58 } from "base58-js";
 import ripemd160 from "ripemd160-js";
 import sha256 from "universal-sha256-js";
@@ -9,8 +7,8 @@ import sha256 from "universal-sha256-js";
  * @kind function
  * @name private_key_to_wif
  * @param {Uint8Array} private_key Compressed public key.
- * @param {boolean} legacy Will return legacy keys if true.
- * @returns {Promise<string>} WIF private key.
+ * @param {Boolean} legacy Will return legacy keys if true.
+ * @returns {Promise<String>} WIF private key.
  * @ignore
  */
 export default async function private_key_to_wif(private_key, legacy = true) {

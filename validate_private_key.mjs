@@ -7,15 +7,15 @@ import sha256 from "universal-sha256-js";
 /**
  * Validates an EOS private key.
  * @typedef validation_obj
- * @prop {boolean} valid Determins if the private key
- * @prop {string} [message] Description of invalidation.
+ * @prop {Boolean} valid Determins if the private key
+ * @prop {String} [message] Description of invalidation.
  */
 
 /**
  * Validate an EOS private key.
  * @name validate_private_key
  * @kind function
- * @param {string} wif_private_key base58 private key
+ * @param {String} wif_private_key base58 private key
  * @returns {Promise<validation_obj>} validation message.
  */
 export default async function validate_private_key(wif_private_key) {

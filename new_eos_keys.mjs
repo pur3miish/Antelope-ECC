@@ -1,3 +1,5 @@
+// @ts-check
+
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.js";
 
 import private_key_to_wif from "./private_key_to_wif.mjs";
@@ -6,10 +8,9 @@ import random_bytes from "./random_bytes.mjs";
 
 /**
  * An Antelope/EOSIO wallet import formatted (WIF) public & private key pair.
- * @kind typedef
- * @name KeyPair
- * @prop {string} public_key WIF public key.
- * @prop {string} private_key WIF private key.
+ * @typedef KeyPair
+ * @prop {String} public_key WIF public key.
+ * @prop {String} private_key WIF private key.
  */
 
 /**
@@ -17,7 +18,7 @@ import random_bytes from "./random_bytes.mjs";
  * @kind function
  * @name new_eos_keys
  * @param {Uint8Array} [seed] A 32 byte array to seed a private key (seed < curve order n).
- * @returns {KeyPair} Key pair.
+ * @returns {Promise<KeyPair>} Key pair.
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js
  * import new_eos_keys from 'eos-ecc/new_eos_keys.mjs')

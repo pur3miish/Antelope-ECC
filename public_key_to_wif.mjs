@@ -6,8 +6,8 @@ import ripemd160 from "ripemd160-js";
  * @kind function
  * @name public_key_to_wif
  * @param {Uint8Array} raw_public_key Compressed public key.
- * @param {boolean} [legacy] Return public key in legacy format.
- * @returns {string} WIF public key.
+ * @param {Boolean} [legacy] Return public key in legacy format.
+ * @returns {Promise<String>} WIF public key.
  * @ignore
  */
 export default async function public_key_to_wif(raw_public_key, legacy = true) {

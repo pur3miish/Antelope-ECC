@@ -7,11 +7,11 @@ import sign_tnx from "./sign_txn.mjs";
  * @kind function
  * @name sign_packed_txn
  * @param {object} PackedTxn Packed transaction object.
- * @param {string} PackedTxn.chain_id ID specifiying what chain.
- * @param {string} PackedTxn.transaction_header Serialised transaction header.
- * @param {string} PackedTxn.transaction_body Serialised transaction body.
- * @param {string} PackedTxn.wif_private_key Private key (wallet import format).
- * @returns {Promise<string>} Signature
+ * @param {String} PackedTxn.chain_id ID specifiying what chain.
+ * @param {String} PackedTxn.transaction_header Serialised transaction header.
+ * @param {String} PackedTxn.transaction_body Serialised transaction body.
+ * @param {String} PackedTxn.wif_private_key Private key (wallet import format).
+ * @returns {Promise<String>} Signature
  * @example <caption>Usage `sign_packed_txn`.</caption>
  * ```js
  * import sign_packed_txn from 'eos-ecc/sign_packed_txn.mjs'

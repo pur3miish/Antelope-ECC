@@ -6,15 +6,15 @@ import ripemd160 from "ripemd160-js";
 /**
  * Validates an EOS private key.
  * @typedef validation_obj
- * @prop {boolean} valid Determins if the private key
- * @prop {string} [message] Description of invalidation.
+ * @prop {Boolean} valid Determins if the private key
+ * @prop {String} [message] Description of invalidation.
  */
 
 /**
  * Validate EOS public key.
  * @name validate_public_key
  * @kind function
- * @param {string} wif_public_key wallet import format EOS public key.
+ * @param {String} wif_public_key wallet import format EOS public key.
  * @returns {Promise<validation_obj>} validation object
  */
 export default async function validate_public_key(wif_public_key) {

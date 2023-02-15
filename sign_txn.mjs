@@ -11,9 +11,9 @@ import wif_to_private_key from "./wif_to_private_key.mjs";
  * @kind function
  * @name sign_txn
  * @param {object} arg Argument.
- * @param {string | Uint8Array} arg.hex Data to sign.
- * @param {string} arg.wif_private_key An Antelope or EOSIO private key.
- * @returns {Promise<string>} Signature.
+ * @param {String | Uint8Array} arg.hex Data to sign.
+ * @param {String} arg.wif_private_key An Antelope or EOSIO private key.
+ * @returns {Promise<String>} Signature.
  * @example <caption>Usage of `sign_txn`.</caption>
  * ```js
  * import sign_txn  from 'eos-ecc/sign_txn.mjs'

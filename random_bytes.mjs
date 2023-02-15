@@ -1,9 +1,11 @@
+// @ts-check
+
 /**
  * Universally generate a psudorandom byte array.
  * @kind function
  * @name random_bytes
  * @param {number} bytes Length of random byte array.
- * @returns {Uint8Array} Random bytes array.
+ * @returns {Promise<Uint8Array>} Random bytes array.
  * @ignore
  */
 export default async function random_bytes(bytes = 32) {

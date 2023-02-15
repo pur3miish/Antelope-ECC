@@ -6,8 +6,8 @@ import sha256 from "universal-sha256-js";
  * Converts an EOS wallet import format (WIF) private key to private key.
  * @kind function
  * @name wif_to_private_key
- * @param {string} wif_private_key WIF is a base 58 string.
- * @returns {Uint8Array} Secp256k1 private key.
+ * @param {String} wif_private_key WIF is a base 58 string.
+ * @returns {Promise<Uint8Array>} Secp256k1 private key.
  * @ignore
  */
 export default async function wif_to_private_key(wif_private_key) {
