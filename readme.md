@@ -54,6 +54,22 @@ recover_public_key({
 
 > The logged output will be PUB_K1….
 
+Ways to require in CJS
+
+> **Note**
+>
+> As this package is [ESM](https://nodejs.org/docs/latest-v16.x/api/esm.html) if you need to require it in a [Common JS](https://nodejs.org/docs/latest-v16.x/api/modules.html) package, then you can require like this:
+
+```js
+(async function () {
+  const { default: new_keys } = await import("eos-ecc/new_keys.mjs");
+  const key_pair = await new_keys();
+  console.log(key_pair);
+})();
+```
+
+> the logged output was: { public_key: PUB_K1_6…, private_key: PVT_K1_ge…}
+
 ## Requirements
 
 Supported runtime environments:
