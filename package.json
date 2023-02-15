@@ -1,6 +1,6 @@
 {
   "name": "eos-ecc",
-  "version": "5.0.0-beta.2",
+  "version": "5.0.0",
   "description": "An universal JavaScript (Node.js and browsers) EOSIO and Antelope based digital signature package with public & private key utilities.",
   "author": "pur3miish",
   "license": "MIT",
