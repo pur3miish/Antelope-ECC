@@ -1,5 +1,11 @@
 # eos-ecc changelog
 
+# 5.1.0
+
+### Minor
+
+- Added [public_key_to_legacy](./public_key_to_legacy.mjs) and [private_key_to_legacy](./private_key_to_legacy.mjs) functions.
+
 # 5.0.1
 
 ## Patch
