@@ -1,7 +1,7 @@
 // @ts-check
 
 import { binary_to_base58 } from "base58-js";
-import { sign } from "isomorphic-secp256k1-js";
+import sign from "isomorphic-secp256k1-js/sign.mjs";
 import ripemd160 from "ripemd160-js";
 
 import wif_to_private_key from "./wif_to_private_key.mjs";

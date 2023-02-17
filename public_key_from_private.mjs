@@ -1,6 +1,6 @@
 // @ts-check
 
-import get_public_key from "isomorphic-secp256k1-js/get_public_key.js";
+import get_public_key from "isomorphic-secp256k1-js/get_public_key.mjs";
 
 import public_key_to_wif from "./public_key_to_wif.mjs";
 import wif_to_private_key from "./wif_to_private_key.mjs";

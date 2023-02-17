@@ -1,5 +1,17 @@
 # eos-ecc changelog
 
+# 5.1.3
+
+## Patch
+
+- Dependency updates
+
+# 5.1.2
+
+## Patch
+
+- Dependency updates
+
 # 5.1.0
 
 ### Minor

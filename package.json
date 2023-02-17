@@ -1,6 +1,6 @@
 {
   "name": "eos-ecc",
-  "version": "5.1.0",
+  "version": "5.1.3",
   "description": "An universal JavaScript (Node.js and browsers) EOSIO and Antelope based digital signature package with public & private key utilities.",
   "author": "pur3miish",
   "license": "MIT",
@@ -51,7 +51,7 @@
     "./public_key_from_private.mjs": "./public_key_from_private.mjs",
     "./public_key_to_legacy.mjs": "./public_key_to_legacy.mjs",
     "./public_key_to_wif.mjs": "./public_key_to_wif.mjs",
-    "./random_bytes.mjs":"./random_bytes.mjs",
+    "./random_bytes.mjs": "./random_bytes.mjs",
     "./recover_public_key_from_signature.mjs": "./recover_public_key_from_signature.mjs",
     "./sign_packed_txn.mjs": "./sign_packed_txn.mjs",
     "./sign_txn.mjs": "./sign_txn.mjs",
@@ -84,7 +84,7 @@
   },
   "dependencies": {
     "base58-js": "^1.0.5",
-    "isomorphic-secp256k1-js": "^1.0.2",
+    "isomorphic-secp256k1-js": "^2.0.0",
     "ripemd160-js": "^1.2.0",
     "universal-sha256-js": "^1.0.3"
   }
