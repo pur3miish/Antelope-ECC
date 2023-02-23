@@ -2,16 +2,33 @@
 
 # EOS-ECC
 
-[![NPM Package](https://img.shields.io/npm/v/eos-ecc.svg)](https://www.npmjs.org/package/eos-ecc) [![CI status](https://github.com/pur3miish/eos-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eos-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eos-ecc/blob/main/LICENSE)
+[![NPM Package](https://img.shields.io/npm/v/eosio-ecc.svg)](https://www.npmjs.org/package/eosio-ecc) [![CI status](https://github.com/pur3miish/eosio_ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eosio_ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eosio_ecc/blob/main/LICENSE)
 
 A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript Antelope and EOSIO digital signature and cryptokey utilty package.
 
 ## Installation
 
-For [Node.js](https://nodejs.org), to install [`eos-ecc`](https://npm.im/eos-ecc) run:
+## Installation
+
+For [Node.js](https://nodejs.org), to install [`eosio-ecc`](https://npm.im/isomorphic-secp256k1-js) run:
 
 ```sh
-npm install eos-ecc
+npm i eosio-ecc
+```
+
+For [Deno.js](https://deno.land/x/eosio_ecc), at the root of your project add a `deno.json` file and include these import paths:
+
+```json
+{
+  "imports": {
+    "universal-sha256-js/": "https://deno.land/x/sha256js/",
+    "universal-hmac-sha256-js/": "https://deno.land/x/hmacsha256/",
+    "universal-hmac-sha256-js/hmac-sha256-node.mjs": "https://deno.land/x/hmacsha256/hmac-sha256-deno.mjs",
+    "base58-js/": "https://deno.land/x/base58/",
+    "isomorphic-secp256k1-js/": "https://deno.land/x/secp256k1js/",
+    "ripemd160-js/": "https://deno.land/x/ripemd160js/"
+  }
+}
 ```
 
 ## Examples
@@ -76,6 +93,7 @@ Supported runtime environments:
 
 - [Node.js](https://nodejs.org) versions `>=16.0.0`.
 - Browsers matching the [Browserslist](https://browsersl.ist) query [`> 0.5%, not OperaMini all, not dead`](https://browsersl.ist/?q=%3E+0.5%25%2C+not+OperaMini+all%2C+not+dead).
+- [Deno](https://deno.land) version `^1.0.0`.
 
 ## Exports
 
