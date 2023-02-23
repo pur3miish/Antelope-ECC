@@ -1,6 +1,6 @@
-import { binary_to_base58 } from "base58-js";
-import ripemd160 from "ripemd160-js";
-import sha256 from "universal-sha256-js";
+import binary_to_base58 from "base58-js/binary_to_base58.mjs";
+import ripemd160 from "ripemd160-js/ripemd160.mjs";
+import sha256 from "universal-sha256-js/sha256.mjs";
 
 /**
  * Converts a private key to an EOS wallet import format (WIF) private key.

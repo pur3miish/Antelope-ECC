@@ -1,8 +1,8 @@
 // @ts-check
 
-import { binary_to_base58 } from "base58-js";
+import binary_to_base58 from "base58-js/binary_to_base58.mjs";
 import sign from "isomorphic-secp256k1-js/sign.mjs";
-import ripemd160 from "ripemd160-js";
+import ripemd160 from "ripemd160-js/ripemd160.mjs";
 
 import wif_to_private_key from "./wif_to_private_key.mjs";
 
@@ -45,6 +45,7 @@ export default async function sign_txn({ hex, wif_private_key }) {
   const checksum = hash.slice(0, 4);
 
   const base58_sig = binary_to_base58(
+    // @ts-ignore
     Uint8Array.from([...raw_sig, ...checksum])
   );
 

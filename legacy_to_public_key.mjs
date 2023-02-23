@@ -1,5 +1,6 @@
-import { base58_to_binary, binary_to_base58 } from "base58-js";
-import ripemd160 from "ripemd160-js";
+import base58_to_binary from "base58-js/base58_to_binary.mjs";
+import binary_to_base58 from "base58-js/binary_to_base58.mjs";
+import ripemd160 from "ripemd160-js/ripemd160.mjs";
 
 /**
  * Converts an EOSIO/Antelope legacy key to PUB_K1 format.
@@ -9,7 +10,7 @@ import ripemd160 from "ripemd160-js";
  * @returns {Promise<String>} public key PUB_K1 format
  * @example <caption>Usage `legacy_to_public_key`.</caption>
  * ```js
- * import legacy_to_public_key from 'eos-ecc/legacy_to_public_key.mjs'
+ * import legacy_to_public_key from 'eosio-ecc/legacy_to_public_key.mjs'
  * legacy_to_public_key("EOS53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDChput7").then(console.log)
  * ```
  * The logged output was PUB_K1_53jowyaGC1WrYJefSHTTmGvZcySUFkEpmCDmEd8txunDCqCCVR.

@@ -1,7 +1,7 @@
 // @ts-check
 
-import { base58_to_binary } from "base58-js";
-import ripemd160 from "ripemd160-js";
+import base58_to_binary from "base58-js/base58_to_binary.mjs";
+import ripemd160 from "ripemd160-js/ripemd160.mjs";
 
 /**
  * Validates an EOS private key.

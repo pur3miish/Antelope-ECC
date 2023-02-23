@@ -1,6 +1,6 @@
 // @ts-check
 
-import { base58_to_binary } from "base58-js";
+import base58_to_binary from "base58-js/base58_to_binary.mjs";
 import get_pub from "isomorphic-secp256k1-js/recover_public_key.mjs";
 
 import public_key_to_wif from "./public_key_to_wif.mjs";
