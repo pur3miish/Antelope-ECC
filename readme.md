@@ -24,7 +24,7 @@ For [Deno.js](https://deno.land), to use [eosio_ecc](https://deno.land/x/eosio_e
     "universal-hmac-sha256-js/hmac-sha256-node.mjs": "https://deno.land/x/hmacsha256/hmac-sha256-deno.mjs",
     "base58-js/": "https://deno.land/x/base58/",
     "isomorphic-secp256k1-js/": "https://deno.land/x/secp256k1js/",
-    "ripemd160-js/": "https://deno.land/x/ripemd160js/"
+    "ripemd160-js/": "https://deno.land/x/ripemd160js@v2.0.3/"
   }
 }
 ```
