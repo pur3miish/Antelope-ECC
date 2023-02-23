@@ -13,7 +13,7 @@ import wif_to_private_key from "./wif_to_private_key.mjs";
  * @returns {Promise<String>} Wallet import format public key.
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
- * import public_key_from_private from 'eos-ecc/public_key_from_private.mjs'
+ * import public_key_from_private from 'eosio-ecc/public_key_from_private.mjs'
  *
  * public_key_from_private(
  *   '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3' // or PVT_K1_…

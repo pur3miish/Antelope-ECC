@@ -16,7 +16,7 @@ import public_key_to_wif from "./public_key_to_wif.mjs";
  * @returns {Promise<String>} WIF Public key.
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
- * import recover_public_key from 'eos-ecc/recover_public_key.mjs'
+ * import recover_public_key from 'eosio-ecc/recover_public_key.mjs'
  *
  * recover_public_key({
  *   signature: 'SIG_K1_…',

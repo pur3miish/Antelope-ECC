@@ -21,7 +21,7 @@ import random_bytes from "./random_bytes.mjs";
  * @returns {Promise<KeyPair>} Key pair.
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js
- * import new_eos_keys from 'eos-ecc/new_eos_keys.mjs')
+ * import new_eos_keys from 'eosio-ecc/new_eos_keys.mjs')
  *
  * new_eos_keys().then(console.log)
  * ```

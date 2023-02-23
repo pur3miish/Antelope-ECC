@@ -14,7 +14,7 @@ import sign_tnx from "./sign_txn.mjs";
  * @returns {Promise<String>} Signature
  * @example <caption>Usage `sign_packed_txn`.</caption>
  * ```js
- * import sign_packed_txn from 'eos-ecc/sign_packed_txn.mjs'
+ * import sign_packed_txn from 'eosio-ecc/sign_packed_txn.mjs'
  *
  * sign_packed_txn(
  *  {

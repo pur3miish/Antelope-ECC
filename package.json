@@ -4,9 +4,9 @@
   "description": "A universal JavaScript (Node.js, Deno.js and client) EOSIO (and Antelope) based digital signature package with key utilities.",
   "author": "pur3miish",
   "license": "MIT",
-  "repository": "github:pur3miish/eos-ecc",
-  "homepage": "https://github.com/pur3miish/eos-ecc#readme",
-  "bugs": "https://github.com/pur3miish/eos-ecc/issues",
+  "repository": "github:pur3miish/eosio_ecc",
+  "homepage": "https://github.com/pur3miish/eosio_ecc#readme",
+  "bugs": "https://github.com/pur3miish/eosio_ecc/issues",
   "keywords": [
     "blockchain",
     "digital",

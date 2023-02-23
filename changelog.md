@@ -1,4 +1,4 @@
-# eosio_ecc changelog
+# EOSIO ECC Changelog
 
 # 1.0.0
 
