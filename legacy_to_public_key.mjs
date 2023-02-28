@@ -4,8 +4,6 @@ import ripemd160 from "ripemd160-js/ripemd160.mjs";
 
 /**
  * Converts an EOSIO/Antelope legacy key to PUB_K1 format.
- * @name legacy_to_public_key
- * @kind function
  * @param {String} legacy legacy public key
  * @returns {Promise<String>} public key PUB_K1 format
  * @example <caption>Usage `legacy_to_public_key`.</caption>
