@@ -5,8 +5,6 @@ import wif_to_private_key from "./wif_to_private_key.mjs";
 
 /**
  * Converts an Antelope/EOSIO legacy private key to PVT_K1 format.
- * @name legacy_to_public_key
- * @kind function
  * @param {String} legacy legacy private key
  * @returns {Promise<String>} public key PVT_K1 format
  * @example <caption>Usage `legacy_to_public_key`.</caption>
