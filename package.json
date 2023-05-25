@@ -1,6 +1,6 @@
 {
   "name": "antelope-ecc",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0",
   "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
