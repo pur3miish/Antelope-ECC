@@ -1,12 +1,12 @@
 {
-  "name": "eosio-ecc",
-  "version": "1.0.1",
-  "description": "A universal JavaScript (Node.js, Deno.js and client) EOSIO (and Antelope) based digital signature package with key utilities.",
+  "name": "antelope-ecc",
+  "version": "1.0.0-rc.1",
+  "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
-  "repository": "github:pur3miish/eosio_ecc",
-  "homepage": "https://github.com/pur3miish/eosio_ecc#readme",
-  "bugs": "https://github.com/pur3miish/eosio_ecc/issues",
+  "repository": "github:pur3miish/Antelope-ECC",
+  "homepage": "https://github.com/pur3miish/Antelope-ECC#readme",
+  "bugs": "https://github.com/pur3miish/Antelope-ECC/issues",
   "keywords": [
     "blockchain",
     "digital",

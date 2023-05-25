@@ -1,10 +1,4 @@
-# EOSIO ECC Changelog
-
-# 1.0.1
-
-### Patch
-
-- Dependency updates.
+# Antelope ECC Changelog
 
 # 1.0.0
 

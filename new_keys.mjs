@@ -20,7 +20,7 @@ import random_bytes from "./random_bytes.mjs";
  * @returns {Promise<KeyPair>} Key pair.
  * @example <caption>Usage `new_eos_keys`.</caption>
  * ```js
- * import new_keys from 'eosio-ecc/new_keys.mjs'
+ * import new_keys from 'antelope-ecc/new_keys.mjs'
  * new_keys().then(console.log)
  * ```
  * The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.

@@ -1,20 +1,20 @@
-![eos ecc logo](static/eosio-ecc.svg)
+![antelope ecc logo](static/antelope-ecc.svg)
 
-# EOSIO ECC
+# Antelope ECC
 
-[![NPM Package](https://img.shields.io/npm/v/eosio-ecc.svg)](https://www.npmjs.org/package/eosio-ecc) [![CI status](https://github.com/pur3miish/eosio_ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/eosio_ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/eosio_ecc/blob/main/LICENSE)
+[![NPM Package](https://img.shields.io/npm/v/antelope-ecc.svg)](https://www.npmjs.org/package/antelope-ecc) [![CI status](https://github.com/pur3miish/antelope-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/antelope-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/antelope-ecc/blob/main/LICENSE)
 
-A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript Antelope and EOSIO digital signature and cryptokey utilty package.
+A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript digital signature and cryptokey utilty package for Antelope based blockchains.
 
 ## Installation
 
-For [Node.js](https://nodejs.org), to install [`eosio-ecc`](https://npm.im/isomorphic-secp256k1-js) run:
+For [Node.js](https://nodejs.org), to install [`antelope-ecc`](https://npm.im/antelope-ecc) run:
 
 ```sh
-npm i eosio-ecc
+npm i antelope-ecc
 ```
 
-For [Deno.js](https://deno.land), to use [eosio_ecc](https://deno.land/x/eosio_ecc) Add these import paths to your `deno.json` file:
+For [Deno.js](https://deno.land), to use [antelope_ecc](https://deno.land/x/antelope_ecc) Add these import paths to your `deno.json` file:
 
 ```json
 {
@@ -34,7 +34,7 @@ For [Deno.js](https://deno.land), to use [eosio_ecc](https://deno.land/x/eosio_e
 Signing a packed transaction.
 
 ```js
-import sign_packed_txn from "eosio-ecc/sign_packed_txn.mjs";
+import sign_packed_txn from "antelope-ecc/sign_packed_txn.mjs";
 
 sign_packed_txn({
   chain_id: "2a02a0053…",
@@ -49,7 +49,7 @@ sign_packed_txn({
 An example of how to create a pair keys.
 
 ```js
-import new_keys from "eosio-ecc/new_keys.mjs";
+import new_keys from "antelope-ecc/new_keys.mjs";
 
 new_keys().then(console.log);
 ```
@@ -59,7 +59,7 @@ new_keys().then(console.log);
 Recover public key from signature.
 
 ```js
-import recover_public_key from "eosio-ecc/recover_public_key.mjs";
+import recover_public_key from "antelope-ecc/recover_public_key.mjs";
 
 recover_public_key({
   signature: "SIG_K1_…", // Signature
@@ -77,7 +77,7 @@ Ways to require in CJS
 
 ```js
 (async function () {
-  const { default: new_keys } = await import("eosio-ecc/new_keys.mjs");
+  const { default: new_keys } = await import("antelope-ecc/new_keys.mjs");
   const key_pair = await new_keys();
   console.log(key_pair);
 })();
@@ -95,7 +95,7 @@ Supported runtime environments:
 
 ## Exports
 
-The [npm](https://npmjs.com) package [`eosio-ecc`](https://npm.im/eosio-ecc) features [optimal JavaScript module design](https://jaydenseric.com/blog/optimal-javascript-module-design). It doesn’t have a main index module, so use deep imports from the ECMAScript modules that are exported via the [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
+The [npm](https://npmjs.com) package [`antelope-ecc`](https://npm.im/antelope-ecc) features [optimal JavaScript module design](https://jaydenseric.com/blog/optimal-javascript-module-design). It doesn’t have a main index module, so use deep imports from the ECMAScript modules that are exported via the [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
 
 - [`legacy_to_private_key.mjs`](./legacy_to_private_key.mjs)
 - [`legacy_to_public_key.mjs`](./legacy_to_public_key.mjs)

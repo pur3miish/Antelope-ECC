@@ -15,7 +15,7 @@ import ripemd160 from "ripemd160-js/ripemd160.mjs";
  * @name validate_public_key
  * @kind function
  * @param {String} wif_public_key wallet import format EOS public key.
- * @returns {Promise<validation_obj>} validation object
+ * @returns {Promise<Boolean>} Returns true if valid
  */
 export default async function validate_public_key(wif_public_key) {
   const legacy = wif_public_key.startsWith("EOS");
@@ -24,31 +24,21 @@ export default async function validate_public_key(wif_public_key) {
     !wif_public_key.startsWith("EOS") &&
     !wif_public_key.startsWith("PUB_K1_")
   )
-    return {
-      valid: false,
-      message: "Public keys need to start with PUB_K1 or for legacy keys EOS",
-    };
+    throw new Error(
+      "Public keys need to start with PUB_K1 or for legacy keys EOS"
+    );
 
   if (legacy && wif_public_key.length != 53)
-    return {
-      valid: false,
-      message: "Legacy public keys need to be 53 characters long.",
-    };
+    throw new Error("Legacy public keys need to be 53 characters long.");
 
   if (!legacy && wif_public_key.startsWith("PUB_K1_"))
     if (wif_public_key.length != 57)
-      return {
-        valid: false,
-        message: "Public key needs to be 57 characters long.",
-      };
+      throw new Error("Public key needs to be 57 characters long.");
 
   let public_key = wif_public_key?.replace("EOS", "").replace("PUB_K1_", "");
 
   if (public_key.match(/[0IOl]+/gmu))
-    return {
-      valid: false,
-      message: "Invalid base58 character.",
-    };
+    throw new Error("Invalid base58 character.");
 
   const base58_str = base58_to_binary(public_key);
   const checksum_check = base58_str.slice(-4);
@@ -65,12 +55,6 @@ export default async function validate_public_key(wif_public_key) {
       break;
     }
 
-  if (invalid_checksum)
-    return {
-      valid: false,
-      message: "Invalid checksum",
-    };
-  return {
-    valid: true,
-  };
+  if (invalid_checksum) throw new Error("Invalid checksum");
+  return true;
 }

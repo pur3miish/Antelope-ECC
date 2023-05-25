@@ -6,14 +6,14 @@ import public_key_to_wif from "./public_key_to_wif.mjs";
 import wif_to_private_key from "./wif_to_private_key.mjs";
 
 /**
- * Convert an EOSIO/Antelope private key to a public key.
+ * Convert an Antelope private key to a public key.
  * @kind function
  * @name public_key_from_private
  * @param {String} wif_private_key Wallet import format key.
  * @returns {Promise<String>} Wallet import format public key.
  * @example <caption>Usage `public_key_from_private`.</caption>
  * ```js
- * import public_key_from_private from 'eosio-ecc/public_key_from_private.mjs'
+ * import public_key_from_private from 'antelope-ecc/public_key_from_private.mjs'
  *
  * public_key_from_private(
  *   '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3' // or PVT_K1_…
