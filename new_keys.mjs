@@ -2,9 +2,9 @@
 
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.mjs";
 
-import private_key_to_wif from "./private_key_to_wif.mjs";
-import public_key_to_wif from "./public_key_to_wif.mjs";
-import random_bytes from "./random_bytes.mjs";
+import random_bytes from "./internal/random_bytes.mjs";
+import private_key_to_wif from "./keys/private_key_to_wif.mjs";
+import public_key_to_wif from "./keys/public_key_to_wif.mjs";
 
 /**
  * @typedef KeyPair
@@ -30,7 +30,7 @@ export default async function new_keys(seed) {
   const public_key = await get_public_key(private_key);
 
   return {
-    public_key: await public_key_to_wif(public_key, false),
-    private_key: await private_key_to_wif(private_key, false),
+    public_key: await public_key_to_wif(public_key),
+    private_key: await private_key_to_wif(private_key),
   };
 }

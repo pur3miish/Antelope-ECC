@@ -1,9 +1,7 @@
-// @ts-check
-
+import base58_to_binary from "base58-js/base58_to_binary.mjs";
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.mjs";
 
 import public_key_to_wif from "./public_key_to_wif.mjs";
-import wif_to_private_key from "./wif_to_private_key.mjs";
 
 /**
  * Convert an Antelope private key to a public key.
@@ -16,15 +14,15 @@ import wif_to_private_key from "./wif_to_private_key.mjs";
  * import public_key_from_private from 'antelope-ecc/public_key_from_private.mjs'
  *
  * public_key_from_private(
- *   '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3' // or PVT_K1_…
+ *   'PVT_K1_asdf…'
  * ).then(console.log)
  * ```
- * The logged output will be EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV or PUB_K1_….
+ * The logged output will be PUB_K1_….
  */
-export default async function public_key_from_private(wif_private_key) {
-  const private_key = await wif_to_private_key(wif_private_key);
-  return public_key_to_wif(
-    await get_public_key(private_key),
-    !wif_private_key.startsWith("PVT_K1_")
+export default async function public_key_from_private_key(wif_private_key) {
+  const raw_pk = base58_to_binary(wif_private_key.replace("PVT_K1_", "")).slice(
+    0,
+    -4
   );
+  return public_key_to_wif(get_public_key(raw_pk));
 }

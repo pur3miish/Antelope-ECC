@@ -1,11 +1,28 @@
 import assert from "assert";
+
+import legacy_to_public_key from "../keys/legacy_to_public_key.mjs";
+import public_key_to_wif from "../keys/public_key_to_wif.mjs";
 const { ok, rejects } = assert;
 
-import validate_private_key from "../validate_private_key.mjs";
-import validate_public_key from "../validate_public_key.mjs";
+import validate_private_key from "../keys/validate_private_key.mjs";
+import validate_public_key from "../keys/validate_public_key.mjs";
 
 export default async (tests) => {
   tests.add("validate private key", async () => {
+    ok(
+      await validate_public_key(
+        "PUB_WA_2V1mu6pYpbtBk9bN9iSNgPgjpMgPUgAw8CVLc2P4oVGXoMayZ6vxjaLKM2Q12yVDfU2Z"
+      ),
+      "Validate WA public key."
+    );
+
+    ok(
+      await validate_public_key(
+        "PUB_R1_8E46r5HiQF84o6V8MWQQg1vPpgfjYA4XDqT6xbtaaebxw7XbLu"
+      ),
+      "Validate R1 public key."
+    );
+
     let valid;
 
     valid = await validate_private_key(
@@ -21,11 +38,6 @@ export default async (tests) => {
 
     valid = await validate_private_key(
       "PVT_K1_NfCHnJ8QKQJqjSxERawfiErvbpy9sx4BKFiKnJaPJ4ndBDehg"
-    );
-    ok(valid, "Valid private key");
-
-    valid = await validate_private_key(
-      "5JYMyGjWUWZqWqjZRKnG6TcJs5ULisaVxxwSwf2pnmf4ZhjCmC3"
     );
     ok(valid, "Valid private key");
 
@@ -73,7 +85,11 @@ export default async (tests) => {
 
     ok(
       await validate_public_key(
-        "EOS5GG8V442yUeMsAMwMB3t57wR2eiFvQH1xqFx7DUMnEzdFa3XMP"
+        await public_key_to_wif(
+          await legacy_to_public_key(
+            "EOS5GG8V442yUeMsAMwMB3t57wR2eiFvQH1xqFx7DUMnEzdFa3XMP"
+          )
+        )
       ),
       "valid public key"
     );

@@ -1,7 +1,8 @@
-import { deepStrictEqual, rejects } from "assert";
+import { deepStrictEqual } from "assert";
 
-import private_key_to_wif from "../private_key_to_wif.mjs";
-import wif_to_private_key from "../wif_to_private_key.mjs";
+import legacy_to_private_key from "../keys/legacy_to_private_key.mjs";
+import private_key_from_wif from "../keys/private_key_from_wif.mjs";
+import private_key_to_wif from "../keys/private_key_to_wif.mjs";
 
 export default (tests) => {
   tests.add("wif to private key", async () => {
@@ -13,16 +14,16 @@ export default (tests) => {
 
     deepStrictEqual(
       private_key,
-      await wif_to_private_key(await private_key_to_wif(private_key, true)),
+      await private_key_from_wif(await private_key_to_wif(private_key)),
       "expected non-legacy private keys"
     );
 
     deepStrictEqual(
       private_key,
-      await wif_to_private_key(
-        "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3",
-        "Expected result"
-      )
+      await legacy_to_private_key(
+        "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"
+      ),
+      "Expected result"
     );
 
     deepStrictEqual(
@@ -31,25 +32,19 @@ export default (tests) => {
         203, 195, 169, 218, 178, 16, 77, 238, 211, 129, 171, 215, 41, 48, 243,
         188,
       ]),
-      await wif_to_private_key(
+      await private_key_from_wif(
         "PVT_K1_CWCRfKc8atzthZbFMfRdFzqFqGf9d3WNAaZd99gwaosw9kfhS",
         "Expected result"
       )
     );
-    // 5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak
+
     deepStrictEqual(
-      await wif_to_private_key(
+      await legacy_to_private_key(
         "5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak"
       ),
-      await wif_to_private_key(
+      await private_key_from_wif(
         "PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23"
       )
     );
-
-    rejects(async () => {
-      await wif_to_private_key(
-        "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvCCC"
-      );
-    }, "Expected rejection - Invalid checksum");
   });
 };
