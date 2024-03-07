@@ -1,4 +1,4 @@
-import antelopeWebAuthnPublicKey from "/Users/pur3miish/Developer/Antelope-ECC/internal/webauthn_public_key.mjs";
+import antelopeWebAuthnPublicKey from "./internal/webauthn_public_key.mjs";
 
 /**
  * Antelope based web authn public key, (browser only)

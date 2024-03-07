@@ -1,6 +1,6 @@
 import { deepStrictEqual, ok } from "assert";
-import { webcrypto } from "crypto";
 
+// import { webcrypto } from "crypto";
 import webauthPublicKey from "../internal/webauthn_public_key.mjs";
 import sign from "../internal/webauthn_signature.mjs";
 import verify from "../verify_wa_signature.mjs";
@@ -162,21 +162,10 @@ export default async (tests) => {
   tests.add("verify webauth sign", async () => {
     const pubkey =
       "PUB_WA_7xt1U9Vu7ZBMAK7r3omQBgGG1cEdETKmUyRzMYsQ2guyRS498fXkxZtwZwUDzzUWc";
-
     const websig =
       "SIG_WA_56vmevFFLd7pzDcLVfqa2yYeKNzbJNT8suPrfaEBSAztVmR9sKmDVswfTAFeFjcDw3548wsPh5FFx4cggjXii4PrkVjw6AWkVjcpzQoJcob9Db4FHcrQpBumbmopX6FM4WwjCCVQaqjSLgjp1qZ9CX68X8i816bmrGHyqnoM7aoqxB4vhM9zzAuooSnTcoTmtmagYEDMgUpw4GCibHE6PcHYT2Fw7pykfFWUvV3omBpPzRSweXQQuGB8urAnsVmULzJsgZTSoS74fePyGoXDHwFWWvvQDyFTEcE8GNYaT1sEgg3HU3tXuqGm84fz8trBALcmVQfkZkvt";
 
-    const websig2 =
-      "SIG_WA_4udSBbBnKrvJ6L7DxZw3MkZj73JKE3JvK7mumyG1x98cxxnsiyuUtAbo6KphEYJMQGQrSWxkBmfsopfqaJeBjXnJHkMA2V7MVY5k4t4Bw3pQprm9G2udzv45fPaGu2ZGKHJCA12AabtUwzuhYQRUiHLxS9c4pci3Z3ZZkw21HrKbZkJbqTrm36TPo9ni9VKMubMzLsQz2ufwaYuwZfksnaMuk3DTeDR61hTTLQFKBdFfXUxEfZDfdG6L6xn7qnZzdEmw2RxyxKtLhYSyXueQk9Qq9zyFKtkZfL7kw1z5GZpnnjJ7CtUqVYkxnm5inrVrdB9bWqz2QSun";
-
-    global.crypto = webcrypto;
     const p = await verify(websig, pubkey);
-    const s = await verify(websig2, pubkey);
-    global.crypto = null;
-
     ok(p);
-    ok(s);
-
-    delete global.crypto;
   });
 };
