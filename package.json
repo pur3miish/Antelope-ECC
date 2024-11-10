@@ -81,6 +81,7 @@
   },
   "dependencies": {
     "base58-js": "^2.0.0",
+    "elliptic": "^6.6.0",
     "eosio-wasm-js": "^4.1.1",
     "isomorphic-secp256k1-js": "^3.0.0",
     "ripemd160-js": "^2.0.2",

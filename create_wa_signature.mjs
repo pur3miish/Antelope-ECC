@@ -14,18 +14,22 @@ export default async function createWebAuthnSignature(credential_ids, hash) {
         )
       : hash;
 
-  const assertation = await navigator.credentials.get({
+  const allowCredentials = credential_ids.map((id) => ({
+    id: Uint8Array.from(
+      window
+        .atob(id.replace(/-/gmu, "+").replace(/_/gmu, "/"))
+        .split("")
+        .map((i) => i.charCodeAt())
+    ),
+    type: "public-key",
+    alg: -7,
+  }));
+
+  const assertation = await window.navigator.credentials.get({
     publicKey: {
+      userVerification: "required",
       timeout: 6e4,
-      allowCredentials: credential_ids.map((id) => ({
-        id: Uint8Array.from(
-          window
-            .atob(id.replace(/-/gmu, "+").replace(/_/gmu, "/"))
-            .split("")
-            .map((i) => i.charCodeAt())
-        ),
-        type: "public-key",
-      })),
+      allowCredentials,
       challenge,
     },
   });

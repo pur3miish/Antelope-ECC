@@ -1,5 +1,11 @@
 # Antelope ECC Changelog
 
+## 3.0.1
+
+### Patch
+
+- Fixed recid bug that was causing webauthn signatures to fail.
+
 ## 3.0.0
 
 ### Major

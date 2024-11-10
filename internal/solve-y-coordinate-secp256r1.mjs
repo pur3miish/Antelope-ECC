@@ -1,10 +1,9 @@
 const b = 0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604bn;
-const a = 0xffffffff00000001000000000000000000000000fffffffffffffffffffffffcn;
 const p = 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffffn;
+const a = (-3n + p) % p;
 
 function calculateYSquared(x) {
-  // Calculate y^2
-  const xCubed = x ** 3n % p;
+  const xCubed = (((x * x) % p) * x) % p;
   const ax = (a * x) % p;
   const ySquared = (xCubed + ax + b) % p;
 
@@ -18,13 +17,19 @@ function modPow(base, exponent, modulus) {
       result = (result * base) % modulus;
     }
     base = (base * base) % modulus;
-    exponent = exponent / 2n;
+    exponent = exponent >> 1n;
   }
   return result;
 }
 
 function legendreSymbol(a, p) {
+  // If a is divisible by p, return 0
+  if (a % p === 0n) {
+    return 0;
+  }
+  // Compute the Legendre symbol using Euler's criterion
   const symbol = modPow(a, (p - 1n) / 2n, p);
+  // If symbol is 1, it's a quadratic residue; if p-1, it's a non-residue
   return symbol === 1n ? 1 : symbol === p - 1n ? -1 : 0;
 }
 
@@ -37,17 +42,17 @@ function tonelliShanksAlgorithm(ySquared, p) {
   let s = 0n;
 
   while (q % 2n === 0n) {
-    q = q / 2n;
+    q = q >> 1n;
     s += 1n;
   }
 
   let z = 2n;
-  while (modPow(z, (p - 1n) / 2n, p) !== p - 1n) {
+  while (modPow(z, (p - 1n) >> 1n, p) !== p - 1n) {
     z += 1n;
   }
 
   let c = modPow(z, q, p);
-  let r = modPow(ySquared, (q + 1n) / 2n, p);
+  let r = modPow(ySquared, (q + 1n) >> 1n, p);
   let t = modPow(ySquared, q, p);
 
   let m = s;
@@ -68,6 +73,26 @@ function tonelliShanksAlgorithm(ySquared, p) {
   }
 
   return r;
+}
+
+export function caculateRecID(r) {
+  const ySquared = calculateYSquared(r);
+  const y = tonelliShanksAlgorithm(ySquared, p);
+  return Number(y % 2n);
+}
+
+export function calculateRecID(r) {
+  // Step 1: Calculate y^2 = r^3 - 3r + 7 mod p
+  const ySquared = calculateYSquared(r);
+
+  // Step 2: Check if y^2 is a quadratic residue modulo p
+  if (legendreSymbol(ySquared, p) === p - 1n) {
+    throw new Error("No valid y-coordinate found for r");
+  }
+  const y = tonelliShanksAlgorithm(ySquared, p);
+
+  const T = y > p / 2n ? p - y : y;
+  return Number(T % 2n);
 }
 
 export default function calculateY(x, prefix) {
