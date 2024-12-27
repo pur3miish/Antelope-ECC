@@ -1,10 +1,13 @@
 {
   "name": "antelope-ecc",
-  "version": "2.0.0-rc.13",
+  "version": "3.0.1",
   "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
-  "repository": "github:pur3miish/Antelope-ECC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pur3miish/Antelope-ECC.git"
+  },
   "homepage": "https://github.com/pur3miish/Antelope-ECC#readme",
   "bugs": "https://github.com/pur3miish/Antelope-ECC/issues",
   "keywords": [
