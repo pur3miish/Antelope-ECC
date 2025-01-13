@@ -1,5 +1,5 @@
 import binary_to_base58 from "base58-js/binary_to_base58";
-import ripemd160 from "ripemd160-js";
+import ripemd160 from "ripemd160-js/ripemd160.js";
 
 /**
  * Converts a private key 32 byte binary array into an Antelope based WIF private key.

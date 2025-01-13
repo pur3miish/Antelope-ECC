@@ -14,5 +14,5 @@
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
   },
-  "ignorePatterns": [".js", "internal/*.js", "keys/*.js"]
+  "ignorePatterns": ["*.js", "internal/*.js", "keys/*.js"]
 }

@@ -7,11 +7,9 @@
  * ```
  * The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
  */
-export default function new_keys(
-  seed?: Uint8Array
-): Promise<newAntelopeKeysReturn>;
+export default function new_keys(seed?: Uint8Array): Promise<newAntelopeKeysReturn>;
 type newAntelopeKeysReturn = {
-  public_key: string;
-  private_key: string;
+    public_key: string;
+    private_key: string;
 };
 export {};

@@ -10,6 +10,4 @@
  * ```
  * The logged output will be PUB_K1_….
  */
-export default function public_key_from_private_key(
-  wif_private_key: string
-): Promise<string>;
+export default function public_key_from_private_key(wif_private_key: string): Promise<string>;

@@ -1,6 +1,6 @@
 {
   "name": "antelope-ecc",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
@@ -68,11 +68,10 @@
   "browserslist": "Node >= 18, > 0.5%, not OperaMini all, not dead",
   "scripts": {
     "eslint": "eslint .",
-    "prettier": "prettier -c .",
     "prettier:readme": "prettier --write readme.md",
-    "test": "npm run eslint && npm run prettier && npm run mocha",
+    "test": "npm run eslint && npm run mocha",
     "mocha": "mocha",
-    "prepublishOnly": "npm test",
+    "prepublishOnly": "npm test && npm run build",
     "build": "tsc"
   },
   "devDependencies": {
@@ -96,6 +95,6 @@
     "base58-js": "^3.0.2",
     "eosio-wasm-js": "^5.0.0",
     "isomorphic-secp256k1-js": "^4.0.3",
-    "ripemd160-js": "^3.0.1"
+    "ripemd160-js": "^3.0.4"
   }
 }

@@ -1,5 +1,11 @@
 # Antelope ECC Changelog
 
+## 4.0.1
+
+### Patch
+
+- Typo fixes
+
 ## 4.0.0
 
 ### Major

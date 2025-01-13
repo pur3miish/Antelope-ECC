@@ -4,7 +4,4 @@
  * @param {String} prefix the prefix to add to the start of the public public key.
  * @returns {String} WIF of legacy public key such as EOS, TELOS, WAX.
  */
-export default function legacy_from_public_key(
-  public_key: Uint8Array,
-  prefix: string
-): Promise<string>;
+export default function legacy_from_public_key(public_key: Uint8Array, prefix: string): Promise<string>;

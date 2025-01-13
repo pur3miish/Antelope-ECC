@@ -1,5 +1,5 @@
 import binary_to_base58 from "base58-js/binary_to_base58.js";
-import ripemd160 from "ripemd160-js";
+import ripemd160 from "ripemd160-js/ripemd160.js";
 
 /**
  * Converts a binary representation of a compressed secp256k1 public key to Antelope based WIF public key (PUB_K1).

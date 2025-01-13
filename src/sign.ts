@@ -1,6 +1,6 @@
 import binary_to_base58 from "base58-js/binary_to_base58.js";
 import sign_secp256k1 from "isomorphic-secp256k1-js/sign.js";
-import ripemd160 from "ripemd160-js";
+import ripemd160 from "ripemd160-js/ripemd160.js";
 
 import wif_to_private_key from "./keys/private_key_from_wif.js";
 
