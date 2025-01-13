@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "env": {
     "es2022": true,
     "node": true,
@@ -10,22 +10,9 @@
   },
   "plugins": ["simple-import-sort"],
   "rules": {
+    "prefer-const": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
   },
-  "overrides": [
-    {
-      "files": ["*.mjs"],
-      "parserOptions": {
-        "sourceType": "module"
-      },
-      "globals": {
-        "__dirname": "off",
-        "__filename": "off",
-        "exports": "off",
-        "module": "off",
-        "require": "off"
-      }
-    }
-  ]
+  "ignorePatterns": [".js", "internal/*.js", "keys/*.js"]
 }

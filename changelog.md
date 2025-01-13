@@ -1,5 +1,11 @@
 # Antelope ECC Changelog
 
+## 4.0.0
+
+### Major
+
+- Removed `createWebAuthnSignature` and `createWebAuthnPublic` key will be extracted into a new stand alone package.
+
 ## 3.0.1
 
 ### Patch

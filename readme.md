@@ -14,7 +14,6 @@ A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_Java
 - Recover public key from siganture.
 - Create and recover private key mnemonic _(BIP39)_.
 - Legacy key transformation utility functions.
-- Create and sign with webauthn keys an signatures _(PUB_WA & SIG_WA)_.
 
 ## Installation
 
@@ -29,7 +28,7 @@ npm i antelope-ecc
 Signing a packed transaction.
 
 ```js
-import sign_packed_txn from "antelope-ecc/sign_packed_txn.mjs";
+import sign_packed_txn from "antelope-ecc/sign_packed_txn.js";
 
 sign_packed_txn({
   chain_id: "2a02a0053…",
@@ -44,7 +43,7 @@ sign_packed_txn({
 Sign a message digest.
 
 ```js
-import sign_txn from "antelope-ecc/sign_txn.mjs";
+import sign_txn from "antelope-ecc/sign_txn.js";
 import crypto from "crypto";
 
 sign_txn({
@@ -62,7 +61,7 @@ The logged output will be SIG_K1…
 An example of how to create a pair keys.
 
 ```js
-import new_keys from "antelope-ecc/new_keys.mjs";
+import new_keys from "antelope-ecc/new_keys.js";
 
 new_keys().then(console.log);
 ```
@@ -72,7 +71,7 @@ new_keys().then(console.log);
 Recover public key from signature.
 
 ```js
-import recover_public_key from "antelope-ecc/recover_public_key.mjs";
+import recover_public_key from "antelope-ecc/recover_public_key.js";
 
 const hash = Uint8Array.from(
   crypto.createHash("sha256").update(Buffer.from("ff", "hex")).digest()
@@ -86,22 +85,6 @@ recover_public_key({
 
 > The logged output will contain the public key “PUB_K1…” used to sign the hash.
 
-Ways to require in CJS
-
-> **Note**
->
-> As this package is [ESM](https://nodejs.org/docs/latest-v16.x/api/esm.html) if you need to require it in a [Common JS](https://nodejs.org/docs/latest-v16.x/api/modules.html) package, then you can require like this:
-
-```js
-(async function () {
-  const { default: new_keys } = await import("antelope-ecc/new_keys.mjs");
-  const key_pair = await new_keys();
-  console.log(key_pair);
-})();
-```
-
-> the logged output was: { public_key: PUB_K1_6…, private_key: PVT_K1_ge…}
-
 ## Requirements
 
 Supported runtime environments:
@@ -112,22 +95,20 @@ Supported runtime environments:
 
 ## Exports
 
-The [npm](https://npmjs.com) package [`antelope-ecc`](https://npm.im/antelope-ecc) features [optimal JavaScript module design](https://jaydenseric.com/blog/optimal-javascript-module-design). It doesn’t have a main index module, so use deep imports from the ECMAScript modules that are exported via the [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
+The [npm](https://npmjs.com) package [`antelope-ecc`](https://npm.im/antelope-ecc) features optimal JavaScript module design, It doesn’t have a main index module, so use deep imports from the ECMAScript modules that are exported via the [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
 
-- [`legacy_from_private_key.mjs`](./keys/legacy_from_private_key.mjs)
-- [`legacy_from_public_key.mjs`](./keys/legacy_from_public_key.mjs)
-- [`legacy_to_private_key.mjs`](./keys/legacy_to_private_key.mjs)
-- [`private_key_from_wif.mjs`](./keys/private_key_from_wif.mjs)
-- [`private_key_to_wif.mjs`](./keys/private_key_to_wif.mjs)
-- [`public_key_from_private_wif.mjs`](./keys/public_key_from_private_wif.mjs)
-- [`public_key_from_wif.mjs`](./keys/public_key_from_wif.mjs)
-- [`public_key_to_wif.mjs`](./keys/public_key_to_wif.mjs)
-- [`validate_private_key.mjs`](./keys/validate_private_key.mjs)
-- [`validate_public_key.mjs`](./keys/validate_public_key.mjs)
-- [`createWebAuthnKey.mjs`](./createWebAuthnKey.mjs)
-- [`createWebAuthnSignaure.mjs`](./createWebAuthnSignaure.mjs)
-- [`mnemonic-create.mjs`](./mnemonic-create.mjs)
-- [`mnemonic-recover.mjs`](./mnemonic-recover.mjs)
-- [`new_keys.mjs`](./new_keys.mjs)
-- [`sign_packed_txn.mjs`](./sign_packed_txn.mjs)
-- [`sign_txn.mjs`](./sign_txn.mjs)
+- [`legacy_from_private_key.js`](./keys/legacy_from_private_key.js)
+- [`legacy_from_public_key.js`](./keys/legacy_from_public_key.js)
+- [`legacy_to_private_key.js`](./keys/legacy_to_private_key.js)
+- [`private_key_from_wif.js`](./keys/private_key_from_wif.js)
+- [`private_key_to_wif.js`](./keys/private_key_to_wif.js)
+- [`public_key_from_private_wif.js`](./keys/public_key_from_private_wif.js)
+- [`public_key_from_wif.js`](./keys/public_key_from_wif.js)
+- [`public_key_to_wif.js`](./keys/public_key_to_wif.js)
+- [`validate_private_key.js`](./keys/validate_private_key.js)
+- [`validate_public_key.js`](./keys/validate_public_key.js)
+- [`mnemonic-create.js`](./mnemonic-create.js)
+- [`mnemonic-recover.js`](./mnemonic-recover.js)
+- [`new_keys.js`](./new_keys.js)
+- [`sign_packed_txn.js`](./sign_packed_txn.js)
+- [`sign.js`](./sign.js)
