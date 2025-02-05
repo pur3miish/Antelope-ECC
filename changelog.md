@@ -1,5 +1,18 @@
 # Antelope ECC Changelog
 
+## 4.0.3
+
+### Patch
+
+- Fixed typos.
+- Now works as a pkg compiled binary.
+
+## 4.0.2
+
+### Patch
+
+- Dependency updates.
+
 ## 4.0.1
 
 ### Patch

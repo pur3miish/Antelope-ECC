@@ -1,6 +1,6 @@
 {
   "name": "antelope-ecc",
-  "version": "4.0.1",
+  "version": "4.0.3",
   "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
@@ -93,8 +93,8 @@
   },
   "dependencies": {
     "base58-js": "^3.0.2",
-    "eosio-wasm-js": "^5.0.0",
-    "isomorphic-secp256k1-js": "^4.0.3",
+    "eosio-wasm-js": "^5.0.2",
+    "isomorphic-secp256k1-js": "^4.0.5",
     "ripemd160-js": "^3.0.4"
   }
 }
