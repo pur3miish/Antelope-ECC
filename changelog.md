@@ -1,5 +1,17 @@
 # Antelope ECC Changelog
 
+## 4.0.5
+
+### Patch
+
+- Now throws an expected error when a a none valid private key is used for [public_key_from_private_wif](keys/public_key_from_private_wif.js).
+
+## 4.0.4
+
+### Patch
+
+- random_bytes import bug fixed.
+
 ## 4.0.3
 
 ### Patch

@@ -2,6 +2,7 @@ import base58_to_binary from "base58-js/base58_to_binary.js";
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.js";
 
 import public_key_to_wif from "./public_key_to_wif.js";
+import validate_private_key from "./validate_private_key.js";
 
 /**
  * Convert an Antelope private key to a public key.
@@ -17,7 +18,10 @@ import public_key_to_wif from "./public_key_to_wif.js";
  */
 export default async function public_key_from_private_key(
   wif_private_key: string
-) {
+): Promise<string> {
+  await validate_private_key(wif_private_key);
+  if (!wif_private_key.startsWith("PVT_K1_"))
+    throw new Error("Private key must be K1 key, “PVT_K1_…”");
   const raw_pk = base58_to_binary(wif_private_key.replace("PVT_K1_", "")).slice(
     0,
     -4

@@ -5,8 +5,16 @@
  */
 export default async function random_bytes(bytes = 32) {
     if (typeof window == "undefined") {
-        const { randomBytes } = await import("crypto");
-        return Uint8Array.from([...randomBytes(bytes)]);
+        let crypto;
+        try {
+            // eslint-disable-next-line
+            crypto = require("crypto"); // Works in `pkg`
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        }
+        catch (_err) {
+            crypto = await import("crypto"); // Works in ESM
+        }
+        return Uint8Array.from([...crypto.randomBytes(bytes)]);
     }
     else
         return window.crypto.getRandomValues(new Uint8Array(bytes));
