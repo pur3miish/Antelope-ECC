@@ -1,5 +1,19 @@
 # Antelope ECC Changelog
 
+## Next
+
+### Major
+
+- Removed default exports from index.js
+
+### Minor
+
+- Added main [index](index.js)
+
+### Patch
+
+- Removed redundant package.json exports fields.
+
 ## 4.0.5
 
 ### Patch

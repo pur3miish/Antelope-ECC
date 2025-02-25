@@ -1,6 +1,6 @@
 {
   "name": "antelope-ecc",
-  "version": "4.0.5",
+  "version": "5.0.0-rc.2",
   "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
@@ -23,6 +23,7 @@
   ],
   "type": "module",
   "files": [
+    "index.js",
     "internal/",
     "keys/",
     "mnemonic_create.js",
@@ -38,8 +39,10 @@
     "sign.js",
     "sign.d.ts"
   ],
+  "main": "index.js",
   "sideEffects": false,
   "exports": {
+    ".":  "./index.js",
     "./package.json": "./package.json",
     "./keys/legacy_from_private_key.js": "./keys/legacy_from_private_key.js",
     "./keys/legacy_from_public_key.js": "./keys/legacy_from_public_key.js",
@@ -52,15 +55,12 @@
     "./keys/public_key_to_wif.js": "./keys/public_key_to_wif.js",
     "./keys/validate_private_key.js": "./keys/validate_private_key.js",
     "./keys/validate_public_key.js": "./keys/validate_public_key.js",
-    "./create_wa_public_key.js": "./create_wa_public_key.js",
-    "./create_wa_signature.js": "./create_wa_signature.js",
     "./mnemonic_create.js": "./mnemonic_create.js",
     "./mnemonic_recover.js": "./mnemonic_recover.js",
     "./new_keys.js": "./new_keys.js",
     "./recover_public_key.js": "./recover_public_key.js",
     "./sign_packed_txn.js": "./sign_packed_txn.js",
-    "./sign.js": "./sign.js",
-    "./verify_wa_signature.js": "./verify_wa_signature.js"
+    "./sign.js": "./sign.js"
   },
   "engines": {
     "node": ">=18.0.0"

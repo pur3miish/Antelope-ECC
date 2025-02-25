@@ -6,14 +6,16 @@
 
 A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript digital signature and cryptokey utilty package for Antelope based blockchains.
 
-### Features of package Antelope blokchain
+## About
 
-- Generate sep256k1 signatures _(SIG_K1)_ .
-- Generate secp256k1 key pair _(private and public keys)_.
-- Derive public key from private key.
-- Recover public key from siganture.
-- Create and recover private key mnemonic _(BIP39)_.
-- Legacy key transformation utility functions.
+antelope-ecc package is designed as an ESM (ECMAScript Module), leveraging modern JavaScript features like static imports, exports, and tree-shaking.
+
+## Requirements
+
+Supported runtime environments:
+
+- [Node.js](https://nodejs.org) versions `>=18.0.0`.
+- Browsers matching the [Browserslist](https://browsersl.ist) query [`> 0.5%, not OperaMini all, not dead`](https://browsersl.ist/?q=%3E+0.5%25%2C+not+OperaMini+all%2C+not+dead).
 
 ## Installation
 
@@ -23,32 +25,35 @@ For [Node.js](https://nodejs.org), to install [`antelope-ecc`](https://npm.im/an
 npm i antelope-ecc
 ```
 
-## Examples
-
-Signing a packed transaction.
+_Ways to import in ESM_
 
 ```js
-import sign_packed_txn from "antelope-ecc/sign_packed_txn.js";
-
-sign_packed_txn({
-  chain_id: "2a02a0053…",
-  transaction_header: "fa123232…",
-  transaction_body: "fa45ffa2…",
-  wif_private_key: "PVT_K1_…",
-}).then(console.log);
+import { sign } from "antelope-ecc"; // Tree shaking capabilities.
 ```
 
-> The logged output will be SIG_K1\_…
-
-Sign a message digest.
+_As default exports_
 
 ```js
-import sign_txn from "antelope-ecc/sign_txn.js";
-import crypto from "crypto";
+import AntelopeECC from "antelope-ecc";
+```
 
-sign_txn({
-  hash: crypto
-    .createHash("sha256")
+_Ways to require/import in Common JS_
+
+```js
+const AntelopeECC = import("antelope-ecc");
+AntelopeECC.then(({ sign }) => {
+  // As import is async
+});
+```
+
+**Sign a message digest.**
+
+```js
+import { sign } from "anteope-ecc";
+import { createHash } from "crypto";
+
+await sign({
+  hash: createHash("sha256")
     .update(Uint8Array.from([1, 2, 3, 4, 5]))
     .digest()
     .toString("hex"), // Uint8Array | string
@@ -58,20 +63,20 @@ sign_txn({
 
 The logged output will be SIG_K1…
 
-An example of how to create a pair keys.
+**An example of how to create a pair keys.**
 
 ```js
-import new_keys from "antelope-ecc/new_keys.js";
+import { new_keys } from "antelope-ecc";
 
 new_keys().then(console.log);
 ```
 
 > The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
 
-Recover public key from signature.
+**Recover public key from signature.**
 
 ```js
-import recover_public_key from "antelope-ecc/recover_public_key.js";
+import { recover_public_key } from "antelope-ecc";
 
 const hash = Uint8Array.from(
   crypto.createHash("sha256").update(Buffer.from("ff", "hex")).digest()
@@ -85,17 +90,9 @@ recover_public_key({
 
 > The logged output will contain the public key “PUB_K1…” used to sign the hash.
 
-## Requirements
-
-Supported runtime environments:
-
-- [Node.js](https://nodejs.org) versions `>=16.0.0`.
-- Browsers matching the [Browserslist](https://browsersl.ist) query [`> 0.5%, not OperaMini all, not dead`](https://browsersl.ist/?q=%3E+0.5%25%2C+not+OperaMini+all%2C+not+dead).
-- [Deno](https://deno.land) version `^1.30.0`.
-
 ## Exports
 
-The [npm](https://npmjs.com) package [`antelope-ecc`](https://npm.im/antelope-ecc) features optimal JavaScript module design, It doesn’t have a main index module, so use deep imports from the ECMAScript modules that are exported via the [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
+ECMAScript modules deep exports are avaialble via [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
 
 - [`legacy_from_private_key.js`](./keys/legacy_from_private_key.js)
 - [`legacy_from_public_key.js`](./keys/legacy_from_public_key.js)

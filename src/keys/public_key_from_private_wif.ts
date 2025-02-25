@@ -5,18 +5,18 @@ import public_key_to_wif from "./public_key_to_wif.js";
 import validate_private_key from "./validate_private_key.js";
 
 /**
- * Convert an Antelope private key to a public key.
- * @example <caption>Usage `public_key_from_private`.</caption>
+ * Convert an Antelope private key WIF to a public key WIF.
+ * @example <caption>Usage `public_key_from_private_wif`.</caption>
  * ```js
- * import public_key_from_private from 'antelope-ecc/public_key_from_private'
+ * import public_key_from_private_wif from 'antelope-ecc/public_key_from_private_wif'
  *
- * public_key_from_private(
+ * public_key_from_private_wif(
  *   'PVT_K1_asdf…'
  * ).then(console.log)
  * ```
  * The logged output will be PUB_K1_….
  */
-export default async function public_key_from_private_key(
+export default async function public_key_from_private_wif(
   wif_private_key: string
 ): Promise<string> {
   await validate_private_key(wif_private_key);

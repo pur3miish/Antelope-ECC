@@ -1,6 +1,6 @@
-import crypto from "crypto";
 import sha256 from "isomorphic-secp256k1-js/sha256.js";
 import words from "./internal/mnemonic-words.js";
+import random_bytes from "./internal/random_bytes.js";
 /**
  * Generates a BIP39 24-word mnemonic representing a 32-byte private key.
  *
@@ -9,15 +9,16 @@ import words from "./internal/mnemonic-words.js";
  *
  * @example
  * ```ts
- * import crypto from "crypto";
- * import createMnemonic from "antelope-ecc/mnemonic-create";
+ * import createMnemonic from "antelope-ecc/mnemonic-create.js";
  *
  * const bytes = crypto.randomBytes(32); // The private key
  * createMnemonic(bytes).then(console.log); // BIP39 words.
  * ```
  * The logged output will be an array like: `['abandon', 'busy', …]`.
  */
-export default async function createMnemonic(bytes = crypto.getRandomValues(new Uint8Array(32))) {
+export default async function createMnemonic(bytes) {
+    if (!bytes)
+        bytes = await random_bytes(32);
     let bitLen = 8 * bytes.length;
     let sumBitLen = bitLen / 32;
     bytes = new Uint8Array(bytes);
