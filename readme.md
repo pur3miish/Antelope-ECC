@@ -4,11 +4,7 @@
 
 [![NPM Package](https://img.shields.io/npm/v/antelope-ecc.svg)](https://www.npmjs.org/package/antelope-ecc) [![CI status](https://github.com/pur3miish/antelope-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/antelope-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/antelope-ecc/blob/main/LICENSE)
 
-A lightweight (\~6 KB) [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript digital signature and cryptokey utilty package for Antelope based blockchains.
-
-## About
-
-antelope-ecc package is designed as an ESM (ECMAScript Module), leveraging modern JavaScript features like static imports, exports, and tree-shaking.
+A lightweight [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript digital signature and cryptokey utilty package for Antelope based blockchains.
 
 ## Requirements
 
