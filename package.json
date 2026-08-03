@@ -1,6 +1,6 @@
 {
   "name": "antelope-ecc",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
@@ -24,6 +24,7 @@
   "type": "module",
   "files": [
     "index.js",
+    "index.d.ts",
     "internal/",
     "keys/",
     "mnemonic_create.js",
@@ -39,10 +40,16 @@
     "sign.js",
     "sign.d.ts"
   ],
-  "main": "index.js",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
   "sideEffects": false,
   "exports": {
-    ".":  "./index.js",
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    },
     "./package.json": "./package.json",
     "./keys/legacy_from_private_key.js": "./keys/legacy_from_private_key.js",
     "./keys/legacy_from_public_key.js": "./keys/legacy_from_public_key.js",
@@ -63,16 +70,18 @@
     "./sign.js": "./sign.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.19.0"
   },
-  "browserslist": "Node >= 18, > 0.5%, not OperaMini all, not dead",
+  "browserslist": "Node >= 20.19, > 0.5%, not OperaMini all, not dead",
   "scripts": {
+    "clean": "node ./scripts/clean.mjs",
     "eslint": "eslint .",
     "prettier:readme": "prettier --write readme.md",
     "test": "npm run eslint && npm run mocha",
     "mocha": "mocha",
-    "prepublishOnly": "npm test && npm run build",
-    "build": "tsc"
+    "build": "npm run clean && tsc",
+    "prepack": "npm test && npm run build",
+    "postpack": "npm run clean"
   },
   "devDependencies": {
     "@types/chai": "^5.0.1",
@@ -94,7 +103,7 @@
   "dependencies": {
     "base58-js": "^3.0.2",
     "eosio-wasm-js": "^5.0.2",
-    "isomorphic-secp256k1-js": "^4.0.5",
+    "isomorphic-secp256k1-js": "^5.0.2",
     "ripemd160-js": "^3.0.4"
   }
 }

@@ -1,11 +1,15 @@
 import binary_to_base58 from "base58-js/binary_to_base58.js";
-import sign_secp256k1 from "isomorphic-secp256k1-js/sign.js";
 import ripemd160 from "ripemd160-js/ripemd160.js";
 
+import sign_graphene_compatible from "./internal/sign_graphene_compatible.js";
 import wif_to_private_key from "./keys/private_key_from_wif.js";
 
 /**
- * Generate an Antelope K1 signature for a given hash and wif_private_key
+ * Generate an Antelope K1 signature for a given hash and wif_private_key.
+ *
+ * Antelope retains the compact-canonical component policy inherited from the
+ * Graphene/BitShares fc library. This protocol compatibility rule is applied
+ * here, outside the standards-focused isomorphic-secp256k1-js signer.
  * @kind function
  * @name sign_txn
  * @param {object} arg Argument.
@@ -26,7 +30,9 @@ type sign_txn_args = {
 };
 
 /**
- * Generate an Antelope K1 signature for a given hash and wif_private_key
+ * Generate an Antelope `SIG_K1_` signature for an exact 32-byte digest.
+ * The inherited Graphene/BitShares component policy is automatic and is not a
+ * caller-selectable ECDSA mode.
  */
 export default async function sign({
   hash,
@@ -45,7 +51,10 @@ export default async function sign({
   } else if (hash instanceof Uint8Array) hash_array = hash;
   else throw new Error("Hash must be a string or a Uint8Array.");
 
-  const { r, s, v } = await sign_secp256k1({ hash: hash_array, private_key });
+  const { r, s, v } = await sign_graphene_compatible({
+    hash: hash_array,
+    private_key,
+  });
 
   const i = 31 + Number(v); // compressed (4) + compact key(27).
   const K1 = [75, 49]; // K1 as ascii

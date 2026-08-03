@@ -1,4 +1,8 @@
 node_modules
+/*.js
+/*.d.ts
+/internal/
+/keys/
 .DS_Store
 coverage/
 .nyc_output

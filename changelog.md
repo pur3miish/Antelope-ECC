@@ -1,6 +1,6 @@
 # Antelope ECC Changelog
 
-## Next
+## 5.0.1 - 2026-08-03
 
 ### Major
 
@@ -13,6 +13,12 @@
 ### Patch
 
 - Removed redundant package.json exports fields.
+- Updated `isomorphic-secp256k1-js` to 5.0.2.
+- Kept the inherited Graphene/BitShares compact-canonical retry policy inside `antelope-ecc`; the generic secp256k1 dependency remains standards-focused.
+- Documented that the retry policy is required for Antelope compatibility and is not an ECDSA or RFC 6979 security requirement.
+- Documented the complete signing sequence, package boundary, and that callers do not enable the compatibility policy themselves.
+- Added a source-only Git workflow: TypeScript builds the npm artifacts during `prepack`, `postpack` removes them locally, and an explicit cleanup allowlist prevents source deletion.
+- Added `src/index.ts` so the root JavaScript entry point and its declaration are generated for npm instead of committed to Git.
 
 ## 4.0.5
 
