@@ -2,7 +2,7 @@
 
 # Antelope ECC
 
-[![npm](https://img.shields.io/npm/v/antelope-ecc.svg)](https://www.npmjs.com/package/antelope-ecc) [![CI](https://github.com/pur3miish/Antelope-ECC/actions/workflows/ci.yml/badge.svg)](https://github.com/pur3miish/Antelope-ECC/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![ESM](https://img.shields.io/badge/ESM-native-blue)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+[![npm](https://img.shields.io/npm/v/antelope-ecc.svg)](https://www.npmjs.com/package/antelope-ecc) [![CI](https://github.com/pur3miish/Antelope-ECC/.github/workflows/node.js.yml/badge.svg)](https://github.com/pur3miish/Antelope-ECC/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![ESM](https://img.shields.io/badge/ESM-native-blue)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 
 A lightweight JavaScript and TypeScript library for Antelope-compatible secp256k1 cryptography, key management, and transaction signing.
 

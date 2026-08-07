@@ -1,7 +1,5 @@
 import base58_to_binary from "base58-js/base58_to_binary.js";
-import {
-  validate_private_key as validate_secp256k1_private_key,
-} from "isomorphic-secp256k1-js/utils.js";
+import { validate_private_key as validate_secp256k1_private_key } from "isomorphic-secp256k1-js/utils.js";
 import { ripemd160 } from "ripemd160-js";
 
 type PrivateKeyType = "K1" | "R1" | "WA";
@@ -12,10 +10,7 @@ const KEY_CODES: Record<PrivateKeyType, Uint8Array> = {
   WA: Uint8Array.of(87, 65),
 };
 
-function checksum_matches(
-  actual: Uint8Array,
-  expected: Uint8Array,
-): boolean {
+function checksum_matches(actual: Uint8Array, expected: Uint8Array): boolean {
   if (actual.length !== expected.length) return false;
 
   for (let i = 0; i < actual.length; i += 1) {
@@ -30,9 +25,7 @@ function checksum_matches(
  *
  * K1 keys are additionally validated as secp256k1 private scalars.
  */
-export default function validate_private_key(
-  wif_private_key: string,
-): boolean {
+export default function validate_private_key(wif_private_key: string): boolean {
   if (typeof wif_private_key !== "string") {
     throw new TypeError("Private key must be a string.");
   }
@@ -51,9 +44,7 @@ export default function validate_private_key(
     );
   }
 
-  const encoded = wif_private_key.slice(
-    `PVT_${key_type}_`.length,
-  );
+  const encoded = wif_private_key.slice(`PVT_${key_type}_`.length);
 
   const decoded = base58_to_binary(encoded);
 
@@ -65,10 +56,7 @@ export default function validate_private_key(
   const checksum = decoded.slice(-4);
 
   const expected_checksum = ripemd160(
-    Uint8Array.from([
-      ...payload,
-      ...KEY_CODES[key_type],
-    ]),
+    Uint8Array.from([...payload, ...KEY_CODES[key_type]]),
   ).slice(0, 4);
 
   if (!checksum_matches(checksum, expected_checksum)) {

@@ -19,33 +19,23 @@ type SignArgs = {
   wif_private_key: string;
 };
 
-function is_uint8_array(
-  value: unknown,
-): value is Uint8Array {
+function is_uint8_array(value: unknown): value is Uint8Array {
   return (
     ArrayBuffer.isView(value) &&
-    Object.prototype.toString.call(value) ===
-      "[object Uint8Array]"
+    Object.prototype.toString.call(value) === "[object Uint8Array]"
   );
 }
 
-function parse_hash(
-  hash: string | Uint8Array,
-): Uint8Array {
+function parse_hash(hash: string | Uint8Array): Uint8Array {
   if (typeof hash === "string") {
     if (!/^[0-9a-fA-F]{64}$/.test(hash)) {
-      throw new Error(
-        "Hash must be exactly 32 bytes of hexadecimal data.",
-      );
+      throw new Error("Hash must be exactly 32 bytes of hexadecimal data.");
     }
 
     const output = new Uint8Array(32);
 
     for (let i = 0; i < output.length; i += 1) {
-      output[i] = Number.parseInt(
-        hash.slice(i * 2, i * 2 + 2),
-        16,
-      );
+      output[i] = Number.parseInt(hash.slice(i * 2, i * 2 + 2), 16);
     }
 
     return output;
@@ -53,17 +43,13 @@ function parse_hash(
 
   if (is_uint8_array(hash)) {
     if (hash.length !== 32) {
-      throw new RangeError(
-        "Hash must be exactly 32 bytes.",
-      );
+      throw new RangeError("Hash must be exactly 32 bytes.");
     }
 
     return Uint8Array.from(hash);
   }
 
-  throw new TypeError(
-    "Hash must be a hexadecimal string or Uint8Array.",
-  );
+  throw new TypeError("Hash must be a hexadecimal string or Uint8Array.");
 }
 
 /**
@@ -77,40 +63,27 @@ export default async function sign({
   hash,
   wif_private_key,
 }: SignArgs): Promise<string> {
-  const private_key =
-    private_key_from_wif(wif_private_key);
+  const private_key = private_key_from_wif(wif_private_key);
 
   const hash_array = parse_hash(hash);
 
-  const { r, s, v } =
-    await sign_graphene_compatible({
-      hash: hash_array,
-      private_key,
-    });
+  const { r, s, v } = await sign_graphene_compatible({
+    hash: hash_array,
+    private_key,
+  });
 
   const recovery_byte = 31 + Number(v);
   const K1 = [75, 49];
 
-  const raw_signature = [
-    recovery_byte,
-    ...r,
-    ...s,
-  ];
+  const raw_signature = [recovery_byte, ...r, ...s];
 
-  const checksum = ripemd160(
-    Uint8Array.from([
-      ...raw_signature,
-      ...K1,
-    ]),
-  ).slice(0, 4);
+  const checksum = ripemd160(Uint8Array.from([...raw_signature, ...K1])).slice(
+    0,
+    4,
+  );
 
   return (
     "SIG_K1_" +
-    binary_to_base58(
-      Uint8Array.from([
-        ...raw_signature,
-        ...checksum,
-      ]),
-    )
+    binary_to_base58(Uint8Array.from([...raw_signature, ...checksum]))
   );
 }

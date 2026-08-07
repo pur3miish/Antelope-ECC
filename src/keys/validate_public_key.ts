@@ -1,7 +1,5 @@
 import base58_to_binary from "base58-js/base58_to_binary.js";
-import {
-  validate_public_key as validate_secp256k1_public_key,
-} from "isomorphic-secp256k1-js/utils.js";
+import { validate_public_key as validate_secp256k1_public_key } from "isomorphic-secp256k1-js/utils.js";
 import { ripemd160 } from "ripemd160-js";
 
 type PublicKeyType = "K1" | "R1" | "WA";
@@ -12,10 +10,7 @@ const KEY_CODES: Record<PublicKeyType, Uint8Array> = {
   WA: Uint8Array.of(87, 65),
 };
 
-function checksum_matches(
-  actual: Uint8Array,
-  expected: Uint8Array,
-): boolean {
+function checksum_matches(actual: Uint8Array, expected: Uint8Array): boolean {
   if (actual.length !== expected.length) return false;
 
   for (let i = 0; i < actual.length; i += 1) {
@@ -31,9 +26,7 @@ function checksum_matches(
  * K1 keys are additionally validated as compressed SEC 1
  * secp256k1 public keys.
  */
-export default function validate_public_key(
-  wif_public_key: string,
-): boolean {
+export default function validate_public_key(wif_public_key: string): boolean {
   if (typeof wif_public_key !== "string") {
     throw new TypeError("Public key must be a string.");
   }
@@ -52,9 +45,7 @@ export default function validate_public_key(
     );
   }
 
-  const encoded = wif_public_key.slice(
-    `PUB_${key_type}_`.length,
-  );
+  const encoded = wif_public_key.slice(`PUB_${key_type}_`.length);
 
   const decoded = base58_to_binary(encoded);
 
@@ -66,10 +57,7 @@ export default function validate_public_key(
   const checksum = decoded.slice(-4);
 
   const expected_checksum = ripemd160(
-    Uint8Array.from([
-      ...payload,
-      ...KEY_CODES[key_type],
-    ]),
+    Uint8Array.from([...payload, ...KEY_CODES[key_type]]),
   ).slice(0, 4);
 
   if (!checksum_matches(checksum, expected_checksum)) {
@@ -87,10 +75,7 @@ export default function validate_public_key(
   }
 
   if (key_type === "R1") {
-    if (
-      payload.length !== 33 ||
-      (payload[0] !== 2 && payload[0] !== 3)
-    ) {
+    if (payload.length !== 33 || (payload[0] !== 2 && payload[0] !== 3)) {
       throw new RangeError(
         "PUB_R1_ public keys must contain a compressed 33-byte key.",
       );
