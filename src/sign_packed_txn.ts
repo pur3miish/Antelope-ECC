@@ -19,8 +19,10 @@ type sign_packed_txn_args = {
    * Private key PVT_K1_ (wallet import format).
    */
   wif_private_key: string;
-  extension?: string;
+  context_free_data_hash?: string;
 };
+
+const EMPTY_CONTEXT_FREE_DATA_HASH = "0".repeat(64);
 
 /**
  * Generate an Antelope/EOSIO signature for a packed transaction object.
@@ -30,10 +32,10 @@ export default async function sign_packed_txn({
   transaction_header,
   transaction_body,
   wif_private_key,
-  extension = "0000000000000000000000000000000000000000000000000000000000000000",
+  context_free_data_hash = EMPTY_CONTEXT_FREE_DATA_HASH,
 }: sign_packed_txn_args): Promise<string> {
   const inputString =
-    chain_id + transaction_header + transaction_body + extension;
+    chain_id + transaction_header + transaction_body + context_free_data_hash;
   const hashArray = inputString.match(/[a-fA-F0-9]{2}/gmu);
   if (!hashArray)
     throw new Error("Invalid input string, could not generate hash.");
