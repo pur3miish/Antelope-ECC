@@ -6,7 +6,7 @@ import base58_to_binary from "base58-js/base58_to_binary";
  * @returns {Uint8Array} Compressed secp256k1 private key.
  */
 export default function legacy_to_private_key(
-  wif_private_key: string
+  wif_private_key: string,
 ): Uint8Array {
   return base58_to_binary(wif_private_key).slice(1, 33);
 }

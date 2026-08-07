@@ -13,14 +13,14 @@ export default (tests) => {
         13,
       ]),
       await public_key_from_wif(
-        "PUB_K1_8h9ch3qgLFZY9DBF3ius7HjJL9SBLgNPFTZZkTfy3r3XCF9V86"
+        "PUB_K1_8h9ch3qgLFZY9DBF3ius7HjJL9SBLgNPFTZZkTfy3r3XCF9V86",
       ),
-      "Expected output for wif_to_public_key using PUB_K1"
+      "Expected output for wif_to_public_key using PUB_K1",
     );
 
     rejects(async () => {
       await public_key_from_wif(
-        "PUB6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDWAAA"
+        "PUB6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDWAAA",
       );
     }, "Expected rejection");
   });

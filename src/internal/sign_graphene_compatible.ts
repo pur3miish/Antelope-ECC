@@ -44,7 +44,7 @@ function satisfies_graphene_policy(signature: Signature): boolean {
 
 async function hmac_and_erase_data(
   data: Uint8Array,
-  key: Uint8Array
+  key: Uint8Array,
 ): Promise<Uint8Array> {
   try {
     return await hmac_sha256(data, key);
@@ -70,7 +70,7 @@ async function sign_retry(
   private_key: Uint8Array,
   hash: Uint8Array,
   attempt: number,
-  private_scalar: bigint
+  private_scalar: bigint,
 ): Promise<Signature> {
   let nonce_digest: Uint8Array = new Uint8Array(0);
   let seed: Uint8Array = new Uint8Array(0);
@@ -79,20 +79,20 @@ async function sign_retry(
 
   try {
     nonce_digest = await sha256_and_erase_data(
-      concat_bytes(hash, new Uint8Array(attempt))
+      concat_bytes(hash, new Uint8Array(attempt)),
     );
     seed = concat_bytes(private_key, nonce_digest);
 
     let next_key: Uint8Array = await hmac_and_erase_data(
       concat_bytes(value, Uint8Array.of(0), seed),
-      key
+      key,
     );
     key.fill(0);
     key = next_key;
     value = await hmac_and_erase_data(value, key);
     next_key = await hmac_and_erase_data(
       concat_bytes(value, Uint8Array.of(1), seed),
-      key
+      key,
     );
     key.fill(0);
     key = next_key;
@@ -111,7 +111,7 @@ async function sign_retry(
           let s = get_mod(
             mul_inverse(nonce, secp256k1.n) *
               (message_scalar + r * private_scalar),
-            secp256k1.n
+            secp256k1.n,
           );
           if (s !== 0n) {
             let recovery =
@@ -131,7 +131,7 @@ async function sign_retry(
 
       next_key = await hmac_and_erase_data(
         concat_bytes(value, Uint8Array.of(0)),
-        key
+        key,
       );
       key.fill(0);
       key = next_key;
@@ -172,7 +172,7 @@ export default async function sign_graphene_compatible({
     const private_scalar = array_to_number(private_key_bytes);
     const public_point = blinded_multiply(
       { x: secp256k1.x, y: secp256k1.y },
-      private_scalar
+      private_scalar,
     );
 
     for (let attempt = 1; attempt <= MAX_GRAPHENE_RETRIES; attempt += 1) {
@@ -180,7 +180,7 @@ export default async function sign_graphene_compatible({
         private_key_bytes,
         hash_bytes,
         attempt,
-        private_scalar
+        private_scalar,
       );
       if (!satisfies_graphene_policy(signature)) continue;
       if (!verify_signature_point(hash_bytes, signature, public_point, true)) {

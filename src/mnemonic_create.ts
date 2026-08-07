@@ -3,52 +3,61 @@ import sha256 from "isomorphic-secp256k1-js/sha256.js";
 import words from "./internal/mnemonic-words.js";
 import random_bytes from "./internal/random_bytes.js";
 
+const VALID_ENTROPY_LENGTHS = new Set([16, 20, 24, 28, 32]);
+
+function is_uint8_array(value: unknown): value is Uint8Array {
+  return (
+    ArrayBuffer.isView(value) &&
+    Object.prototype.toString.call(value) === "[object Uint8Array]"
+  );
+}
+
+function bytes_to_bits(bytes: Uint8Array): string {
+  return Array.from(bytes, (byte) => byte.toString(2).padStart(8, "0")).join(
+    "",
+  );
+}
+
 /**
- * Generates a BIP39 24-word mnemonic representing a 32-byte private key.
+ * Creates a BIP39 mnemonic from entropy.
  *
- * @param bytes - 32 bytes of data, typically a private key.
- * @returns A Promise that resolves to an array of strings representing the BIP39 mnemonic.
+ * Supports the standard BIP39 entropy sizes:
+ * 128, 160, 192, 224, and 256 bits.
  *
- * @example
- * ```ts
- * import createMnemonic from "antelope-ecc/mnemonic-create.js";
- *
- * const bytes = crypto.randomBytes(32); // The private key
- * createMnemonic(bytes).then(console.log); // BIP39 words.
- * ```
- * The logged output will be an array like: `['abandon', 'busy', …]`.
+ * When entropy is omitted, 256 bits of secure random
+ * entropy are generated, producing a 24-word mnemonic.
  */
-export default async function createMnemonic(
-  bytes: Uint8Array
+export default async function mnemonic_create(
+  bytes: Uint8Array = random_bytes(32),
 ): Promise<string> {
-  if (!bytes) bytes = await random_bytes(32);
-  let bitLen = 8 * bytes.length;
-  let sumBitLen = bitLen / 32;
-  bytes = new Uint8Array(bytes);
-
-  let hashAb = await sha256(bytes);
-  let hashBuf = new Uint8Array(hashAb);
-
-  let bits = "";
-  bytes.forEach((n) => {
-    let b = n.toString(2).padStart(8, "0");
-    bits += b;
-  });
-
-  let checkByte = hashBuf[0];
-  let checkBits = checkByte.toString(2);
-  checkBits = checkBits.padStart(8, "0");
-
-  let checksum = checkBits.slice(0, sumBitLen);
-  bits += checksum;
-
-  const seed: number[] = [];
-
-  for (let bit = 0; bit < bitLen + sumBitLen; bit += 11) {
-    // 11-bit integer (0-2047)
-    let i = parseInt(bits.slice(bit, bit + 11).padStart(8, "0"), 2);
-    seed.push(i);
+  if (!is_uint8_array(bytes)) {
+    throw new TypeError("Mnemonic entropy must be a Uint8Array.");
   }
 
-  return seed.map((i) => words[i]).join(" ");
+  const entropy = Uint8Array.from(bytes);
+
+  if (!VALID_ENTROPY_LENGTHS.has(entropy.length)) {
+    throw new RangeError("BIP39 entropy must be 16, 20, 24, 28, or 32 bytes.");
+  }
+
+  const hash = await sha256(entropy);
+
+  const checksum_bit_length = entropy.length / 4;
+
+  const checksum_bits = hash[0]
+    .toString(2)
+    .padStart(8, "0")
+    .slice(0, checksum_bit_length);
+
+  const bits = bytes_to_bits(entropy) + checksum_bits;
+
+  const mnemonic_words: string[] = [];
+
+  for (let offset = 0; offset < bits.length; offset += 11) {
+    const index = Number.parseInt(bits.slice(offset, offset + 11), 2);
+
+    mnemonic_words.push(words[index]);
+  }
+
+  return mnemonic_words.join(" ");
 }

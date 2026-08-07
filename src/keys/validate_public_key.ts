@@ -1,45 +1,86 @@
-// @ts-check
+import base58_to_binary from "base58-js/base58_to_binary.js";
+import { validate_public_key as validate_secp256k1_public_key } from "isomorphic-secp256k1-js/utils.js";
+import { ripemd160 } from "ripemd160-js";
 
-import base58_to_binary from "base58-js/base58_to_binary";
-import ripemd160 from "ripemd160-js/ripemd160.js";
+type PublicKeyType = "K1" | "R1" | "WA";
+
+const KEY_CODES: Record<PublicKeyType, Uint8Array> = {
+  K1: Uint8Array.of(75, 49),
+  R1: Uint8Array.of(82, 49),
+  WA: Uint8Array.of(87, 65),
+};
+
+function checksum_matches(actual: Uint8Array, expected: Uint8Array): boolean {
+  if (actual.length !== expected.length) return false;
+
+  for (let i = 0; i < actual.length; i += 1) {
+    if (actual[i] !== expected[i]) return false;
+  }
+
+  return true;
+}
 
 /**
- * Validate Antelope public key.
- * @name validate_public_key
- * @kind function
- * @param {String} wif_public_key wallet import format Antelope public key.
- * @returns {Promise<Boolean>} Returns true if valid
+ * Validates an Antelope public key and its checksum.
+ *
+ * K1 keys are additionally validated as compressed SEC 1
+ * secp256k1 public keys.
  */
-export default async function validate_public_key(
-  wif_public_key: string
-): Promise<boolean> {
-  let key_type;
-  const key_code = [
-    [75, 49],
-    [82, 49],
-    [87, 65],
-  ];
+export default function validate_public_key(wif_public_key: string): boolean {
+  if (typeof wif_public_key !== "string") {
+    throw new TypeError("Public key must be a string.");
+  }
 
-  if (wif_public_key.startsWith("PUB_K1_")) key_type = 0;
-  else if (wif_public_key.startsWith("PUB_R1_")) key_type = 1;
-  else if (wif_public_key.startsWith("PUB_WA_")) key_type = 2;
-  else
-    throw new Error("Public keys need to start with PUB_K1, PUB_R1 or PUB_WA.");
+  let key_type: PublicKeyType;
 
-  let public_key = wif_public_key
-    .replace("PUB_K1_", "")
-    .replace("PUB_R1_", "")
-    .replace("PUB_WA_", "");
+  if (wif_public_key.startsWith("PUB_K1_")) {
+    key_type = "K1";
+  } else if (wif_public_key.startsWith("PUB_R1_")) {
+    key_type = "R1";
+  } else if (wif_public_key.startsWith("PUB_WA_")) {
+    key_type = "WA";
+  } else {
+    throw new Error(
+      "Public keys must start with PUB_K1_, PUB_R1_, or PUB_WA_.",
+    );
+  }
 
-  const base58_str = base58_to_binary(public_key);
-  const checksum_check = base58_str.slice(-4);
+  const encoded = wif_public_key.slice(`PUB_${key_type}_`.length);
 
-  const checksum = await ripemd160(
-    Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]])
-  );
+  const decoded = base58_to_binary(encoded);
 
-  for (let i = 0; i < 4; i++)
-    if (checksum[i] !== checksum_check[i]) throw new Error("Invalid checksum");
+  if (decoded.length < 5) {
+    throw new RangeError("Public key payload is too short.");
+  }
+
+  const payload = decoded.slice(0, -4);
+  const checksum = decoded.slice(-4);
+
+  const expected_checksum = ripemd160(
+    Uint8Array.from([...payload, ...KEY_CODES[key_type]]),
+  ).slice(0, 4);
+
+  if (!checksum_matches(checksum, expected_checksum)) {
+    throw new Error("Invalid public key checksum.");
+  }
+
+  if (key_type === "K1") {
+    if (payload.length !== 33) {
+      throw new RangeError(
+        "PUB_K1_ public keys must contain exactly 33 compressed key bytes.",
+      );
+    }
+
+    validate_secp256k1_public_key(payload);
+  }
+
+  if (key_type === "R1") {
+    if (payload.length !== 33 || (payload[0] !== 2 && payload[0] !== 3)) {
+      throw new RangeError(
+        "PUB_R1_ public keys must contain a compressed 33-byte key.",
+      );
+    }
+  }
 
   return true;
 }

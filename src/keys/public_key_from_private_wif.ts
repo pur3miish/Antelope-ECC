@@ -1,31 +1,29 @@
-import base58_to_binary from "base58-js/base58_to_binary.js";
 import get_public_key from "isomorphic-secp256k1-js/get_public_key.js";
 
+import private_key_from_wif from "./private_key_from_wif.js";
 import public_key_to_wif from "./public_key_to_wif.js";
-import validate_private_key from "./validate_private_key.js";
 
 /**
- * Convert an Antelope private key WIF to a public key WIF.
- * @example <caption>Usage `public_key_from_private_wif`.</caption>
- * ```js
- * import public_key_from_private_wif from 'antelope-ecc/public_key_from_private_wif'
+ * Converts an Antelope PVT_K1_ private key into its
+ * corresponding PUB_K1_ public key.
  *
- * public_key_from_private_wif(
- *   'PVT_K1_asdf…'
- * ).then(console.log)
+ * @example
+ * ```js
+ * import {
+ *   public_key_from_private_wif,
+ * } from "antelope-ecc";
+ *
+ * console.log(
+ *   public_key_from_private_wif("PVT_K1_...")
+ * );
  * ```
- * The logged output will be PUB_K1_….
  */
-export default async function public_key_from_private_wif(
-  wif_private_key: string
-): Promise<string> {
-  await validate_private_key(wif_private_key);
-  if (!wif_private_key.startsWith("PVT_K1_"))
-    throw new Error("Private key must be K1 key, “PVT_K1_…”");
-  const raw_pk = base58_to_binary(wif_private_key.replace("PVT_K1_", "")).slice(
-    0,
-    -4
-  );
+export default function public_key_from_private_wif(
+  wif_private_key: string,
+): string {
+  const private_key = private_key_from_wif(wif_private_key);
 
-  return public_key_to_wif(await get_public_key(raw_pk));
+  const public_key = get_public_key(private_key);
+
+  return public_key_to_wif(public_key);
 }

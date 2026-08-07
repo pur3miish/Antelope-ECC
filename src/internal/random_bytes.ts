@@ -1,20 +1,34 @@
 /**
- * Universally generates a pseudorandom byte array.
- * @param {number} bytes - The length of the random byte array to generate.
- * @returns {Promise<Uint8Array>} A Promise that resolves to a Uint8Array of random bytes.
+ * Generates cryptographically secure random bytes.
+ *
+ * Uses the standard Web Crypto API available in modern browsers
+ * and Node.js 22+.
+ *
+ * @param bytes Number of random bytes to generate.
+ * @returns Cryptographically secure random bytes.
  */
-export default async function random_bytes(
-  bytes: number = 32
-): Promise<Uint8Array> {
-  if (typeof window == "undefined") {
-    let crypto;
-    try {
-      // eslint-disable-next-line
-      crypto = require("crypto"); // Works in `pkg`
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_err) {
-      crypto = await import("crypto"); // Works in ESM
-    }
-    return Uint8Array.from([...crypto.randomBytes(bytes)]);
-  } else return window.crypto.getRandomValues(new Uint8Array(bytes));
+export default function random_bytes(bytes: number = 32): Uint8Array {
+  if (!Number.isSafeInteger(bytes) || bytes < 0) {
+    throw new RangeError("bytes must be a non-negative safe integer");
+  }
+
+  if (
+    typeof globalThis.crypto === "undefined" ||
+    typeof globalThis.crypto.getRandomValues !== "function"
+  ) {
+    throw new Error(
+      "Cryptographically secure random number generation is unavailable.",
+    );
+  }
+
+  const output = new Uint8Array(bytes);
+
+  // Web Crypto limits getRandomValues() to 65,536 bytes per call.
+  for (let offset = 0; offset < output.length; offset += 65_536) {
+    globalThis.crypto.getRandomValues(
+      output.subarray(offset, Math.min(offset + 65_536, output.length)),
+    );
+  }
+
+  return output;
 }

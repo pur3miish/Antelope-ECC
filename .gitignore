@@ -1,8 +1,9 @@
-node_modules
-/*.js
-/*.d.ts
-/internal/
-/keys/
+node_modules/
+dist/
+
 .DS_Store
+
 coverage/
-.nyc_output
+.nyc_output/
+
+*.tgz

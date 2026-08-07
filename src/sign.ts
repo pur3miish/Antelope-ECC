@@ -1,71 +1,89 @@
 import binary_to_base58 from "base58-js/binary_to_base58.js";
-import ripemd160 from "ripemd160-js/ripemd160.js";
+import { ripemd160 } from "ripemd160-js";
 
 import sign_graphene_compatible from "./internal/sign_graphene_compatible.js";
-import wif_to_private_key from "./keys/private_key_from_wif.js";
+import private_key_from_wif from "./keys/private_key_from_wif.js";
 
-/**
- * Generate an Antelope K1 signature for a given hash and wif_private_key.
- *
- * Antelope retains the compact-canonical component policy inherited from the
- * Graphene/BitShares fc library. This protocol compatibility rule is applied
- * here, outside the standards-focused isomorphic-secp256k1-js signer.
- * @kind function
- * @name sign_txn
- * @param {object} arg Argument.
- * @param {String | Uint8Array} arg.hash
- * @param {String} arg.wif_private_key An Antelope private key.
- * @returns {Promise<String>} Signature SIG_K1.
- */
-
-type sign_txn_args = {
+type SignArgs = {
   /**
-   * 32 bytes message digest to sign, can be Uint8Array or hexadecimal string.
+   * Exact 32-byte message digest.
+   *
+   * May be supplied as a Uint8Array or 64-character
+   * hexadecimal string.
    */
   hash: string | Uint8Array;
+
   /**
-   * Wallet import format private key, PVT_K1_ format
+   * Antelope PVT_K1_ private key.
    */
   wif_private_key: string;
 };
 
+function is_uint8_array(value: unknown): value is Uint8Array {
+  return (
+    ArrayBuffer.isView(value) &&
+    Object.prototype.toString.call(value) === "[object Uint8Array]"
+  );
+}
+
+function parse_hash(hash: string | Uint8Array): Uint8Array {
+  if (typeof hash === "string") {
+    if (!/^[0-9a-fA-F]{64}$/.test(hash)) {
+      throw new Error("Hash must be exactly 32 bytes of hexadecimal data.");
+    }
+
+    const output = new Uint8Array(32);
+
+    for (let i = 0; i < output.length; i += 1) {
+      output[i] = Number.parseInt(hash.slice(i * 2, i * 2 + 2), 16);
+    }
+
+    return output;
+  }
+
+  if (is_uint8_array(hash)) {
+    if (hash.length !== 32) {
+      throw new RangeError("Hash must be exactly 32 bytes.");
+    }
+
+    return Uint8Array.from(hash);
+  }
+
+  throw new TypeError("Hash must be a hexadecimal string or Uint8Array.");
+}
+
 /**
- * Generate an Antelope `SIG_K1_` signature for an exact 32-byte digest.
- * The inherited Graphene/BitShares component policy is automatic and is not a
- * caller-selectable ECDSA mode.
+ * Generates an Antelope SIG_K1_ signature for an exact
+ * 32-byte message digest.
+ *
+ * Antelope's historical Graphene/BitShares compact-canonical
+ * compatibility policy is applied automatically.
  */
 export default async function sign({
   hash,
   wif_private_key,
-}: sign_txn_args): Promise<string> {
-  const private_key = wif_to_private_key(wif_private_key);
-  let hash_array: Uint8Array;
-  // Handle the case where hash is a string
-  if (typeof hash === "string") {
-    const hashMatches = hash.match(/[a-fA-F0-9]{2}/gmu);
-    if (hashMatches)
-      hash_array = Uint8Array.from(
-        hashMatches.map((i) => Number(`0x${i}`))
-      ) as Uint8Array;
-    else throw new Error("Invalid hash format.");
-  } else if (hash instanceof Uint8Array) hash_array = hash;
-  else throw new Error("Hash must be a string or a Uint8Array.");
+}: SignArgs): Promise<string> {
+  const private_key = private_key_from_wif(wif_private_key);
+
+  const hash_array = parse_hash(hash);
 
   const { r, s, v } = await sign_graphene_compatible({
     hash: hash_array,
     private_key,
   });
 
-  const i = 31 + Number(v); // compressed (4) + compact key(27).
-  const K1 = [75, 49]; // K1 as ascii
-  const raw_sig = [i, ...r, ...s];
+  const recovery_byte = 31 + Number(v);
+  const K1 = [75, 49];
 
-  const ripe_hash = await ripemd160(Uint8Array.from([...raw_sig, ...K1]));
-  const checksum = ripe_hash.slice(0, 4);
+  const raw_signature = [recovery_byte, ...r, ...s];
 
-  const base58_sig = binary_to_base58(
-    Uint8Array.from([...raw_sig, ...checksum])
+  const checksum = ripemd160(Uint8Array.from([...raw_signature, ...K1])).slice(
+    0,
+    4,
   );
 
-  return "SIG_K1_" + base58_sig;
+  return (
+    "SIG_K1_" +
+    binary_to_base58(Uint8Array.from([...raw_signature, ...checksum]))
+  );
 }
