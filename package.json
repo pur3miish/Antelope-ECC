@@ -1,7 +1,7 @@
 {
   "name": "antelope-ecc",
-  "version": "5.0.1",
-  "description": "A universal JavaScript ECC digital signature and key utility package for Antelope based blockchains.",
+  "version": "6.0.0",
+  "description": "A universal JavaScript and TypeScript ECC signing and key utility library for Antelope-based blockchains.",
   "author": "pur3miish",
   "license": "MIT",
   "repository": {
@@ -11,99 +11,154 @@
   "homepage": "https://github.com/pur3miish/Antelope-ECC#readme",
   "bugs": "https://github.com/pur3miish/Antelope-ECC/issues",
   "keywords": [
-    "blockchain",
-    "digital",
-    "signature",
-    "ecc",
+    "antelope",
     "eosio",
-    "Antelope",
-    "crypto",
+    "blockchain",
+    "ecc",
+    "ecdsa",
+    "secp256k1",
+    "cryptography",
+    "signature",
     "keys",
-    "secp256k1"
+    "typescript",
+    "javascript",
+    "esm",
+    "isomorphic"
   ],
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "index.js",
-    "index.d.ts",
-    "internal/",
-    "keys/",
-    "mnemonic_create.js",
-    "mnemonic_create.d.ts",
-    "mnemonic_recover.js",
-    "mnemonic_recover.d.ts",
-    "new_keys.js",
-    "new_keys.d.ts",
-    "recover_public_key.js",
-    "recover_public_key.d.ts",
-    "sign_packed_txn.js",
-    "sign_packed_txn.d.ts",
-    "sign.js",
-    "sign.d.ts"
+    "dist"
   ],
-  "main": "./index.js",
-  "module": "./index.js",
-  "types": "./index.d.ts",
   "sideEffects": false,
+  "engines": {
+    "node": ">=22"
+  },
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js",
-      "default": "./index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json",
-    "./keys/legacy_from_private_key.js": "./keys/legacy_from_private_key.js",
-    "./keys/legacy_from_public_key.js": "./keys/legacy_from_public_key.js",
-    "./keys/legacy_to_private_key.js": "./keys/legacy_to_private_key.js",
-    "./keys/legacy_to_public_key.js": "./keys/legacy_to_public_key.js",
-    "./keys/private_key_from_wif.js": "./keys/private_key_from_wif.js",
-    "./keys/private_key_to_wif.js": "./keys/private_key_to_wif.js",
-    "./keys/public_key_from_private_wif.js": "./keys/public_key_from_private_wif.js",
-    "./keys/public_key_from_wif.js": "./keys/public_key_from_wif.js",
-    "./keys/public_key_to_wif.js": "./keys/public_key_to_wif.js",
-    "./keys/validate_private_key.js": "./keys/validate_private_key.js",
-    "./keys/validate_public_key.js": "./keys/validate_public_key.js",
-    "./mnemonic_create.js": "./mnemonic_create.js",
-    "./mnemonic_recover.js": "./mnemonic_recover.js",
-    "./new_keys.js": "./new_keys.js",
-    "./recover_public_key.js": "./recover_public_key.js",
-    "./sign_packed_txn.js": "./sign_packed_txn.js",
-    "./sign.js": "./sign.js"
+    "./keys/legacy_from_private_key.js": {
+      "types": "./dist/keys/legacy_from_private_key.d.ts",
+      "import": "./dist/keys/legacy_from_private_key.js",
+      "default": "./dist/keys/legacy_from_private_key.js"
+    },
+    "./keys/legacy_from_public_key.js": {
+      "types": "./dist/keys/legacy_from_public_key.d.ts",
+      "import": "./dist/keys/legacy_from_public_key.js",
+      "default": "./dist/keys/legacy_from_public_key.js"
+    },
+    "./keys/legacy_to_private_key.js": {
+      "types": "./dist/keys/legacy_to_private_key.d.ts",
+      "import": "./dist/keys/legacy_to_private_key.js",
+      "default": "./dist/keys/legacy_to_private_key.js"
+    },
+    "./keys/legacy_to_public_key.js": {
+      "types": "./dist/keys/legacy_to_public_key.d.ts",
+      "import": "./dist/keys/legacy_to_public_key.js",
+      "default": "./dist/keys/legacy_to_public_key.js"
+    },
+    "./keys/private_key_from_wif.js": {
+      "types": "./dist/keys/private_key_from_wif.d.ts",
+      "import": "./dist/keys/private_key_from_wif.js",
+      "default": "./dist/keys/private_key_from_wif.js"
+    },
+    "./keys/private_key_to_wif.js": {
+      "types": "./dist/keys/private_key_to_wif.d.ts",
+      "import": "./dist/keys/private_key_to_wif.js",
+      "default": "./dist/keys/private_key_to_wif.js"
+    },
+    "./keys/public_key_from_private_wif.js": {
+      "types": "./dist/keys/public_key_from_private_wif.d.ts",
+      "import": "./dist/keys/public_key_from_private_wif.js",
+      "default": "./dist/keys/public_key_from_private_wif.js"
+    },
+    "./keys/public_key_from_wif.js": {
+      "types": "./dist/keys/public_key_from_wif.d.ts",
+      "import": "./dist/keys/public_key_from_wif.js",
+      "default": "./dist/keys/public_key_from_wif.js"
+    },
+    "./keys/public_key_to_wif.js": {
+      "types": "./dist/keys/public_key_to_wif.d.ts",
+      "import": "./dist/keys/public_key_to_wif.js",
+      "default": "./dist/keys/public_key_to_wif.js"
+    },
+    "./keys/validate_private_key.js": {
+      "types": "./dist/keys/validate_private_key.d.ts",
+      "import": "./dist/keys/validate_private_key.js",
+      "default": "./dist/keys/validate_private_key.js"
+    },
+    "./keys/validate_public_key.js": {
+      "types": "./dist/keys/validate_public_key.d.ts",
+      "import": "./dist/keys/validate_public_key.js",
+      "default": "./dist/keys/validate_public_key.js"
+    },
+    "./mnemonic_create.js": {
+      "types": "./dist/mnemonic_create.d.ts",
+      "import": "./dist/mnemonic_create.js",
+      "default": "./dist/mnemonic_create.js"
+    },
+    "./mnemonic_recover.js": {
+      "types": "./dist/mnemonic_recover.d.ts",
+      "import": "./dist/mnemonic_recover.js",
+      "default": "./dist/mnemonic_recover.js"
+    },
+    "./new_keys.js": {
+      "types": "./dist/new_keys.d.ts",
+      "import": "./dist/new_keys.js",
+      "default": "./dist/new_keys.js"
+    },
+    "./recover_public_key.js": {
+      "types": "./dist/recover_public_key.d.ts",
+      "import": "./dist/recover_public_key.js",
+      "default": "./dist/recover_public_key.js"
+    },
+    "./sign_packed_txn.js": {
+      "types": "./dist/sign_packed_txn.d.ts",
+      "import": "./dist/sign_packed_txn.js",
+      "default": "./dist/sign_packed_txn.js"
+    },
+    "./sign.js": {
+      "types": "./dist/sign.d.ts",
+      "import": "./dist/sign.js",
+      "default": "./dist/sign.js"
+    }
   },
-  "engines": {
-    "node": ">=20.19.0"
-  },
-  "browserslist": "Node >= 20.19, > 0.5%, not OperaMini all, not dead",
   "scripts": {
     "clean": "node ./scripts/clean.mjs",
     "eslint": "eslint .",
-    "prettier:readme": "prettier --write readme.md",
-    "test": "npm run eslint && npm run mocha",
+    "prettier": "prettier -c .",
+    "prettier:fix": "prettier --write .",
     "mocha": "mocha",
-    "build": "npm run clean && tsc",
-    "prepack": "npm test && npm run build",
-    "postpack": "npm run clean"
-  },
-  "devDependencies": {
-    "@types/chai": "^5.0.1",
-    "@types/elliptic": "^6.4.18",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^22.10.5",
-    "@typescript-eslint/eslint-plugin": "^8.19.1",
-    "@typescript-eslint/parser": "^8.19.1",
-    "chai": "^5.1.2",
-    "eslint": "^8.34.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "mocha": "^11.0.1",
-    "nyc": "^17.1.0",
-    "prettier": "^2.8.4",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "npm run eslint && npm run prettier && npm run build && npm run mocha",
+    "prepack": "npm run build",
+    "smoke": "npm test && node scripts/smoke-test.mjs",
+    "prepublishOnly": "npm run smoke"
   },
   "dependencies": {
     "base58-js": "^3.0.2",
-    "eosio-wasm-js": "^5.0.2",
+    "eosio-wasm-js": "^6.0.0",
     "isomorphic-secp256k1-js": "^5.0.2",
     "ripemd160-js": "^4.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.5",
+    "chai": "^6.2.2",
+    "eslint": "^10.8.0",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "globals": "^17.9.0",
+    "mocha": "^11.3.0",
+    "prettier": "^3.9.6",
+    "tsx": "^4.22.5",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.66.0"
   }
 }
