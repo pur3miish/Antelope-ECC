@@ -1,150 +1,476 @@
-![antelope ecc logo](static/antelope-ecc.svg)
+![Antelope ECC logo](static/antelope-ecc.svg)
 
 # Antelope ECC
 
-[![NPM Package](https://img.shields.io/npm/v/antelope-ecc.svg)](https://www.npmjs.org/package/antelope-ecc) [![CI status](https://github.com/pur3miish/antelope-ecc/workflows/CI/badge.svg)](https://github.com/pur3miish/antelope-ecc/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/pur3miish/antelope-ecc/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/v/antelope-ecc.svg)](https://www.npmjs.com/package/antelope-ecc) [![CI](https://github.com/pur3miish/Antelope-ECC/actions/workflows/ci.yml/badge.svg)](https://github.com/pur3miish/Antelope-ECC/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![ESM](https://img.shields.io/badge/ESM-native-blue)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 
-A lightweight [universal](https://en.wikipedia.org/wiki/Isomorphic_JavaScript) JavaScript digital-signature and cryptographic-key utility package for Antelope-based blockchains.
+A lightweight JavaScript and TypeScript library for Antelope-compatible secp256k1 cryptography, key management, and transaction signing.
 
-- Creates recoverable Antelope `SIG_K1_` signatures from 32-byte transaction digests.
-- Uses the standards-focused [`isomorphic-secp256k1-js`](https://github.com/pur3miish/isomorphic-secp256k1-js) implementation for secp256k1, ECDSA, and RFC 6979 operations.
-- Applies Antelope's historical compact-canonical signing policy, inherited from the Graphene/BitShares `fc` library, only inside this package.
-- Creates, validates, converts, and recovers Antelope `PVT_K1_`, `PUB_K1_`, and legacy key representations.
+`antelope-ecc` provides utilities for:
+
+- generating Antelope K1 key pairs;
+- creating `SIG_K1_` signatures;
+- signing packed Antelope transactions;
+- converting and validating `PVT_K1_` and `PUB_K1_` keys;
+- converting legacy EOSIO key formats;
+- recovering public keys from signatures;
+- creating and recovering mnemonic-based keys.
+
+The package is native ESM, side-effect free, tree-shakeable, and designed for both modern browsers and Node.js.
 
 ## Requirements
 
-Supported runtime environments:
+- Node.js `>=22`
+- Native ECMAScript modules
+- Modern browsers with the Web Crypto API
 
-- [Node.js](https://nodejs.org) versions `>=20.19.0`.
-- Browsers matching the [Browserslist](https://browsersl.ist) query [`> 0.5%, not OperaMini all, not dead`](https://browsersl.ist/?q=%3E+0.5%25%2C+not+OperaMini+all%2C+not+dead).
+This package does not provide a CommonJS `require()` entry point.
 
 ## Installation
 
-For [Node.js](https://nodejs.org), to install [`antelope-ecc`](https://npm.im/antelope-ecc) run:
-
 ```sh
-npm i antelope-ecc
+npm install antelope-ecc
 ```
 
-_Ways to import in ESM_
+## Importing
+
+### Named imports
+
+The package root exposes named exports:
 
 ```js
-import { sign } from "antelope-ecc"; // Tree shaking capabilities.
+import {
+  new_keys,
+  sign,
+  sign_packed_txn,
+  validate_private_key,
+  validate_public_key,
+} from "antelope-ecc";
 ```
 
-_As default exports_
+There is no default package export.
+
+### Deep imports
+
+Individual modules can also be imported directly:
 
 ```js
-import AntelopeECC from "antelope-ecc";
+import sign from "antelope-ecc/sign.js";
+import new_keys from "antelope-ecc/new_keys.js";
+import validate_private_key from "antelope-ecc/keys/validate_private_key.js";
 ```
 
-_Ways to require/import in Common JS_
+Deep imports allow consumers to explicitly depend on individual modules.
 
-```js
-const AntelopeECC = import("antelope-ecc");
-AntelopeECC.then(({ sign }) => {
-  // As import is async
-});
+The package is also marked:
+
+```json
+{
+  "sideEffects": false
+}
 ```
 
-**Sign a message digest.**
+so modern bundlers can tree-shake unused modules when using named root imports.
 
-```js
-import { sign } from "antelope-ecc";
-import { createHash } from "crypto";
-
-await sign({
-  hash: createHash("sha256")
-    .update(Uint8Array.from([1, 2, 3, 4, 5]))
-    .digest()
-    .toString("hex"), // Uint8Array | string
-  wif_private_key: "PVT_K1_43…",
-}).then(console.log);
-```
-
-The logged output will be SIG_K1…
-
-### Antelope K1 signing compatibility
-
-The underlying ECDSA signer first creates a deterministic, low-S secp256k1 signature using RFC 6979. Antelope additionally retains a historical signature policy inherited from the Graphene/BitShares [`fc` cryptography library](https://github.com/EOSIO/fc/blob/master/src/crypto/elliptic_common.cpp): the positive DER integer representation of each fixed-width `r` and `s` component must be exactly 32 bytes.
-
-If the first standards-based signature does not have that representation, this package deterministically derives another nonce and signs the original digest again until the Antelope policy is satisfied. This retry rule is implemented only by `antelope-ecc`; it is not an ECDSA, secp256k1, or RFC 6979 security requirement, and it is not exposed by `isomorphic-secp256k1-js`.
-
-The policy exists for compatibility with Antelope/EOSIO signing software and historical signature vectors. Low-S normalization is the separate protection against the usual ECDSA `(r, s)` / `(r, n - s)` malleability.
-
-Applications do not enable this mode or pass a compatibility option. The exported [`sign`](./src/sign.ts) and [`sign_packed_txn`](./src/sign_packed_txn.ts) functions always apply the policy because they return Antelope signatures. Applications that need only the first standards-based RFC 6979 signature should use [`isomorphic-secp256k1-js`](https://github.com/pur3miish/isomorphic-secp256k1-js) directly.
-
-#### Signing sequence
-
-1. Decode and validate the Antelope `PVT_K1_` private key and require an exact 32-byte message digest.
-2. Generate the first recoverable secp256k1 ECDSA signature using RFC 6979 deterministic nonce derivation and low-S normalization.
-3. Test whether the fixed-width `r` and `s` values satisfy the inherited Graphene/BitShares 32-byte positive-DER-component policy.
-4. If necessary, perform the deterministic compatibility retry internally while continuing to sign the original message digest.
-5. Verify the resulting signature before serializing the recovery header, `r`, and `s` into the 65-byte Antelope compact representation.
-6. Add the `K1` RIPEMD-160 checksum and Base58-encode the result as `SIG_K1_…`.
-
-#### Package boundary
-
-- `isomorphic-secp256k1-js` contains the reusable secp256k1 arithmetic, hashing, RFC 6979 signer, verification, recovery, validation, and low-S handling. It does not expose the Graphene/BitShares retry policy.
-- `antelope-ecc` contains the Antelope key formats, `SIG_K1_` encoding, recovery-header conversion, checksum, and inherited Graphene/BitShares compatibility retry.
-- The compatibility signer is an internal module and is not listed in the package `exports` map. The supported public entry points remain `sign` and `sign_packed_txn`.
-
-**An example of how to create a pair keys.**
+## Generate a key pair
 
 ```js
 import { new_keys } from "antelope-ecc";
 
-new_keys().then(console.log);
+const keys = await new_keys();
+
+console.log(keys.public_key);
+console.log(keys.private_key);
 ```
 
-> The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
-
-**Recover public key from signature.**
+The result contains an Antelope K1 key pair:
 
 ```js
-import { recover_public_key } from "antelope-ecc";
-
-const hash = Uint8Array.from(
-  crypto.createHash("sha256").update(Buffer.from("ff", "hex")).digest(),
-); // Data signed with private key
-
-recover_public_key({
-  signature: "SIG_K1_…",
-  hash,
-}).then(console.log);
+{
+  public_key: "PUB_K1_...",
+  private_key: "PVT_K1_..."
+}
 ```
 
-> The logged output will contain the public key “PUB_K1…” used to sign the hash.
+Secure random key material is generated using the standard Web Crypto API.
 
-## Exports
+An existing 32-byte private key can also be supplied:
 
-ECMAScript module deep exports are available through the [`package.json`](./package.json) [`exports`](https://nodejs.org/api/packages.html#exports) field. These links open the TypeScript source retained in Git; npm consumers import the corresponding compiled `.js` path:
+```js
+import { new_keys } from "antelope-ecc";
 
-- [`antelope-ecc/keys/legacy_from_private_key.js`](./src/keys/legacy_from_private_key.ts)
-- [`antelope-ecc/keys/legacy_from_public_key.js`](./src/keys/legacy_from_public_key.ts)
-- [`antelope-ecc/keys/legacy_to_private_key.js`](./src/keys/legacy_to_private_key.ts)
-- [`antelope-ecc/keys/legacy_to_public_key.js`](./src/keys/legacy_to_public_key.ts)
-- [`antelope-ecc/keys/private_key_from_wif.js`](./src/keys/private_key_from_wif.ts)
-- [`antelope-ecc/keys/private_key_to_wif.js`](./src/keys/private_key_to_wif.ts)
-- [`antelope-ecc/keys/public_key_from_private_wif.js`](./src/keys/public_key_from_private_wif.ts)
-- [`antelope-ecc/keys/public_key_from_wif.js`](./src/keys/public_key_from_wif.ts)
-- [`antelope-ecc/keys/public_key_to_wif.js`](./src/keys/public_key_to_wif.ts)
-- [`antelope-ecc/keys/validate_private_key.js`](./src/keys/validate_private_key.ts)
-- [`antelope-ecc/keys/validate_public_key.js`](./src/keys/validate_public_key.ts)
-- [`antelope-ecc/mnemonic_create.js`](./src/mnemonic_create.ts)
-- [`antelope-ecc/mnemonic_recover.js`](./src/mnemonic_recover.ts)
-- [`antelope-ecc/new_keys.js`](./src/new_keys.ts)
-- [`antelope-ecc/recover_public_key.js`](./src/recover_public_key.ts)
-- [`antelope-ecc/sign_packed_txn.js`](./src/sign_packed_txn.ts)
-- [`antelope-ecc/sign.js`](./src/sign.ts)
+const privateKey = new Uint8Array(32);
 
-## Development and publishing
+// Populate privateKey with valid secure key material.
 
-The Git repository keeps the TypeScript source under [`src/`](./src/) and does not keep compiler-generated `.js` or `.d.ts` files. The npm package still contains the compiled JavaScript and TypeScript declarations required by consumers.
+const keys = await new_keys(privateKey);
+```
 
-- `npm run clean` removes only the explicit compiler-output allowlist in [`scripts/clean.mjs`](./scripts/clean.mjs).
-- `npm run build` cleans stale outputs and compiles `src/**/*.ts` into the package paths declared by `package.json`.
-- `npm pack` and `npm publish` run the tests and build through `prepack`, include the generated files in the tarball, and then remove local generated files through `postpack`.
-- Generated root files and the generated root `internal/` and `keys/` directories are ignored by Git. Their TypeScript sources remain under `src/`.
+Do not construct cryptographic private keys from predictable values in production.
 
-Run `npm pack --dry-run` to inspect the files npm will include without publishing the package.
+## Sign a digest
+
+`sign()` signs an exact 32-byte message digest.
+
+```js
+import { sign } from "antelope-ecc";
+
+const message = new TextEncoder().encode("Hello Antelope");
+
+const digest = new Uint8Array(
+  await globalThis.crypto.subtle.digest("SHA-256", message),
+);
+
+const signature = await sign({
+  hash: digest,
+  wif_private_key: "PVT_K1_...",
+});
+
+console.log(signature);
+```
+
+The returned value is an Antelope signature:
+
+```text
+SIG_K1_...
+```
+
+A hexadecimal 32-byte digest can also be supplied:
+
+```js
+const signature = await sign({
+  hash: "0123456789abcdef...",
+  wif_private_key: "PVT_K1_...",
+});
+```
+
+`sign()` expects a digest, not an arbitrary un-hashed message.
+
+## Sign a packed transaction
+
+`sign_packed_txn()` constructs the Antelope signing digest from the chain ID, serialized transaction data, and context-free-data extension before producing a `SIG_K1_` signature.
+
+```js
+import { sign_packed_txn } from "antelope-ecc";
+
+const signature = await sign_packed_txn({
+  chain_id: "...",
+  transaction_header: "...",
+  transaction_body: "...",
+  wif_private_key: "PVT_K1_...",
+});
+
+console.log(signature);
+```
+
+The default context-free-data extension is the standard 32-byte zero value.
+
+A custom extension can be provided when required:
+
+```js
+const signature = await sign_packed_txn({
+  chain_id: "...",
+  transaction_header: "...",
+  transaction_body: "...",
+  extension: "...",
+  wif_private_key: "PVT_K1_...",
+});
+```
+
+## Key utilities
+
+The package exposes the following modern K1 key utilities.
+
+### Private keys
+
+```js
+import {
+  private_key_from_wif,
+  private_key_to_wif,
+  validate_private_key,
+} from "antelope-ecc";
+```
+
+#### `private_key_to_wif()`
+
+Converts a 32-byte private key into an Antelope `PVT_K1_` key.
+
+```js
+const privateKey = new Uint8Array(32);
+
+const encoded = await private_key_to_wif(privateKey);
+```
+
+#### `private_key_from_wif()`
+
+Converts an Antelope private-key string into its binary representation.
+
+```js
+const privateKey = private_key_from_wif("PVT_K1_...");
+```
+
+#### `validate_private_key()`
+
+Validates an Antelope private key and its checksum.
+
+```js
+const valid = await validate_private_key("PVT_K1_...");
+```
+
+### Public keys
+
+```js
+import {
+  public_key_from_private_wif,
+  public_key_from_wif,
+  public_key_to_wif,
+  validate_public_key,
+} from "antelope-ecc";
+```
+
+These utilities convert between binary public-key data and Antelope `PUB_K1_` representations, derive public keys from private keys, and validate public-key checksums.
+
+## Legacy EOSIO key conversion
+
+Legacy EOSIO key formats are supported through explicit conversion utilities:
+
+```js
+import {
+  legacy_from_private_key,
+  legacy_from_public_key,
+  legacy_to_private_key,
+  legacy_to_public_key,
+} from "antelope-ecc";
+```
+
+These functions are intended for interoperability with older EOSIO key representations.
+
+New applications should generally prefer modern:
+
+```text
+PVT_K1_...
+PUB_K1_...
+SIG_K1_...
+```
+
+formats.
+
+## Public API
+
+The package root exports:
+
+### Signing
+
+```text
+sign
+sign_packed_txn
+recover_public_key
+```
+
+### Key generation
+
+```text
+new_keys
+```
+
+### Modern K1 keys
+
+```text
+private_key_from_wif
+private_key_to_wif
+public_key_from_private_wif
+public_key_from_wif
+public_key_to_wif
+validate_private_key
+validate_public_key
+```
+
+### Legacy key conversion
+
+```text
+legacy_from_private_key
+legacy_from_public_key
+legacy_to_private_key
+legacy_to_public_key
+```
+
+### Mnemonics
+
+```text
+mnemonic_create
+mnemonic_recover
+```
+
+## Antelope K1 signing compatibility
+
+Antelope K1 signatures retain a historical compact-canonical signature policy inherited from the Graphene/BitShares `fc` cryptography implementation.
+
+The underlying secp256k1 operation produces deterministic, low-S ECDSA signatures. Antelope additionally requires the fixed-width `r` and `s` components to satisfy its historical compact representation rules.
+
+`antelope-ecc` applies this compatibility policy automatically when producing Antelope signatures.
+
+Consumers do not need to configure or enable it.
+
+This behavior exists specifically for Antelope protocol compatibility and should not be interpreted as a general ECDSA security requirement.
+
+## Cryptographic dependencies
+
+The package separates generic cryptographic primitives from Antelope-specific encoding and compatibility behavior.
+
+Core functionality uses:
+
+- [`isomorphic-secp256k1-js`](https://github.com/pur3miish/isomorphic-secp256k1-js) for secp256k1 operations;
+- [`ripemd160-js`](https://github.com/pur3miish/ripemd160-js) for RIPEMD-160 checksums;
+- [`base58-js`](https://github.com/pur3miish/base58-js) for Base58 encoding and decoding;
+- [`eosio-wasm-js`](https://github.com/pur3miish/eosio-wasm-js) for Antelope/EOSIO serialization utilities.
+
+Antelope-specific compact-canonical signing behavior remains inside `antelope-ecc` rather than the generic secp256k1 implementation.
+
+## Browser support
+
+`antelope-ecc` is designed to operate without Node-specific cryptographic APIs in application code.
+
+Cryptographically secure random bytes use:
+
+```js
+globalThis.crypto.getRandomValues(...)
+```
+
+which is provided by Node.js 22+ and modern browsers.
+
+This avoids environment-specific `require("crypto")` or conditional Node.js crypto imports.
+
+## TypeScript
+
+TypeScript declarations are included with the published package.
+
+```ts
+import { sign } from "antelope-ecc";
+```
+
+No separate `@types/antelope-ecc` package is required.
+
+## Package structure
+
+Source code is maintained as TypeScript under:
+
+```text
+src/
+```
+
+Published JavaScript and TypeScript declarations are generated into:
+
+```text
+dist/
+```
+
+Only the compiled distribution is included in the npm package.
+
+The package exposes both the root API and explicitly supported deep-import paths through the `exports` map.
+
+## Development
+
+Clone the repository and install dependencies:
+
+```sh
+npm install
+```
+
+Run the complete test suite:
+
+```sh
+npm test
+```
+
+This performs linting, formatting checks, TypeScript compilation, and unit tests.
+
+### Formatting
+
+Check formatting:
+
+```sh
+npm run prettier
+```
+
+Format the repository:
+
+```sh
+npm run prettier:fix
+```
+
+### ESLint
+
+Check:
+
+```sh
+npm run eslint
+```
+
+Automatically fix supported issues:
+
+```sh
+npm run eslint:fix
+```
+
+### Build
+
+```sh
+npm run build
+```
+
+The generated package is written to:
+
+```text
+dist/
+```
+
+### Package smoke test
+
+```sh
+npm run smoke
+```
+
+The smoke test builds and tests the project, creates the actual npm tarball, installs that tarball into an isolated consumer project, and verifies that the published package can be imported and executed.
+
+Before publishing, npm automatically runs the package's release checks.
+
+## Security
+
+Private keys are sensitive cryptographic material.
+
+Applications using this library should:
+
+- generate private keys only from cryptographically secure randomness;
+- avoid logging private keys or mnemonics;
+- avoid transmitting private keys to remote services;
+- avoid storing unencrypted private keys;
+- verify transaction contents before signing;
+- treat mnemonic phrases with the same sensitivity as private keys.
+
+`antelope-ecc` provides cryptographic primitives and Antelope-compatible serialization utilities. Secure key storage and application-level authorization remain the responsibility of the consuming application.
+
+If you believe you have discovered a security issue, avoid publishing private-key material or exploit details in a public issue.
+
+## Version 6
+
+Version 6 modernizes the package architecture and runtime requirements.
+
+Notable changes include:
+
+- Node.js 22 or later;
+- native ESM package structure;
+- TypeScript source and generated declarations;
+- compiled npm artifacts under `dist/`;
+- named root exports;
+- explicit supported deep imports;
+- Web Crypto based random-byte generation;
+- `ripemd160-js` v4;
+- `eosio-wasm-js` v6;
+- modern ESLint and Prettier tooling;
+- npm package smoke testing.
+
+Applications upgrading from older versions should review the changelog for breaking API and runtime changes.
+
+## License
+
+[MIT](LICENSE)
