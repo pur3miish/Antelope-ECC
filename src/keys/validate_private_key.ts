@@ -8,11 +8,11 @@ import { ripemd160 } from "ripemd160-js";
  * @name validate_private_key
  * @kind function
  * @param {String} wif_private_key base58 private key
- * @returns {Promise<boolean>} validation message.
+ * @returns {boolean} validation message.
  */
-export default async function validate_private_key(
+export default function validate_private_key(
   wif_private_key: string,
-): Promise<boolean> {
+): boolean {
   let key_type;
   const key_code = [
     [75, 49], // K1

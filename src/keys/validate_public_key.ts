@@ -10,9 +10,7 @@ import { ripemd160 } from "ripemd160-js";
  * @param {String} wif_public_key wallet import format Antelope public key.
  * @returns {Boolean} Returns true if valid
  */
-export default  function validate_public_key(
-  wif_public_key: string,
-): boolean {
+export default function validate_public_key(wif_public_key: string): boolean {
   let key_type;
   const key_code = [
     [75, 49],

@@ -16,7 +16,7 @@ export default async function legacy_from_public_key(
       "Please include a prefix for the WIF public key, e.g EOS, TELOS.",
     );
 
-  const checksum = (ripemd160(public_key)).slice(0, 4);
+  const checksum = ripemd160(public_key).slice(0, 4);
   return (
     prefix + binary_to_base58(Uint8Array.from([...public_key, ...checksum]))
   );
