@@ -4,185 +4,44 @@
 
 ### Breaking Changes
 
+- Updated the minimum supported Node.js version to Node.js 22.
+- Migrated `ripemd160-js` from v3 to v4.
 - Updated `isomorphic-secp256k1-js` to v6.
-- `new_keys()` is now synchronous and returns its key pair directly instead of `Promise<{ public_key, private_key }>`.
-- `recover_public_key()` is now synchronous and returns the recovered `PUB_K1_` key directly instead of `Promise<string>`.
-- Public-key derivation APIs no longer introduce unnecessary Promise wrappers.
-- Existing callers using `await` remain compatible, but callers using `.then()` or explicit Promise typings must update.
-- Updated the minimum supported Node.js version from Node.js 20 to **Node.js 22**.
-- Migrated `ripemd160-js` from v3 to **v4** and adopted its new synchronous `Uint8Array → Uint8Array` API.
-- Updated `eosio-wasm-js` to **v6**.
-- Standardized the package as **native ESM** with explicit named exports and supported deep-import paths.
-- Removed legacy/default package export behavior. Consumers should use named imports or documented deep imports.
-- Renamed the `sign_packed_txn()` `extension` argument to `context_free_data_hash` to correctly describe its role in the Antelope transaction signing digest.
-- Package build artifacts are now generated under `dist/` rather than alongside source files.
+- Standardized the package as native ESM.
+- Removed legacy/default package export behavior.
+- Package build artifacts are now generated under `dist/`.
+- Renamed the `sign_packed_txn()` `extension` argument to `context_free_data_hash`.
+- Multiple public APIs that previously returned unnecessary Promises are now synchronous.
+- `new_keys()` now returns its key pair directly.
+- `recover_public_key()` now returns the recovered `PUB_K1_` key directly.
+- RIPEMD-backed key conversion and validation APIs now return their results directly where no asynchronous operation is required.
+- Existing callers using `await` remain compatible, but callers relying on `.then()`, `.catch()`, or explicit Promise typings for newly synchronous functions must update.
 
 ### Added
 
-- Added a root ESM entry point exposing the supported Antelope ECC API through named exports.
-- Added TypeScript declaration generation for the complete published API.
-- Added explicit package `exports` for root imports and supported deep imports.
-- Added npm package smoke testing that:
-
-  - builds the package;
-  - creates the actual npm tarball;
-  - installs the tarball into an isolated consumer project;
-  - verifies root imports;
-  - verifies deep imports;
-  - performs runtime cryptographic operations against the packaged artifact.
-
-- Added a committed npm lockfile for reproducible CI installations.
-- Added modern ESLint flat configuration.
-- Added automated formatting and lint-fix scripts.
+- Added a side-effect-free root ESM entry point with named exports.
+- Added explicit supported deep-import paths.
+- Added TypeScript declaration generation for the published API.
+- Added npm package smoke testing against the actual packed npm artifact.
+- Added a reproducible npm lockfile.
+- Added ESLint flat configuration.
 - Added CI coverage across Node.js 22, 24, and 26 on Linux and macOS.
-- Added explicit validation and documentation for cryptographically secure random-byte generation.
+- Added strict secp256k1 scalar validation for `PVT_K1_` private keys.
+- Added strict compressed SEC 1 point validation for `PUB_K1_` public keys.
+- Added checksum validation when decoding K1 keys.
+- Added checksum validation when recovering `SIG_K1_` signatures.
+- Added strict 32-byte digest validation for signing and recovery.
+- Added strict hexadecimal validation for packed transaction signing inputs.
+- Added BIP39 checksum validation during mnemonic recovery.
+- Added validation of standard BIP39 entropy sizes and mnemonic word counts.
 
 ### Changed
 
-- Migrated RIPEMD-160 imports from the legacy deep import:
-
-  ```js
-  import ripemd160 from "ripemd160-js/ripemd160.js";
-  ```
-
-  to the v4 package API:
+- RIPEMD-160 imports now use:
 
   ```js
   import { ripemd160 } from "ripemd160-js";
   ```
-
-- Updated Antelope private-key, public-key, and signature checksum operations to use the synchronous RIPEMD-160 implementation.
-
-- Removed unnecessary asynchronous RIPEMD-160 checksum handling.
-
-- Updated key validation and conversion functions for the new RIPEMD-160 byte-oriented API.
-
-- Replaced environment-specific Node.js random-byte handling with the standard Web Crypto API:
-
-  ```js
-  globalThis.crypto.getRandomValues(...)
-  ```
-
-- Removed the previous `require("crypto")` and dynamic `import("crypto")` fallback logic.
-
-- Random-byte generation now uses the same standards-based implementation in Node.js and modern browsers.
-
-- Random-byte generation supports requests larger than the Web Crypto 65,536-byte per-call limit by filling the result in chunks.
-
-- Updated `sign_packed_txn()` terminology so the final 32-byte component of the signing preimage is correctly identified as `context_free_data_hash`.
-
-- `context_free_data_hash` defaults to 32 zero bytes when no context-free data is present, matching the standard Antelope transaction signing format.
-
-- Clarified that `context_free_data_hash` is unrelated to Antelope `transaction_extensions`, which are serialized as part of the transaction itself.
-
-- Retained the Antelope/Graphene compact-canonical signature compatibility policy inside `antelope-ecc`.
-
-- Kept generic secp256k1 functionality isolated in `isomorphic-secp256k1-js`, with Antelope-specific signing compatibility remaining at the Antelope package boundary.
-
-- Updated TypeScript compilation to use `NodeNext` module and resolution semantics.
-
-- TypeScript source now lives exclusively under `src/`.
-
-- Compiled JavaScript and `.d.ts` files are generated exclusively under `dist/`.
-
-- Updated the npm package to publish only the compiled `dist/` distribution.
-
-- Updated package metadata and dependency versions.
-
-- Updated README documentation for the v6 API, ESM usage, deep imports, Node.js requirements, Web Crypto support, package structure, development workflow, and security considerations.
-
-### Tooling
-
-- Updated TypeScript to v6.
-- Migrated from legacy `.eslintrc` configuration to ESLint flat config.
-- Updated ESLint to v10.
-- Updated Prettier to v3.
-- Updated `typescript-eslint`.
-- Updated `eslint-plugin-simple-import-sort`.
-- Updated test and development dependencies.
-- CI now uses `npm ci` instead of mutable dependency installation.
-- Updated GitHub Actions workflow and Node.js test matrix.
-- Simplified the build cleanup process to remove only generated `dist/` output.
-
-### Package Structure
-
-Source files are now maintained as TypeScript:
-
-```text
-src/
-├── index.ts
-├── sign.ts
-├── sign_packed_txn.ts
-├── new_keys.ts
-├── keys/
-└── internal/
-```
-
-TypeScript generates the npm distribution:
-
-```text
-dist/
-├── index.js
-├── index.d.ts
-├── sign.js
-├── sign.d.ts
-├── sign_packed_txn.js
-├── sign_packed_txn.d.ts
-├── keys/
-└── internal/
-```
-
-Generated JavaScript is no longer stored alongside TypeScript source files.
-
-### Dependencies
-
-Updated runtime dependencies include:
-
-- `base58-js` v3
-- `eosio-wasm-js` v6
-- `isomorphic-secp256k1-js` v5
-- `ripemd160-js` v4
-
-### Removed
-
-- Removed support for Node.js versions below 22.
-- Removed support for `ripemd160-js` v3.
-- Removed the legacy `ripemd160-js/ripemd160.js` deep import.
-- Removed Node-specific `require("crypto")` random-byte handling.
-- Removed dynamic Node `crypto` import fallback logic.
-- Removed legacy ESLint `.eslintrc` configuration.
-- Removed generated JavaScript from the TypeScript source tree.
-- Removed obsolete root-level compiler output and cleanup behavior.
-- Removed stale CommonJS and default-import documentation.
-
-### Migration Notes
-
-Applications upgrading from v5 should:
-
-- run on Node.js 22 or later;
-- update any default package imports to named imports;
-- use documented package exports for deep imports;
-- update `sign_packed_txn()` calls from `extension` to `context_free_data_hash`;
-- account for functions that no longer need asynchronous RIPEMD-160 checksum handling;
-- review any code relying specifically on previous Promise-based checksum behavior.
-
-Typical package imports now use:
-
-```js
-import {
-  new_keys,
-  sign,
-  sign_packed_txn,
-  validate_private_key,
-  validate_public_key,
-} from "antelope-ecc";
-```
-
-or an explicitly exported deep module:
-
-```js
-import sign from "antelope-ecc/sign.js";
-```
 
 ## 5.0.1 - 2026-08-03
 

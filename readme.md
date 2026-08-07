@@ -148,7 +148,7 @@ const signature = await sign({
 
 ## Sign a packed transaction
 
-`sign_packed_txn()` constructs the Antelope signing digest from the chain ID, serialized transaction data, and context-free-data extension before producing a `SIG_K1_` signature.
+`sign_packed_txn()` constructs the Antelope signing digest from the chain ID, serialized transaction data, and context-free-data hash before producing a `SIG_K1_` signature.
 
 ```js
 import { sign_packed_txn } from "antelope-ecc";
@@ -163,7 +163,7 @@ const signature = await sign_packed_txn({
 console.log(signature);
 ```
 
-The default context-free-data extension is the standard 32-byte zero value.
+When no context-free data is present, `context_free_data_hash` defaults to the standard 32-byte zero value.
 
 A custom context_free_data_hash can be provided when required:
 
@@ -211,7 +211,7 @@ const privateKey = private_key_from_wif("PVT_K1_...");
 
 #### `validate_private_key()`
 
-Validates an Antelope private key and its checksum.
+Validates an Antelope private key and checksum. `PVT_K1_` keys are additionally validated as secp256k1 private scalars.
 
 ```js
 const valid = validate_private_key("PVT_K1_...");

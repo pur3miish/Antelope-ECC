@@ -9,27 +9,20 @@ let tempDir;
 let tarball;
 
 try {
-  // --------------------------------------------------
-  // Pack the exact artifact npm would publish
-  // --------------------------------------------------
-
   const packOutput = execFileSync(npm, ["pack", "--json"], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "inherit"],
   });
 
-  const packResult = JSON.parse(packOutput);
-  const packed = packResult[0];
+  const [packed] = JSON.parse(packOutput);
 
   tarball = resolve(packed.filename);
 
   console.log(`Packed: ${packed.filename}`);
-  console.log(`Package size: ${packed.size} bytes`);
-  console.log(`Unpacked size: ${packed.unpackedSize} bytes`);
 
-  // --------------------------------------------------
-  // Sanity-check published files
-  // --------------------------------------------------
+  console.log(`Package size: ${packed.size} bytes`);
+
+  console.log(`Unpacked size: ${packed.unpackedSize} bytes`);
 
   const publishedFiles = packed.files.map(({ path }) => path);
 
@@ -38,20 +31,16 @@ try {
       (path) => path.startsWith("src/") || path.startsWith("test/"),
     )
   ) {
-    throw new Error("Source or test files were included in the npm package");
+    throw new Error("Source or test files were included in the npm package.");
   }
 
   if (!publishedFiles.includes("dist/index.js")) {
-    throw new Error("dist/index.js is missing from the npm package");
+    throw new Error("dist/index.js is missing from the npm package.");
   }
 
   if (!publishedFiles.includes("dist/index.d.ts")) {
-    throw new Error("dist/index.d.ts is missing from the npm package");
+    throw new Error("dist/index.d.ts is missing from the npm package.");
   }
-
-  // --------------------------------------------------
-  // Create isolated consumer project
-  // --------------------------------------------------
 
   tempDir = mkdtempSync(join(tmpdir(), "antelope-ecc-smoke-"));
 
@@ -67,10 +56,6 @@ try {
     ),
   );
 
-  // --------------------------------------------------
-  // Install exactly the packed npm artifact
-  // --------------------------------------------------
-
   execFileSync(
     npm,
     ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarball],
@@ -80,80 +65,46 @@ try {
     },
   );
 
-  // --------------------------------------------------
-  // Consumer smoke test
-  // --------------------------------------------------
-
   writeFileSync(
     join(tempDir, "test.mjs"),
     `
 import {
+  new_keys,
   private_key_to_wif,
   validate_private_key,
-  sign,
 } from "antelope-ecc";
 
 import privateKeyToWifDeep from
   "antelope-ecc/keys/private_key_to_wif.js";
 
-// --------------------------------------------------
-// Root exports
-// --------------------------------------------------
+const privateKey =
+  new Uint8Array(32).fill(1);
 
-if (typeof private_key_to_wif !== "function") {
+// Root synchronous API.
+const rootResult =
+  private_key_to_wif(privateKey);
+
+if (
+  rootResult &&
+  typeof rootResult.then === "function"
+) {
   throw new Error(
-    "Root export private_key_to_wif is unavailable"
+    "private_key_to_wif unexpectedly returned a Promise"
   );
 }
 
-if (typeof validate_private_key !== "function") {
+if (
+  typeof rootResult !== "string" ||
+  !rootResult.startsWith("PVT_K1_")
+) {
   throw new Error(
-    "Root export validate_private_key is unavailable"
+    "private_key_to_wif returned an invalid result"
   );
 }
 
-if (typeof sign !== "function") {
-  throw new Error(
-    "Root export sign is unavailable"
-  );
-}
-
-// --------------------------------------------------
-// Deep export
-// --------------------------------------------------
-
-if (typeof privateKeyToWifDeep !== "function") {
-  throw new Error(
-    "Deep export private_key_to_wif is unavailable"
-  );
-}
-
-// --------------------------------------------------
-// Actual runtime operation
-// --------------------------------------------------
-
-const privateKey = new Uint8Array(32);
-privateKey.fill(1);
-
-const rootResult = await Promise.resolve(
-  private_key_to_wif(privateKey)
-);
-
-const deepResult = await Promise.resolve(
-  privateKeyToWifDeep(privateKey)
-);
-
-if (typeof rootResult !== "string") {
-  throw new Error(
-    "private_key_to_wif did not return a string"
-  );
-}
-
-if (!rootResult.startsWith("PVT_K1_")) {
-  throw new Error(
-    \`Unexpected private key format: \${rootResult}\`
-  );
-}
+// Deep import.
+const deepResult =
+  privateKeyToWifDeep(privateKey);
 
 if (rootResult !== deepResult) {
   throw new Error(
@@ -161,13 +112,9 @@ if (rootResult !== deepResult) {
   );
 }
 
-// --------------------------------------------------
-// Validate generated key
-// --------------------------------------------------
-
-const valid = await Promise.resolve(
-  validate_private_key(rootResult)
-);
+// Synchronous validator.
+const valid =
+  validate_private_key(rootResult);
 
 if (valid !== true) {
   throw new Error(
@@ -175,12 +122,51 @@ if (valid !== true) {
   );
 }
 
-console.log("✓ root package import works");
-console.log("✓ deep package import works");
-console.log("✓ TypeScript-built distribution works");
-console.log("✓ private_key_to_wif works");
-console.log("✓ generated PVT_K1 key validates");
-console.log("✓ npm package smoke test passed");
+// Synchronous key generation.
+const generated =
+  new_keys(privateKey);
+
+if (
+  generated &&
+  typeof generated.then === "function"
+) {
+  throw new Error(
+    "new_keys unexpectedly returned a Promise"
+  );
+}
+
+if (
+  generated.private_key !== rootResult
+) {
+  throw new Error(
+    "new_keys returned an unexpected private key"
+  );
+}
+
+if (
+  typeof generated.public_key !== "string" ||
+  !generated.public_key.startsWith("PUB_K1_")
+) {
+  throw new Error(
+    "new_keys returned an invalid public key"
+  );
+}
+
+console.log(
+  "✓ root package import works"
+);
+console.log(
+  "✓ deep package import works"
+);
+console.log(
+  "✓ synchronous API works"
+);
+console.log(
+  "✓ TypeScript-built distribution works"
+);
+console.log(
+  "✓ npm package smoke test passed"
+);
 `,
   );
 
@@ -188,13 +174,7 @@ console.log("✓ npm package smoke test passed");
     cwd: tempDir,
     stdio: "inherit",
   });
-
-  console.log("✓ Antelope-ECC package is installable");
 } finally {
-  // --------------------------------------------------
-  // Cleanup
-  // --------------------------------------------------
-
   if (tempDir) {
     rmSync(tempDir, {
       recursive: true,
