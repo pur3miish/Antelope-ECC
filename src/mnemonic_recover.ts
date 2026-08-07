@@ -10,7 +10,7 @@ import words from "./internal/mnemonic-words.js";
  * ```
  * The logged output was [abandon, busy, …].
  */
-export default async function recoverMnemonic(recoveryPhrase: string) {
+export default function recoverMnemonic(recoveryPhrase: string) {
   recoveryPhrase = recoveryPhrase.normalize("NFKD").trim().toLowerCase();
   const ints: number[] = []; // Use a regular array to store the numbers.
   recoveryPhrase.split(/[\s,:-]+/gmu).forEach((word) => {

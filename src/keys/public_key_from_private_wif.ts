@@ -16,10 +16,10 @@ import validate_private_key from "./validate_private_key.js";
  * ```
  * The logged output will be PUB_K1_….
  */
-export default async function public_key_from_private_wif(
+export default function public_key_from_private_wif(
   wif_private_key: string,
-): Promise<string> {
-  await validate_private_key(wif_private_key);
+): string {
+  validate_private_key(wif_private_key);
   if (!wif_private_key.startsWith("PVT_K1_"))
     throw new Error("Private key must be K1 key, “PVT_K1_…”");
   const raw_pk = base58_to_binary(wif_private_key.replace("PVT_K1_", "")).slice(
@@ -27,5 +27,5 @@ export default async function public_key_from_private_wif(
     -4,
   );
 
-  return public_key_to_wif(await get_public_key(raw_pk));
+  return public_key_to_wif(get_public_key(raw_pk));
 }

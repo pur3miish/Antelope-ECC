@@ -143,8 +143,7 @@
   },
   "dependencies": {
     "base58-js": "^3.0.2",
-    "eosio-wasm-js": "^6.0.0",
-    "isomorphic-secp256k1-js": "^5.0.2",
+    "isomorphic-secp256k1-js": "^6.0.0",
     "ripemd160-js": "^4.0.0"
   },
   "devDependencies": {

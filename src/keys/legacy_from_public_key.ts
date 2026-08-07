@@ -7,10 +7,10 @@ import { ripemd160 } from "ripemd160-js";
  * @param {String} prefix the prefix to add to the start of the public public key.
  * @returns {String} WIF of legacy public key such as EOS, TELOS, WAX.
  */
-export default async function legacy_from_public_key(
+export default function legacy_from_public_key(
   public_key: Uint8Array,
   prefix: string,
-) {
+): string {
   if (!prefix)
     throw new Error(
       "Please include a prefix for the WIF public key, e.g EOS, TELOS.",
