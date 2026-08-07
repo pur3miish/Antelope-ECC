@@ -7,7 +7,7 @@ import sha256 from "isomorphic-secp256k1-js/sha256.js";
  * @returns {String} WIF private key.
  */
 export default async function legacy_from_private_key(
-  private_key: Uint8Array
+  private_key: Uint8Array,
 ): Promise<string> {
   private_key = new Uint8Array([128, ...private_key]);
   const checksum = await sha256(await sha256(private_key));

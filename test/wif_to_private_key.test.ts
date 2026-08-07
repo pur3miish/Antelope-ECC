@@ -15,15 +15,15 @@ export default (tests) => {
     deepStrictEqual(
       private_key,
       await private_key_from_wif(await private_key_to_wif(private_key)),
-      "expected non-legacy private keys"
+      "expected non-legacy private keys",
     );
 
     deepStrictEqual(
       private_key,
       await legacy_to_private_key(
-        "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"
+        "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3",
       ),
-      "Expected result"
+      "Expected result",
     );
 
     deepStrictEqual(
@@ -34,17 +34,17 @@ export default (tests) => {
       ]),
       await private_key_from_wif(
         "PVT_K1_CWCRfKc8atzthZbFMfRdFzqFqGf9d3WNAaZd99gwaosw9kfhS",
-        "Expected result"
-      )
+        "Expected result",
+      ),
     );
 
     deepStrictEqual(
       await legacy_to_private_key(
-        "5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak"
+        "5KML6yCUABWYxuEexgMZPJA9641SptvHdB5Gm5KZW8rFeGf5uak",
       ),
       await private_key_from_wif(
-        "PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23"
-      )
+        "PVT_K1_2Y3XHkP5iwZhtrNvUufJFR1sTBXcm4CuN1VXuGpGFzcUa8vu23",
+      ),
     );
   });
 };

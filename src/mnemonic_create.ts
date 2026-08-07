@@ -19,7 +19,7 @@ import random_bytes from "./internal/random_bytes.js";
  * The logged output will be an array like: `['abandon', 'busy', …]`.
  */
 export default async function createMnemonic(
-  bytes: Uint8Array
+  bytes: Uint8Array,
 ): Promise<string> {
   if (!bytes) bytes = await random_bytes(32);
   let bitLen = 8 * bytes.length;

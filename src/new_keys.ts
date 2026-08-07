@@ -12,13 +12,12 @@ import public_key_to_wif from "./keys/public_key_to_wif.js";
  * The logged output will be an object containing PUB_K1 and PVT_K1 wif keys.
  */
 export default async function new_keys(
-  seed?: Uint8Array
+  seed?: Uint8Array,
 ): Promise<newAntelopeKeysReturn> {
   const private_key = seed ? seed : await random_bytes();
 
-  const { default: get_public_key } = await import(
-    "isomorphic-secp256k1-js/get_public_key.js"
-  );
+  const { default: get_public_key } =
+    await import("isomorphic-secp256k1-js/get_public_key.js");
   const public_key = await get_public_key(private_key);
 
   return {

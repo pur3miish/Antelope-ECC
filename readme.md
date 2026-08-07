@@ -105,7 +105,7 @@ new_keys().then(console.log);
 import { recover_public_key } from "antelope-ecc";
 
 const hash = Uint8Array.from(
-  crypto.createHash("sha256").update(Buffer.from("ff", "hex")).digest()
+  crypto.createHash("sha256").update(Buffer.from("ff", "hex")).digest(),
 ); // Data signed with private key
 
 recover_public_key({

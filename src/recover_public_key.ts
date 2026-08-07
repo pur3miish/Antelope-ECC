@@ -41,7 +41,7 @@ export default async function recover_public_key({
 
   const raw_sig = base58_to_binary(signature.replace("SIG_K1_", "")).slice(
     0,
-    -4
+    -4,
   );
 
   const v = raw_sig.slice(0, 1)[0] - 31;
@@ -49,6 +49,6 @@ export default async function recover_public_key({
   const s = raw_sig.slice(33, 65);
 
   return public_key_to_wif(
-    await recover_public({ hash: hash_array, signature: { r, s, v } })
+    await recover_public({ hash: hash_array, signature: { r, s, v } }),
   );
 }

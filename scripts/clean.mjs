@@ -34,6 +34,6 @@ const generated_files = generated_module_stems.flatMap((stem) => [
 
 await Promise.all(
   generated_files.map((file) =>
-    rm(new URL(`../${file}`, import.meta.url), { force: true })
-  )
+    rm(new URL(`../${file}`, import.meta.url), { force: true }),
+  ),
 );

@@ -11,7 +11,7 @@ import { ripemd160 } from "ripemd160-js";
  * @returns {Promise<Boolean>} Returns true if valid
  */
 export default async function validate_public_key(
-  wif_public_key: string
+  wif_public_key: string,
 ): Promise<boolean> {
   let key_type;
   const key_code = [
@@ -35,7 +35,7 @@ export default async function validate_public_key(
   const checksum_check = base58_str.slice(-4);
 
   const checksum = await ripemd160(
-    Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]])
+    Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]]),
   );
 
   for (let i = 0; i < 4; i++)

@@ -9,11 +9,11 @@ import { ripemd160 } from "ripemd160-js";
  */
 export default async function legacy_from_public_key(
   public_key: Uint8Array,
-  prefix: string
+  prefix: string,
 ) {
   if (!prefix)
     throw new Error(
-      "Please include a prefix for the WIF public key, e.g EOS, TELOS."
+      "Please include a prefix for the WIF public key, e.g EOS, TELOS.",
     );
 
   const checksum = (await ripemd160(public_key)).slice(0, 4);

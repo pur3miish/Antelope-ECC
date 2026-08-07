@@ -11,6 +11,6 @@ it("Mnemonic test", async () => {
   deepStrictEqual(
     private_key,
     await recoverMnemonic(words),
-    "Invalid recovery mnemonic"
+    "Invalid recovery mnemonic",
   );
 });

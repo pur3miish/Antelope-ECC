@@ -12,19 +12,22 @@
  * @returns {Promise<String>} Signature SIG_K1.
  */
 type sign_txn_args = {
-    /**
-     * 32 bytes message digest to sign, can be Uint8Array or hexadecimal string.
-     */
-    hash: string | Uint8Array;
-    /**
-     * Wallet import format private key, PVT_K1_ format
-     */
-    wif_private_key: string;
+  /**
+   * 32 bytes message digest to sign, can be Uint8Array or hexadecimal string.
+   */
+  hash: string | Uint8Array;
+  /**
+   * Wallet import format private key, PVT_K1_ format
+   */
+  wif_private_key: string;
 };
 /**
  * Generate an Antelope `SIG_K1_` signature for an exact 32-byte digest.
  * The inherited Graphene/BitShares component policy is automatic and is not a
  * caller-selectable ECDSA mode.
  */
-export default function sign({ hash, wif_private_key, }: sign_txn_args): Promise<string>;
+export default function sign({
+  hash,
+  wif_private_key,
+}: sign_txn_args): Promise<string>;
 export {};

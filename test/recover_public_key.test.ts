@@ -16,27 +16,27 @@ it("Recover secp256k1 public keys", async () => {
 
   const public_key = await public_key_to_wif(
     await legacy_to_public_key(
-      "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
-    )
+      "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
+    ),
   );
 
   deepStrictEqual(
     await legacy_from_public_key(
       await public_key_from_wif(
-        "PUB_K1_6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5BoDq63"
+        "PUB_K1_6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5BoDq63",
       ),
-      "EOS"
+      "EOS",
     ),
-    "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
+    "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
   );
 
   deepStrictEqual(
     public_key,
     pub_key,
-    "Expected recover public key from signature"
+    "Expected recover public key from signature",
   );
 
   rejects(() =>
-    recover_public_key({ signature: "NOT_GONNA_WORK", hash: "ff" })
+    recover_public_key({ signature: "NOT_GONNA_WORK", hash: "ff" }),
   );
 });

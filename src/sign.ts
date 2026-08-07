@@ -45,7 +45,7 @@ export default async function sign({
     const hashMatches = hash.match(/[a-fA-F0-9]{2}/gmu);
     if (hashMatches)
       hash_array = Uint8Array.from(
-        hashMatches.map((i) => Number(`0x${i}`))
+        hashMatches.map((i) => Number(`0x${i}`)),
       ) as Uint8Array;
     else throw new Error("Invalid hash format.");
   } else if (hash instanceof Uint8Array) hash_array = hash;
@@ -64,7 +64,7 @@ export default async function sign({
   const checksum = ripe_hash.slice(0, 4);
 
   const base58_sig = binary_to_base58(
-    Uint8Array.from([...raw_sig, ...checksum])
+    Uint8Array.from([...raw_sig, ...checksum]),
   );
 
   return "SIG_K1_" + base58_sig;

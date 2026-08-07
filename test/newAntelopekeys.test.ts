@@ -10,7 +10,7 @@ it("recover public key from signature secp256k1", async () => {
   ok(
     random_keys.public_key ==
       (await public_key_from_private(random_keys.private_key)),
-    "Public key from private key error"
+    "Public key from private key error",
   );
 
   deepStrictEqual(
@@ -22,8 +22,8 @@ it("recover public key from signature secp256k1", async () => {
       Uint8Array.from([
         1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21,
         22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-      ])
-    )
+      ]),
+    ),
   );
 
   // client side random bytes test
@@ -36,7 +36,7 @@ it("recover public key from signature secp256k1", async () => {
   const random_keys2 = await new_keys();
   ok(
     random_keys2.public_key ==
-      (await public_key_from_private(random_keys2.private_key))
+      (await public_key_from_private(random_keys2.private_key)),
   );
   global.window = undefined;
 });

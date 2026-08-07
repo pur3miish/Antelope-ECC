@@ -8,4 +8,6 @@
  * ```
  * The logged output was [abandon, busy, …].
  */
-export default function recoverMnemonic(recoveryPhrase: string): Promise<Uint8Array<ArrayBuffer>>;
+export default function recoverMnemonic(
+  recoveryPhrase: string,
+): Promise<Uint8Array<ArrayBuffer>>;

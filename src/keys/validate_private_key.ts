@@ -11,7 +11,7 @@ import { ripemd160 } from "ripemd160-js";
  * @returns {Promise<boolean>} validation message.
  */
 export default async function validate_private_key(
-  wif_private_key: string
+  wif_private_key: string,
 ): Promise<boolean> {
   let key_type;
   const key_code = [
@@ -29,13 +29,13 @@ export default async function validate_private_key(
     wif_private_key
       .replace("PVT_K1_", "")
       .replace("PVT_R1_", "")
-      .replace("PVT_WA_", "")
+      .replace("PVT_WA_", ""),
   );
 
   const checksum_check = base58_str.slice(-4);
 
   const checksum = await ripemd160(
-    Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]])
+    Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]]),
   );
 
   for (let i = 0; i < 4; i++)

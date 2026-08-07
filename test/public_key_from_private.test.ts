@@ -39,10 +39,10 @@ it("public_key_from_private", async () => {
         await public_key_to_wif(legacy_to_public_key(key[0])),
         await private_key_to_wif(legacy_to_private_key(key[1])),
       ];
-    })
+    }),
   );
   const public_keys = await Promise.all(
-    keys.map(([, k]) => public_key_from_private(k))
+    keys.map(([, k]) => public_key_from_private(k)),
   );
   ok(public_keys[0] == keys[0][0], "Invalid public key 0");
   ok(public_keys[1] == keys[1][0], "Invalid public key 1");
@@ -53,20 +53,20 @@ it("public_key_from_private", async () => {
 
   ok(
     (await public_key_from_private(
-      "PVT_K1_CWCRfKc8atzthZbFMfRdFzqFqGf9d3WNAaZd99gwaosw9kfhS"
+      "PVT_K1_CWCRfKc8atzthZbFMfRdFzqFqGf9d3WNAaZd99gwaosw9kfhS",
     )) == "PUB_K1_6jytfkQoZHYpzCvMZwcw8yL42KfbJ8ayncM459zii44utEy8zn",
-    "Invalid public key 6"
+    "Invalid public key 6",
   );
   ok(
     (await public_key_from_private(
-      "PVT_K1_rpcKPJ4DbcppgK1aBVcWkgxk2VcxeVqChYK7SgQSVccBG4Do"
+      "PVT_K1_rpcKPJ4DbcppgK1aBVcWkgxk2VcxeVqChYK7SgQSVccBG4Do",
     )) == "PUB_K1_6Xdz1dScSbjEWm3urrwrx2BtfivTN7PpDeEsRcwM3abDuVuHox",
-    "Invalid public key 7"
+    "Invalid public key 7",
   );
   ok(
     (await public_key_from_private(
-      "PVT_K1_2oSnUdngPUHVw3zAvNLkBeRtMZiyYRy7e4mgmgpNUgBUrvgAjA"
+      "PVT_K1_2oSnUdngPUHVw3zAvNLkBeRtMZiyYRy7e4mgmgpNUgBUrvgAjA",
     )) == "PUB_K1_6VjQqy3sKmzyFCkmE8rKrKLtt3988zyo1FZnsDtjxNf4gcoeEQ",
-    "Invalid public key 8"
+    "Invalid public key 8",
   );
 });
