@@ -10,9 +10,11 @@ import validate_private_key from "./validate_private_key.js";
  * ```js
  * import public_key_from_private_wif from 'antelope-ecc/public_key_from_private_wif'
  *
+ * console.log(
  * public_key_from_private_wif(
- *   'PVT_K1_asdf…'
- * ).then(console.log)
+ *   "PVT_K1_asdf…",
+ * ),
+);
  * ```
  * The logged output will be PUB_K1_….
  */

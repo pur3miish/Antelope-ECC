@@ -6,7 +6,7 @@ import words from "./internal/mnemonic-words.js";
  * @param recoveryPhrase 32 bytes of data.
  * import recoverMnemonic from "antelope-ecc/mnemonic-recover.js"
  *
- * recoverMnemonic([your, twenty, four, words, go, here, …]).then(console.log)
+ * recoverMnemonic([your, twenty, four, words, go, here, …])
  * ```
  * The logged output was [abandon, busy, …].
  */

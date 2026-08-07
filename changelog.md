@@ -4,6 +4,11 @@
 
 ### Breaking Changes
 
+- Updated `isomorphic-secp256k1-js` to v6.
+- `new_keys()` is now synchronous and returns its key pair directly instead of `Promise<{ public_key, private_key }>`.
+- `recover_public_key()` is now synchronous and returns the recovered `PUB_K1_` key directly instead of `Promise<string>`.
+- Public-key derivation APIs no longer introduce unnecessary Promise wrappers.
+- Existing callers using `await` remain compatible, but callers using `.then()` or explicit Promise typings must update.
 - Updated the minimum supported Node.js version from Node.js 20 to **Node.js 22**.
 - Migrated `ripemd160-js` from v3 to **v4** and adopted its new synchronous `Uint8Array → Uint8Array` API.
 - Updated `eosio-wasm-js` to **v6**.

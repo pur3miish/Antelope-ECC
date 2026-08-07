@@ -77,7 +77,7 @@ so modern bundlers can tree-shake unused modules when using named root imports.
 ```js
 import { new_keys } from "antelope-ecc";
 
-const keys = await new_keys();
+const keys = new_keys();
 
 console.log(keys.public_key);
 console.log(keys.private_key);
@@ -103,7 +103,7 @@ const privateKey = new Uint8Array(32);
 
 // Populate privateKey with valid secure key material.
 
-const keys = await new_keys(privateKey);
+const keys = new_keys(privateKey);
 ```
 
 Do not construct cryptographic private keys from predictable values in production.
@@ -165,14 +165,14 @@ console.log(signature);
 
 The default context-free-data extension is the standard 32-byte zero value.
 
-A custom extension can be provided when required:
+A custom context_free_data_hash can be provided when required:
 
 ```js
 const signature = await sign_packed_txn({
   chain_id: "...",
   transaction_header: "...",
   transaction_body: "...",
-  extension: "...",
+  context_free_data_hash: "...",
   wif_private_key: "PVT_K1_...",
 });
 ```
@@ -198,7 +198,7 @@ Converts a 32-byte private key into an Antelope `PVT_K1_` key.
 ```js
 const privateKey = new Uint8Array(32);
 
-const encoded = await private_key_to_wif(privateKey);
+const encoded = private_key_to_wif(privateKey);
 ```
 
 #### `private_key_from_wif()`
@@ -214,7 +214,7 @@ const privateKey = private_key_from_wif("PVT_K1_...");
 Validates an Antelope private key and its checksum.
 
 ```js
-const valid = await validate_private_key("PVT_K1_...");
+const valid = validate_private_key("PVT_K1_...");
 ```
 
 ### Public keys
@@ -322,7 +322,6 @@ Core functionality uses:
 - [`isomorphic-secp256k1-js`](https://github.com/pur3miish/isomorphic-secp256k1-js) for secp256k1 operations;
 - [`ripemd160-js`](https://github.com/pur3miish/ripemd160-js) for RIPEMD-160 checksums;
 - [`base58-js`](https://github.com/pur3miish/base58-js) for Base58 encoding and decoding;
-- [`eosio-wasm-js`](https://github.com/pur3miish/eosio-wasm-js) for Antelope/EOSIO serialization utilities.
 
 Antelope-specific compact-canonical signing behavior remains inside `antelope-ecc` rather than the generic secp256k1 implementation.
 
@@ -465,7 +464,6 @@ Notable changes include:
 - explicit supported deep imports;
 - Web Crypto based random-byte generation;
 - `ripemd160-js` v4;
-- `eosio-wasm-js` v6;
 - modern ESLint and Prettier tooling;
 - npm package smoke testing.
 

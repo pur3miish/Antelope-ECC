@@ -10,7 +10,7 @@ it("Mnemonic test", async () => {
   const words = await generateMnemonic(private_key);
   deepStrictEqual(
     private_key,
-    await recoverMnemonic(words),
+    recoverMnemonic(words),
     "Invalid recovery mnemonic",
   );
 });

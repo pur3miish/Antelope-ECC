@@ -3,52 +3,55 @@ import recover_public from "isomorphic-secp256k1-js/recover_public_key.js";
 
 import public_key_to_wif from "./keys/public_key_to_wif.js";
 
-type recover_public_key_args = {
-  signature: string; // hex string
+type RecoverPublicKeyArgs = {
+  signature: string;
   hash: string | Uint8Array;
 };
 
 /**
- * Recovers an Antelope secp256k1 public key from K1 signature.
+ * Recovers an Antelope secp256k1 public key from a K1 signature.
  */
-export default async function recover_public_key({
+export default function recover_public_key({
   signature,
   hash,
-}: recover_public_key_args): Promise<string> {
+}: RecoverPublicKeyArgs): string {
   let hash_array: Uint8Array;
 
-  // Handle the case where hash is a string
   if (typeof hash === "string") {
-    const hashMatches = hash.match(/[a-fA-F0-9]{2}/gmu);
-
-    if (hashMatches) {
-      hash_array = Uint8Array.from(hashMatches.map((i) => Number(`0x${i}`)));
-    } else {
-      throw new Error("Invalid hash format.");
+    if (!/^[0-9a-fA-F]{64}$/.test(hash)) {
+      throw new Error("Hash must be exactly 32 bytes of hexadecimal data.");
     }
-  }
-  // Handle the case where hash is already a Uint8Array
-  else if (hash instanceof Uint8Array) {
+
+    hash_array = Uint8Array.from(
+      hash.match(/.{2}/g)!.map((byte) => Number.parseInt(byte, 16)),
+    );
+  } else if (hash instanceof Uint8Array) {
+    if (hash.length !== 32) {
+      throw new Error("Hash must be exactly 32 bytes.");
+    }
+
     hash_array = hash;
-  }
-  // Throw an error if hash is neither a string nor Uint8Array
-  else {
-    throw new Error("Hash must be a string or a Uint8Array.");
+  } else {
+    throw new TypeError("Hash must be a hexadecimal string or Uint8Array.");
   }
 
-  if (!signature?.startsWith("SIG_K1_"))
-    throw new TypeError("Signature must start with “SIG_K1_”");
+  if (!signature.startsWith("SIG_K1_")) {
+    throw new TypeError("Signature must start with SIG_K1_.");
+  }
 
   const raw_sig = base58_to_binary(signature.replace("SIG_K1_", "")).slice(
     0,
     -4,
   );
 
-  const v = raw_sig.slice(0, 1)[0] - 31;
+  const v = raw_sig[0] - 31;
   const r = raw_sig.slice(1, 33);
   const s = raw_sig.slice(33, 65);
 
   return public_key_to_wif(
-    await recover_public({ hash: hash_array, signature: { r, s, v } }),
+    recover_public({
+      hash: hash_array,
+      signature: { r, s, v },
+    }),
   );
 }
