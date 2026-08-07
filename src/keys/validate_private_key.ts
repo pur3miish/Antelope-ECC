@@ -34,7 +34,7 @@ export default async function validate_private_key(
 
   const checksum_check = base58_str.slice(-4);
 
-  const checksum = await ripemd160(
+  const checksum = ripemd160(
     Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]]),
   );
 

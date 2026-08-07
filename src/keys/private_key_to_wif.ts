@@ -6,8 +6,8 @@ import { ripemd160 } from "ripemd160-js";
  * @param {Uint8Array} private_key Binary private key.
  * @returns {String} Antelope based WIF private key.
  */
-export default async function private_key_to_wif(private_key: Uint8Array) {
-  const checksum = await ripemd160(Uint8Array.from([...private_key, 75, 49]));
+export default function private_key_to_wif(private_key: Uint8Array) {
+  const checksum = ripemd160(Uint8Array.from([...private_key, 75, 49]));
 
   return (
     "PVT_K1_" +

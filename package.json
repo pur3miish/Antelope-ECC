@@ -128,19 +128,19 @@
       "default": "./dist/sign.js"
     }
   },
-"scripts": {
-  "clean": "node ./scripts/clean.mjs",
-  "eslint": "eslint .",
-  "eslint:fix": "eslint . --fix",
-  "prettier": "prettier -c .",
-  "prettier:fix": "prettier --write .",
-  "mocha": "mocha",
-  "build": "npm run clean && tsc -p tsconfig.json",
-  "test": "npm run eslint && npm run prettier && npm run build && npm run mocha",
-  "prepack": "npm run build",
-  "smoke": "npm test && node scripts/smoke-test.mjs",
-  "prepublishOnly": "npm run smoke"
-},
+  "scripts": {
+    "clean": "node ./scripts/clean.mjs",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "prettier": "prettier -c .",
+    "prettier:fix": "prettier --write .",
+    "mocha": "mocha",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "npm run eslint && npm run prettier && npm run build && npm run mocha",
+    "prepack": "npm run build",
+    "smoke": "npm test && node scripts/smoke-test.mjs",
+    "prepublishOnly": "npm run smoke"
+  },
   "dependencies": {
     "base58-js": "^3.0.2",
     "eosio-wasm-js": "^6.0.0",

@@ -60,7 +60,7 @@ export default async function sign({
   const K1 = [75, 49]; // K1 as ascii
   const raw_sig = [i, ...r, ...s];
 
-  const ripe_hash = await ripemd160(Uint8Array.from([...raw_sig, ...K1]));
+  const ripe_hash = ripemd160(Uint8Array.from([...raw_sig, ...K1]));
   const checksum = ripe_hash.slice(0, 4);
 
   const base58_sig = binary_to_base58(

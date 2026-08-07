@@ -7,8 +7,12 @@ import { ripemd160 } from "ripemd160-js";
  * @returns {String} WIF of legacy public key such as EOS, TELOS, WAX.
  */
 export default async function legacy_from_public_key(public_key, prefix) {
-    if (!prefix)
-        throw new Error("Please include a prefix for the WIF public key, e.g EOS, TELOS.");
-    const checksum = (await ripemd160(public_key)).slice(0, 4);
-    return (prefix + binary_to_base58(Uint8Array.from([...public_key, ...checksum])));
+  if (!prefix)
+    throw new Error(
+      "Please include a prefix for the WIF public key, e.g EOS, TELOS.",
+    );
+  const checksum = ripemd160(public_key).slice(0, 4);
+  return (
+    prefix + binary_to_base58(Uint8Array.from([...public_key, ...checksum]))
+  );
 }

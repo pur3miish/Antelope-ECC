@@ -8,11 +8,11 @@ import { ripemd160 } from "ripemd160-js";
  * @name validate_public_key
  * @kind function
  * @param {String} wif_public_key wallet import format Antelope public key.
- * @returns {Promise<Boolean>} Returns true if valid
+ * @returns {Boolean} Returns true if valid
  */
-export default async function validate_public_key(
+export default  function validate_public_key(
   wif_public_key: string,
-): Promise<boolean> {
+): boolean {
   let key_type;
   const key_code = [
     [75, 49],
@@ -34,7 +34,7 @@ export default async function validate_public_key(
   const base58_str = base58_to_binary(public_key);
   const checksum_check = base58_str.slice(-4);
 
-  const checksum = await ripemd160(
+  const checksum = ripemd160(
     Uint8Array.from([...base58_str.slice(0, -4), ...key_code[key_type]]),
   );
 

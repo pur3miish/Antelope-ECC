@@ -12,12 +12,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
 
   {
-    files: [
-      "src/**/*.ts",
-      "test/**/*.ts",
-      "scripts/**/*.js",
-      "scripts/**/*.mjs",
-    ],
+    files: ["src/**/*.ts", "test/**/*.ts", "scripts/**/*.mjs"],
 
     languageOptions: {
       ecmaVersion: "latest",
@@ -36,7 +31,6 @@ export default tseslint.config(
 
     rules: {
       "prefer-const": "off",
-
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
     },
