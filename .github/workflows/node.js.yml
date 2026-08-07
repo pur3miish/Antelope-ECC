@@ -1,18 +1,39 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
 jobs:
   test:
-    name: Test with Node.js v${{ matrix.node }} and ${{ matrix.os }}
+    name: Node ${{ matrix.node }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        node: ["20"]
+        os:
+          - ubuntu-latest
+          - macos-latest
+        node:
+          - 22
+          - 24
+          - 26
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js v${{ matrix.node }}
-        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
-      - name: npm install and test
-        run: npm install-test
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run package smoke test
+        run: npm run smoke
