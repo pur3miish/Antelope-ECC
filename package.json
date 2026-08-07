@@ -104,6 +104,6 @@
     "base58-js": "^3.0.2",
     "eosio-wasm-js": "^5.0.2",
     "isomorphic-secp256k1-js": "^5.0.2",
-    "ripemd160-js": "^3.0.4"
+    "ripemd160-js": "^4.0.0"
   }
 }

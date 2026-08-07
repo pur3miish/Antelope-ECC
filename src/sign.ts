@@ -1,5 +1,5 @@
 import binary_to_base58 from "base58-js/binary_to_base58.js";
-import ripemd160 from "ripemd160-js/ripemd160.js";
+import { ripemd160 } from "ripemd160-js";
 
 import sign_graphene_compatible from "./internal/sign_graphene_compatible.js";
 import wif_to_private_key from "./keys/private_key_from_wif.js";
